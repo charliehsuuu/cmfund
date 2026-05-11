@@ -1008,7 +1008,7 @@ window.openEditModalFromMonthly = async (id, dateKey) => {
 };
 
 // ── Monthly ──
-function toggleMonthSort() {
+window.toggleMonthSort = function() {
   monthSortAsc = !monthSortAsc;
   const btn = document.getElementById('sort-toggle-btn');
   if (btn) btn.textContent = monthSortAsc ? '⬆️ 舊→新' : '⬇️ 新→舊';
