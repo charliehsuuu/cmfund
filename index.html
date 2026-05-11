@@ -503,7 +503,10 @@ body {
       <button class="export-btn" onclick="exportCSV()">⬇️ 下載 CSV</button>
     </div>
     <div class="list-section">
-      <h2>月度明細</h2>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 style="margin-bottom:0">月度明細</h2>
+        <button id="sort-toggle-btn" onclick="toggleMonthSort()" style="background:#fffdf9;border:2px solid var(--border);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.75rem;cursor:pointer;font-weight:700;box-shadow:0 3px 0 #c8b090;">⬆️ 舊→新</button>
+      </div>
       <div class="tx-list" id="month-tx-list"></div>
     </div>
   </div>
@@ -611,6 +614,7 @@ let filterCat = 'all';
 let monthBudget = parseInt(localStorage.getItem('cmfund_budget') || '0');
 let editingTx = null; // { id, dateKey }
 let editType = 'income';
+let monthSortAsc = true; // true=舊到新, false=新到舊
 
 // ── Auth ──
 document.getElementById('login-btn').onclick = () => signInWithPopup(auth, provider);
@@ -1004,6 +1008,12 @@ window.openEditModalFromMonthly = async (id, dateKey) => {
 };
 
 // ── Monthly ──
+function toggleMonthSort() {
+  monthSortAsc = !monthSortAsc;
+  const btn = document.getElementById('sort-toggle-btn');
+  if (btn) btn.textContent = monthSortAsc ? '⬆️ 舊→新' : '⬇️ 新→舊';
+  renderMonthly();
+}
 async function renderMonthly() {
   const y = currentMonthDate.getFullYear();
   const m = currentMonthDate.getMonth(); // 0-indexed
@@ -1053,9 +1063,11 @@ async function renderMonthly() {
   // Month tx list
   allTxs.sort((a,b) => {
     // Sort by date then time
-    if (a.dateKey !== b.dateKey) return a.dateKey < b.dateKey ? -1 : 1;
-    return (a.ts||0) - (b.ts||0);
+    const dir = monthSortAsc ? 1 : -1;
+    if (a.dateKey !== b.dateKey) return a.dateKey < b.dateKey ? -dir : dir;
+    return ((a.ts||0) - (b.ts||0)) * dir;
   });
+  const currentUserWho = currentUser ? (currentUser.displayName || currentUser.email) : null;
   const mtl = document.getElementById('month-tx-list');
   mtl.innerHTML = allTxs.length ? allTxs.map(t => {
     const cls = t.type==='income' ? 'income' : 'expense';
@@ -1065,6 +1077,7 @@ async function renderMonthly() {
     const dateDisp = t.dateKey ? t.dateKey.replace(/_/g,'/') : '';
     const safeId = t.id.replace(/['"]/g,'');
     const safeDateKey = (t.dateKey||'').replace(/['"]/g,'');
+    const isOwner = !t.who || t.who === '匿名' || (currentUserWho && t.who === currentUserWho);
     return `<div class="tx-item">
       <div class="tx-dot ${cls}"></div>
       <div class="tx-info">
@@ -1076,7 +1089,7 @@ async function renderMonthly() {
         </div>
       </div>
       <div class="tx-amount ${cls}">${sign}${fmt(t.amount)}</div>
-      <button class="tx-edit" onclick="openEditModalFromMonthly('${safeId}','${safeDateKey}')">✏️</button>
+      ${isOwner ? `<button class="tx-edit" onclick="openEditModalFromMonthly('${safeId}','${safeDateKey}')">✏️</button>` : '<button class="tx-edit" style="opacity:0;pointer-events:none;">✏️</button>'}
     </div>`;
   }).join('') : '<div class="empty-state">本月無記錄</div>';
 
