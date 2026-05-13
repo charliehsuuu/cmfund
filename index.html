@@ -314,6 +314,141 @@ body {
 .sync-dot { width:7px; height:7px; border-radius:50%; background:#ccc; transition:background .3s; }
 .sync-dot.online { background:#5aab82; box-shadow:0 0 6px #5aab82; }
 .sync-dot.saving { background:var(--gold); }
+
+/* ── BOTTOM NAV (Richart style) ── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 65px;
+  background: #1a1220;
+  border-top: 1px solid #3a2840;
+  display: none; /* shown after login */
+  align-items: center;
+  justify-content: space-around;
+  z-index: 300;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px; cursor: pointer; padding: 8px 4px;
+  transition: all .2s; border: none; background: transparent;
+}
+.nav-icon { font-size: 1.5rem; line-height: 1; transition: transform .2s; }
+.nav-label { font-size: .6rem; color: #6b5a78; font-family: 'Noto Sans TC', sans-serif; font-weight: 500; white-space: nowrap; transition: color .2s; }
+.nav-item.active .nav-icon { transform: translateY(-2px); filter: drop-shadow(0 0 6px rgba(236,72,153,.8)); }
+.nav-item.active .nav-label { color: #ec4899; font-weight: 700; }
+.nav-item:active .nav-icon { transform: scale(.9); }
+
+/* ── PAGES ── */
+.love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
+.love-page.active { display: block; }
+
+/* ── LOVE CALENDAR PAGE ── */
+.love-page-header { text-align: center; margin-bottom: 20px; }
+.love-page-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.love-page-header p { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+.love-add-card {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 22px;
+  padding: 18px; margin-bottom: 18px;
+  box-shadow: 0 4px 0 #c8b090, 0 6px 14px var(--shadow);
+}
+.love-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.love-cat-btn {
+  padding: 10px 14px; border-radius: 20px; font-size: .95rem; cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif; font-weight: 600; transition: all .1s;
+  border: 2px solid #e0c0d0; background: #fdf0f5; color: #903050;
+  box-shadow: 0 4px 0 #c08090;
+}
+.love-cat-btn:active, .love-cat-btn.selected { transform: translateY(3px); box-shadow: 0 1px 0 #c08090; }
+.love-cat-btn.selected { background: #f0b0c8; border-color: #c07090; }
+.love-cat-btn[data-cat="吃飯"] { background: #fff3e0; border-color: #e0a060; color: #804020; box-shadow: 0 4px 0 #c07030; }
+.love-cat-btn[data-cat="吃飯"].selected { background: #ffe0b0; transform: translateY(3px); box-shadow: 0 1px 0 #c07030; }
+.love-cat-btn[data-cat="旅遊"] { background: #e0f0ff; border-color: #60a0e0; color: #204070; box-shadow: 0 4px 0 #3070b0; }
+.love-cat-btn[data-cat="旅遊"].selected { background: #c0e0ff; transform: translateY(3px); box-shadow: 0 1px 0 #3070b0; }
+.love-cat-btn[data-cat="愛愛"] { background: #ffe0ec; border-color: #e060a0; color: #901040; box-shadow: 0 4px 0 #b03070; }
+.love-cat-btn[data-cat="愛愛"].selected { background: #ffc0dc; transform: translateY(3px); box-shadow: 0 1px 0 #b03070; }
+.love-cat-btn[data-cat="吵架"] { background: #ffe8e0; border-color: #e07060; color: #802010; box-shadow: 0 4px 0 #b04030; }
+.love-cat-btn[data-cat="吵架"].selected { background: #ffcfbf; transform: translateY(3px); box-shadow: 0 1px 0 #b04030; }
+.love-cat-btn[data-cat="其他"] { background: #eeeef8; border-color: #8888b8; color: #303068; box-shadow: 0 4px 0 #5858a0; }
+.love-cat-btn[data-cat="其他"].selected { background: #d8d8ef; transform: translateY(3px); box-shadow: 0 1px 0 #5858a0; }
+
+.love-field-row { display: flex; gap: 9px; margin-bottom: 10px; align-items: center; }
+.love-field-row label { font-size: .78rem; color: var(--muted); flex-shrink: 0; font-weight: 500; }
+.love-field-row input { flex: 1; background: #fdf6ee; border: 2px solid var(--border); color: var(--text); border-radius: 12px; padding: 10px 14px; font-family: 'Noto Sans TC', sans-serif; font-size: .95rem; outline: none; }
+.love-field-row input:focus { border-color: #e8708a; background: #fff; }
+.love-note-input { width: 100%; background: #fdf6ee; border: 2px solid var(--border); color: var(--text); border-radius: 12px; padding: 10px 14px; font-family: 'Noto Sans TC', sans-serif; font-size: .95rem; outline: none; margin-bottom: 14px; }
+.love-note-input:focus { border-color: #e8708a; }
+.love-add-btn {
+  width: 100%; padding: 16px; border-radius: 20px; border: none;
+  background: linear-gradient(160deg, #e8708a, #d05070);
+  color: #fff; font-family: 'Noto Sans TC', sans-serif; font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; transition: all .1s;
+  box-shadow: 0 6px 0 #903050, 0 8px 18px rgba(180,60,80,.3);
+}
+.love-add-btn:active { transform: translateY(5px); box-shadow: 0 1px 0 #903050; }
+
+.love-events-list { display: flex; flex-direction: column; gap: 8px; }
+.love-event-item {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 18px;
+  padding: 13px 15px; display: flex; align-items: center; gap: 11px;
+  box-shadow: 0 4px 0 #c8b090, 0 6px 12px var(--shadow);
+  animation: slideIn .2s ease;
+}
+.love-event-emoji { font-size: 1.6rem; flex-shrink: 0; }
+.love-event-info { flex: 1; min-width: 0; }
+.love-event-cat { font-size: 1rem; font-weight: 700; color: var(--text); }
+.love-event-date { font-size: .78rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.love-event-note { font-size: .82rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.love-event-score { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 700; flex-shrink: 0; }
+.love-event-score.pos { color: #4a8830; }
+.love-event-score.neg { color: #c04030; }
+.love-event-score.zero { color: var(--muted); }
+.love-event-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; opacity: .3; transition: opacity .15s; padding: 0 0 0 4px; }
+.love-event-del:hover { opacity: 1; color: #c04030; }
+
+/* ── LOVE SCORE PAGE ── */
+.score-big-card {
+  background: linear-gradient(135deg, #f0a0b8 0%, #e07090 100%);
+  border-radius: 28px; padding: 36px 24px; text-align: center; margin-bottom: 20px;
+  box-shadow: 0 8px 0 #903050, 0 12px 28px rgba(180,60,80,.3);
+  border: 2px solid #c06878;
+}
+.score-lbl { font-size: .8rem; color: rgba(255,255,255,.85); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+.score-number { font-family: 'DM Mono', monospace; font-size: 5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.2); line-height: 1; }
+.score-unit { font-size: 1.1rem; color: rgba(255,255,255,.9); margin-top: 8px; }
+.score-hearts { font-size: 1.6rem; margin-top: 14px; letter-spacing: .4rem; }
+
+.score-rules-card {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 20px;
+  padding: 16px 18px; margin-bottom: 18px;
+  box-shadow: 0 4px 0 #c8b090;
+}
+.score-rules-card h3 { font-size: .75rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+.score-rule-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #f0e0d0; }
+.score-rule-row:last-child { border-bottom: none; }
+.score-rule-cat { font-size: .9rem; color: var(--text); }
+.score-rule-pts { font-family: 'DM Mono', monospace; font-size: .95rem; font-weight: 700; }
+.score-rule-pts.pos { color: #4a8830; }
+.score-rule-pts.neg { color: #c04030; }
+.score-rule-pts.zero { color: var(--muted); }
+
+.score-hist-list { display: flex; flex-direction: column; gap: 8px; }
+.score-hist-item {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 16px;
+  padding: 12px 15px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 3px 0 #c8b090;
+  animation: slideIn .2s ease;
+}
+.score-hist-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.score-hist-info { flex: 1; min-width: 0; }
+.score-hist-cat { font-size: .9rem; font-weight: 600; color: var(--text); }
+.score-hist-date { font-size: .75rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.score-hist-note { font-size: .78rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.score-hist-pts { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.score-hist-pts.pos { color: #4a8830; }
+.score-hist-pts.neg { color: #c04030; }
+.score-hist-pts.zero { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -625,6 +760,7 @@ onAuthStateChanged(auth, user => {
     currentUser = user;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
+    document.getElementById('bottom-nav').style.display = 'flex';
     document.getElementById('user-name').textContent = user.displayName || user.email;
     document.getElementById('user-avatar').src = user.photoURL || '';
     init();
@@ -632,6 +768,7 @@ onAuthStateChanged(auth, user => {
     currentUser = null;
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app').style.display = 'none';
+    document.getElementById('bottom-nav').style.display = 'none';
   }
 });
 
@@ -1169,6 +1306,250 @@ function prefillTimeInput() {
   const mm = now.getMinutes().toString().padStart(2,'0');
   document.getElementById('time-input').value = `${hh}:${mm}`;
 }
+
+// ══════════════════════════════════════════
+// PAGE NAVIGATION
+// ══════════════════════════════════════════
+window.switchPage = function(page) {
+  // Hide CMfund app
+  document.getElementById('app').style.display = 'none';
+  // Hide love pages
+  document.querySelectorAll('.love-page').forEach(p => p.classList.remove('active'));
+  // Deactivate all nav items
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  if (page === 'cmfund') {
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('nav-cmfund').classList.add('active');
+  } else if (page === 'love-calendar') {
+    const pg = document.getElementById('page-love-calendar');
+    pg.classList.add('active');
+    document.getElementById('nav-love-cal').classList.add('active');
+    // prefill today
+    const today = new Date();
+    const yy = today.getFullYear();
+    const mm = String(today.getMonth()+1).padStart(2,'0');
+    const dd = String(today.getDate()).padStart(2,'0');
+    if (!document.getElementById('love-date-input').value)
+      document.getElementById('love-date-input').value = `${yy}-${mm}-${dd}`;
+    renderLoveEvents();
+  } else if (page === 'love-score') {
+    const pg = document.getElementById('page-love-score');
+    pg.classList.add('active');
+    document.getElementById('nav-love-score').classList.add('active');
+    renderLoveScore();
+  }
+};
+
+// ══════════════════════════════════════════
+// LOVE EVENTS — localStorage
+// ══════════════════════════════════════════
+const LOVE_SCORES  = { '吃飯': 2, '旅遊': 5, '愛愛': 2, '吵架': -5, '其他': 0 };
+const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝' };
+const LOVE_KEY     = 'cmfund_love_events';
+
+function getLoveEvents() {
+  try { return JSON.parse(localStorage.getItem(LOVE_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveLoveEvents(evts) {
+  localStorage.setItem(LOVE_KEY, JSON.stringify(evts));
+}
+
+let selectedLoveCat = '';
+
+window.selectLoveCat = function(btn) {
+  document.querySelectorAll('.love-cat-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedLoveCat = btn.dataset.cat;
+};
+
+window.addLoveEvent = function() {
+  if (!selectedLoveCat) { showToast('請先選擇分類！', 'error'); return; }
+  const date = document.getElementById('love-date-input').value;
+  if (!date) { showToast('請選擇日期！', 'error'); return; }
+  const note = document.getElementById('love-note-input').value.trim();
+  const evts = getLoveEvents();
+  evts.unshift({ id: Date.now().toString(), cat: selectedLoveCat, date, note, ts: Date.now() });
+  saveLoveEvents(evts);
+  // reset
+  selectedLoveCat = '';
+  document.querySelectorAll('.love-cat-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('love-note-input').value = '';
+  renderLoveEvents();
+  showToast('💕 已記錄！', 'success');
+};
+
+window.deleteLoveEvent = function(id) {
+  saveLoveEvents(getLoveEvents().filter(e => e.id !== id));
+  renderLoveEvents();
+  showToast('已刪除', '');
+};
+
+function renderLoveEvents() {
+  const evts = getLoveEvents();
+  const list = document.getElementById('love-events-list');
+  if (!list) return;
+  if (!evts.length) {
+    list.innerHTML = '<div class="empty-state">還沒有記錄<br>開始記錄你們的美好時光 💕</div>';
+    return;
+  }
+  list.innerHTML = evts.map(e => {
+    const score = LOVE_SCORES[e.cat] ?? 0;
+    const emoji = LOVE_EMOJIS[e.cat] || '📝';
+    const sc    = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
+    const stxt  = score > 0 ? '+'+score : score === 0 ? '0' : ''+score;
+    const safeId = e.id.replace(/'/g, '');
+    return `<div class="love-event-item">
+      <div class="love-event-emoji">${emoji}</div>
+      <div class="love-event-info">
+        <div class="love-event-cat">${e.cat}</div>
+        <div class="love-event-date">${e.date}</div>
+        ${e.note ? `<div class="love-event-note">${e.note}</div>` : ''}
+      </div>
+      <div class="love-event-score ${sc}">${stxt} 分</div>
+      <button class="love-event-del" onclick="deleteLoveEvent('${safeId}')">✕</button>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// LOVE SCORE
+// ══════════════════════════════════════════
+function renderLoveScore() {
+  const evts  = getLoveEvents();
+  let total   = 0;
+  evts.forEach(e => { total += LOVE_SCORES[e.cat] ?? 0; });
+
+  const numEl = document.getElementById('love-score-number');
+  const hrtEl = document.getElementById('love-score-hearts');
+  if (numEl) numEl.textContent = total;
+  if (hrtEl) {
+    if      (total >= 100) hrtEl.textContent = '💕💕💕💕💕';
+    else if (total >=  50) hrtEl.textContent = '💕💕💕💕';
+    else if (total >=  20) hrtEl.textContent = '💕💕💕';
+    else if (total >=   1) hrtEl.textContent = '💕💕';
+    else if (total >=   0) hrtEl.textContent = '💕';
+    else if (total >=  -20) hrtEl.textContent = '💔';
+    else                   hrtEl.textContent = '💔💔';
+  }
+
+  const hist = document.getElementById('love-score-history');
+  if (!hist) return;
+  if (!evts.length) {
+    hist.innerHTML = '<div class="empty-state">還沒有記錄<br>去「為愛加分」頁面記錄吧 💕</div>';
+    return;
+  }
+  hist.innerHTML = evts.map(e => {
+    const score = LOVE_SCORES[e.cat] ?? 0;
+    const emoji = LOVE_EMOJIS[e.cat] || '📝';
+    const sc    = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
+    const stxt  = score > 0 ? '+'+score+' 分' : score === 0 ? '±0 分' : score+' 分';
+    return `<div class="score-hist-item">
+      <div class="score-hist-emoji">${emoji}</div>
+      <div class="score-hist-info">
+        <div class="score-hist-cat">${e.cat}</div>
+        <div class="score-hist-date">${e.date}</div>
+        ${e.note ? `<div class="score-hist-note">${e.note}</div>` : ''}
+      </div>
+      <div class="score-hist-pts ${sc}">${stxt}</div>
+    </div>`;
+  }).join('');
+}
+
 </script>
+
+<!-- ═══ PAGE: 為愛加分 ═══ -->
+<div class="love-page" id="page-love-calendar">
+  <div class="love-page-header">
+    <h1>📅 為愛加分</h1>
+    <p>記錄你們的美好（與不美好）時光</p>
+  </div>
+
+  <div class="love-add-card">
+    <div class="section-title">新增記錄</div>
+    <div class="love-cats">
+      <button class="love-cat-btn" data-cat="吃飯" onclick="selectLoveCat(this)">🍽️ 吃飯</button>
+      <button class="love-cat-btn" data-cat="旅遊" onclick="selectLoveCat(this)">✈️ 旅遊</button>
+      <button class="love-cat-btn" data-cat="愛愛" onclick="selectLoveCat(this)">💕 愛愛</button>
+      <button class="love-cat-btn" data-cat="吵架" onclick="selectLoveCat(this)">💢 吵架</button>
+      <button class="love-cat-btn" data-cat="其他" onclick="selectLoveCat(this)">📝 其他</button>
+    </div>
+    <div class="love-field-row">
+      <label>📆 日期</label>
+      <input type="date" id="love-date-input" />
+    </div>
+    <input class="love-note-input" type="text" id="love-note-input" placeholder="備註（可選，例如：去了101吃牛排）" />
+    <button class="love-add-btn" onclick="addLoveEvent()">💕 記錄這一刻</button>
+  </div>
+
+  <div class="list-section">
+    <h2 style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">所有記錄</h2>
+    <div class="love-events-list" id="love-events-list">
+      <div class="empty-state">還沒有記錄<br>開始記錄你們的美好時光 💕</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: 愛情分數 ═══ -->
+<div class="love-page" id="page-love-score">
+  <div class="love-page-header">
+    <h1>💯 愛情分數</h1>
+    <p>你們的愛情帳本</p>
+  </div>
+
+  <div class="score-big-card">
+    <div class="score-lbl">累積愛情分數</div>
+    <div class="score-number" id="love-score-number">0</div>
+    <div class="score-unit">分</div>
+    <div class="score-hearts" id="love-score-hearts">💕</div>
+  </div>
+
+  <div class="score-rules-card">
+    <h3>計分規則</h3>
+    <div class="score-rule-row">
+      <span class="score-rule-cat">🍽️ 吃飯</span>
+      <span class="score-rule-pts pos">+2 分</span>
+    </div>
+    <div class="score-rule-row">
+      <span class="score-rule-cat">✈️ 旅遊</span>
+      <span class="score-rule-pts pos">+5 分</span>
+    </div>
+    <div class="score-rule-row">
+      <span class="score-rule-cat">💕 愛愛</span>
+      <span class="score-rule-pts pos">+2 分</span>
+    </div>
+    <div class="score-rule-row">
+      <span class="score-rule-cat">💢 吵架</span>
+      <span class="score-rule-pts neg">-5 分</span>
+    </div>
+    <div class="score-rule-row">
+      <span class="score-rule-cat">📝 其他</span>
+      <span class="score-rule-pts zero">0 分</span>
+    </div>
+  </div>
+
+  <div class="list-section">
+    <h2 style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">得分明細</h2>
+    <div class="score-hist-list" id="love-score-history">
+      <div class="empty-state">還沒有記錄<br>去「為愛加分」頁面記錄吧 💕</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="nav-item active" id="nav-cmfund" onclick="switchPage('cmfund')">
+    <span class="nav-icon">💰</span>
+    <span class="nav-label">共同基金</span>
+  </button>
+  <button class="nav-item" id="nav-love-cal" onclick="switchPage('love-calendar')">
+    <span class="nav-icon">📅</span>
+    <span class="nav-label">為愛加分</span>
+  </button>
+  <button class="nav-item" id="nav-love-score" onclick="switchPage('love-score')">
+    <span class="nav-icon">💯</span>
+    <span class="nav-label">愛情分數</span>
+  </button>
+</nav>
 </body>
 </html>
