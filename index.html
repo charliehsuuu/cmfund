@@ -461,14 +461,15 @@ body {
 .cal-wd { text-align:center; font-size:.72rem; font-weight:700; color:var(--muted); padding:4px 0; }
 .cal-wd:last-child { color:#e07090; }
 .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
-.cal-cell { border-radius:10px; padding:3px 1px; cursor:pointer; text-align:center; min-height:50px; transition:background .12s; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.cal-cell { border-radius:10px; padding:3px 2px; cursor:pointer; text-align:center; min-height:80px; transition:background .12s; display:flex; flex-direction:column; align-items:center; gap:1px; overflow:hidden; }
 .cal-cell.empty { cursor:default; pointer-events:none; }
 .cal-cell:not(.empty):hover { background:#f5e8d0; }
 .cal-cell.today .cal-dn { background:#e8708a; color:#fff; border-radius:50%; box-shadow:0 2px 6px rgba(180,60,80,.4); font-weight:700; }
 .cal-cell.selected { background:#fde8f0; outline:1.5px solid #e8a0b0; }
 .cal-dn { font-size:.8rem; color:var(--text); width:26px; height:26px; display:flex; align-items:center; justify-content:center; margin:0 auto; font-weight:500; }
-.cal-dots { display:flex; flex-wrap:wrap; justify-content:center; gap:2px; max-width:40px; }
-.cal-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.cal-dots { display:none; }
+.cal-dot { display:none; }
+.cal-ev-chip { font-size:.54rem; font-weight:700; padding:1px 3px; border-radius:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:calc(100% - 4px); text-align:center; color:#fff; margin:0 2px; flex-shrink:0; line-height:1.4; }
 .cal-legend { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; padding:0 2px; }
 .cal-legend-item { display:flex; align-items:center; gap:4px; font-size:.72rem; color:var(--muted); }
 .cal-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
@@ -508,6 +509,28 @@ body {
 .ae-input { width:100%; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:10px 14px; font-family:'Noto Sans TC',sans-serif; font-size:.95rem; outline:none; }
 .ae-input:focus { border-color:#e8708a; }
 .ae-score-hint { font-size:.7rem; color:var(--muted); margin-top:3px; }
+/* Score month nav */
+.score-month-nav { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
+.score-month-nav button { background:#fffdf9; border:2px solid var(--border); color:var(--accent); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:.85rem; box-shadow:0 3px 0 #c8b090; transition:all .1s; }
+.score-month-nav button:active { transform:translateY(2px); box-shadow:0 1px 0 #c8b090; }
+.score-month-lbl { font-family:'Noto Sans TC',sans-serif; font-size:.95rem; color:#fff; min-width:120px; text-align:center; font-weight:700; background:#e8708a; border-radius:20px; padding:6px 14px; box-shadow:0 4px 0 #9a3848; }
+/* 在一起天數 */
+.love-stats-card { background:linear-gradient(135deg,#fff0f5,#fff8f0); border:2px solid #e8a0b0; border-radius:22px; padding:18px 14px; margin-bottom:16px; text-align:center; box-shadow:0 5px 0 #c8b090; }
+.love-stats-days { font-family:'DM Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--accent); line-height:1.15; }
+.love-stats-label { font-size:.8rem; color:var(--muted); margin-top:4px; letter-spacing:.04em; }
+.love-stats-sub { font-size:.7rem; color:var(--muted); margin-top:3px; opacity:.85; }
+/* 戀愛百分比 */
+.pct-row { display:flex; align-items:center; gap:8px; margin-bottom:9px; }
+.pct-cat { font-size:.82rem; color:var(--text); width:76px; flex-shrink:0; }
+.pct-bar-track { flex:1; height:9px; background:#ede0d0; border-radius:5px; overflow:hidden; }
+.pct-bar-fill { height:100%; border-radius:5px; transition:width .5s ease; }
+.pct-val { font-family:'DM Mono',monospace; font-size:.78rem; font-weight:700; width:40px; text-align:right; flex-shrink:0; }
+/* Who 標籤 */
+.who-badge { font-size:.62rem; padding:1px 5px; border-radius:8px; font-weight:700; flex-shrink:0; white-space:nowrap; }
+.who-badge.charlie { background:#d0e8f8; color:#204870; border:1px solid #6898c8; }
+.who-badge.nini    { background:#ffd6e0; color:#903040; border:1px solid #e09090; }
+.who-badge.other   { background:#e8d0f0; color:#402860; border:1px solid #9870b8; }
+
 
 </style>
 </head>
@@ -824,6 +847,7 @@ onAuthStateChanged(auth, user => {
     document.getElementById('user-name').textContent = user.displayName || user.email;
     document.getElementById('user-avatar').src = user.photoURL || '';
     init();
+    initLoveEvents();
   } else {
     currentUser = null;
     document.getElementById('login-screen').style.display = 'flex';
@@ -1399,74 +1423,107 @@ window.switchPage = function(page) {
 };
 
 // ══════════════════════════════════════════
-// LOVE EVENTS — localStorage
+// LOVE EVENTS — Firebase 共享（兩人共用）
 // ══════════════════════════════════════════
 const LOVE_SCORES  = { '吃飯': 2, '旅遊': 5, '愛愛': 2, '吵架': -5, '其他': 0 };
 const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝' };
 const CAT_COLORS   = { '吃飯': '#f97316', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#b91c1c', '其他': '#9ca3af' };
-const LOVE_KEY     = 'cmfund_love_events';
+const LOVE_KEY     = 'cmfund_love_events'; // 舊 localStorage key（僅用於搬移）
 
-function getLoveEvents() {
-  try { return JSON.parse(localStorage.getItem(LOVE_KEY) || '[]'); } catch(e) { return []; }
-}
-function saveLoveEvents(evts) {
-  localStorage.setItem(LOVE_KEY, JSON.stringify(evts));
-}
-
-// Helpers: support both old format (cat/ts) and new format (category/score/timestamp)
+// Helpers
 function evtCat(e)   { return e.category || e.cat || '其他'; }
 function evtScore(e) { return (e.score !== undefined && e.score !== null) ? Number(e.score) : (LOVE_SCORES[evtCat(e)] ?? 0); }
 function evtTs(e)    { return e.timestamp || e.ts || 0; }
+function currentWho() { return currentUser ? (currentUser.displayName || currentUser.email || '匿名') : '匿名'; }
 
-// ── Calendar state ──
-let calendarDate = new Date();
+// 本機快取（Firebase listener 即時更新）
+let loveEvents = [];
+
+function initLoveEvents() {
+  // 舊 localStorage 資料搬移到 Firebase（一次性）
+  try {
+    const old = JSON.parse(localStorage.getItem(LOVE_KEY) || '[]');
+    if (old.length > 0) {
+      old.forEach(e => {
+        push(ref(db, 'love_events'), {
+          date: e.date || '',
+          category: evtCat(e),
+          score: evtScore(e),
+          note: e.note || '',
+          timestamp: evtTs(e) || Date.now(),
+          who: currentWho()
+        });
+      });
+      localStorage.removeItem(LOVE_KEY);
+    }
+  } catch(ex) {}
+
+  // 即時監聽 Firebase
+  onValue(ref(db, 'love_events'), snap => {
+    loveEvents = [];
+    if (snap.exists()) {
+      snap.forEach(child => { loveEvents.push({ id: child.key, ...child.val() }); });
+    }
+    loveEvents.sort((a, b) => {
+      if (b.date !== a.date) return b.date > a.date ? 1 : -1;
+      return evtTs(b) - evtTs(a);
+    });
+    // 主動刷新目前顯示頁面
+    const calPg   = document.getElementById('page-love-calendar');
+    const scorePg = document.getElementById('page-love-score');
+    if (calPg   && calPg.classList.contains('active'))   renderCalendar();
+    if (scorePg && scorePg.classList.contains('active')) renderLoveScore();
+  });
+}
+
+// ── Calendar / Score 狀態 ──
+let calendarDate  = new Date();
 let selectedCalDay = null;
-let aeModalCat = '';
+let aeModalCat    = '';
+let scoreMonthDate = new Date();
 
 // ── Render Calendar ──
 function renderCalendar() {
   const y = calendarDate.getFullYear();
-  const m = calendarDate.getMonth(); // 0-indexed
+  const m = calendarDate.getMonth();
   document.getElementById('cal-month-lbl').textContent = y + '年' + (m + 1) + '月';
 
-  const events = getLoveEvents();
   const evtByDate = {};
-  events.forEach(e => {
-    const d = e.date;
-    if (!d) return;
-    const parts = d.split('-');
-    if (parseInt(parts[0]) === y && parseInt(parts[1]) === m + 1) {
-      if (!evtByDate[d]) evtByDate[d] = [];
-      evtByDate[d].push(e);
+  loveEvents.forEach(e => {
+    if (!e.date) return;
+    const p = e.date.split('-');
+    if (parseInt(p[0]) === y && parseInt(p[1]) === m + 1) {
+      if (!evtByDate[e.date]) evtByDate[e.date] = [];
+      evtByDate[e.date].push(e);
     }
   });
 
   const firstDay = new Date(y, m, 1);
   const lastDate = new Date(y, m + 1, 0).getDate();
-  // Mon=0 … Sun=6
   let startOffset = firstDay.getDay();
   startOffset = startOffset === 0 ? 6 : startOffset - 1;
 
   const now = new Date();
-  const todayStr = now.getFullYear() + '-' +
-    String(now.getMonth() + 1).padStart(2, '0') + '-' +
-    String(now.getDate()).padStart(2, '0');
+  const todayStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
 
   let html = '';
   for (let i = 0; i < startOffset; i++) html += '<div class="cal-cell empty"></div>';
   for (let d = 1; d <= lastDate; d++) {
-    const dateStr = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+    const dateStr = y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
     const dayEvts = evtByDate[dateStr] || [];
     const isToday = dateStr === todayStr;
     const isSel   = dateStr === selectedCalDay;
-    const dots = dayEvts.slice(0, 5).map(e => {
-      const col = CAT_COLORS[evtCat(e)] || '#9ca3af';
-      return '<div class="cal-dot" style="background:' + col + '"></div>';
+    // 最多顯示 3 個 chip
+    let chips = dayEvts.slice(0, 3).map(e => {
+      const cat = evtCat(e);
+      const col = CAT_COLORS[cat] || '#9ca3af';
+      const emoji = LOVE_EMOJIS[cat] || '📝';
+      return '<div class="cal-ev-chip" style="background:' + col + '">' + emoji + ' ' + cat + '</div>';
     }).join('');
-    html += `<div class="cal-cell${isToday ? ' today' : ''}${isSel ? ' selected' : ''}" onclick="selectCalDay('${dateStr}')">` +
-      `<div class="cal-dn">${d}</div>` +
-      `<div class="cal-dots">${dots}</div>` +
-      `</div>`;
+    if (dayEvts.length > 3) chips += '<div class="cal-ev-chip" style="background:#9ca3af">+' + (dayEvts.length - 3) + ' 筆</div>';
+    html += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' selected' : '') +
+      '" onclick="selectCalDay('' + dateStr + '')">' +
+      '<div class="cal-dn">' + d + '</div>' + chips + '</div>';
   }
   document.getElementById('cal-grid').innerHTML = html;
 
@@ -1557,73 +1614,144 @@ window.selectAECat = function(btn) {
   document.getElementById('ae-score-hint').textContent = '預設 ' + sign + def + ' 分，可手動修改';
 };
 
-window.confirmAddEvent = function() {
+window.confirmAddEvent = async function() {
   if (!aeModalCat) { showToast('請選擇分類！', 'error'); return; }
   const date = document.getElementById('ae-date').value;
   if (!date) { showToast('請選擇日期！', 'error'); return; }
   const scoreRaw = document.getElementById('ae-score').value;
   const score = scoreRaw !== '' ? parseInt(scoreRaw) : (LOVE_SCORES[aeModalCat] ?? 0);
   const note = document.getElementById('ae-note').value.trim();
-  const evts = getLoveEvents();
-  evts.push({ id: Date.now().toString(), date, category: aeModalCat, score, note, timestamp: Date.now() });
-  evts.sort((a, b) => {
-    if (b.date !== a.date) return b.date > a.date ? 1 : -1;
-    return evtTs(b) - evtTs(a);
-  });
-  saveLoveEvents(evts);
-  closeAddEventModal();
-  selectedCalDay = date;
-  renderCalendar();
-  showToast('💕 已記錄！', 'success');
+  try {
+    await push(ref(db, 'love_events'), {
+      date, category: aeModalCat, score, note,
+      timestamp: Date.now(),
+      who: currentWho()
+    });
+    closeAddEventModal();
+    selectedCalDay = date;
+    showToast('💕 已記錄！', 'success');
+  } catch(err) {
+    showToast('⚠ 新增失敗，請檢查網路', 'error');
+  }
 };
 
-window.deleteLoveEvent = function(id) {
-  saveLoveEvents(getLoveEvents().filter(e => e.id !== id));
-  renderDayPanel();
-  renderCalendar();
-  showToast('已刪除', '');
+window.deleteLoveEvent = async function(id) {
+  const evt = loveEvents.find(e => e.id === id);
+  if (evt && evt.who && evt.who !== currentWho()) {
+    showToast('⚠ 不能刪除對方的記錄！', 'error'); return;
+  }
+  try {
+    await remove(ref(db, 'love_events/' + id));
+    showToast('已刪除', '');
+    // onValue listener 會自動重繪
+  } catch(err) {
+    showToast('⚠ 刪除失敗', 'error');
+  }
 };
 
 // ══════════════════════════════════════════
 // LOVE SCORE
 // ══════════════════════════════════════════
-function renderLoveScore() {
-  const evts  = getLoveEvents();
-  let total   = 0;
-  evts.forEach(e => { total += evtScore(e); });
+function getDaysTogether() {
+  const start = new Date(2026, 2, 15); // 2026-03-15
+  const now   = new Date();
+  let months  = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  let days    = now.getDate() - start.getDate();
+  if (days < 0) {
+    months--;
+    days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+  }
+  const total = Math.max(0, Math.floor((now - start) / 86400000));
+  return { months: Math.max(0, months), days: Math.max(0, days), total };
+}
 
+function renderLoveScore() {
+  // ── 在一起天數 ──
+  const dt = getDaysTogether();
+  const dEl = document.getElementById('love-days-number');
+  const dLb = document.getElementById('love-days-label');
+  if (dEl) dEl.textContent = (dt.months > 0 ? dt.months + ' 個月又 ' : '') + dt.days + ' 天';
+  if (dLb) dLb.textContent = '（共 ' + dt.total + ' 天 🌹）';
+
+  // ── 月份標籤 ──
+  const sy = scoreMonthDate.getFullYear();
+  const sm = scoreMonthDate.getMonth();
+  const lblEl = document.getElementById('score-month-lbl');
+  if (lblEl) lblEl.textContent = sy + '年' + (sm + 1) + '月';
+
+  // ── 本月事件 ──
+  const monthEvts = loveEvents.filter(e => {
+    if (!e.date) return false;
+    const p = e.date.split('-');
+    return parseInt(p[0]) === sy && parseInt(p[1]) === sm + 1;
+  });
+
+  let total = 0;
+  monthEvts.forEach(e => { total += evtScore(e); });
+
+  const scoreLblEl = document.getElementById('love-score-lbl');
+  if (scoreLblEl) scoreLblEl.textContent = (sm + 1) + '月份累積愛情分數';
   const numEl = document.getElementById('love-score-number');
   const hrtEl = document.getElementById('love-score-hearts');
   if (numEl) numEl.textContent = total;
   if (hrtEl) {
-    if      (total >= 100) hrtEl.textContent = '💕💕💕💕💕';
-    else if (total >=  50) hrtEl.textContent = '💕💕💕💕';
-    else if (total >=  20) hrtEl.textContent = '💕💕💕';
-    else if (total >=   1) hrtEl.textContent = '💕💕';
-    else if (total >=   0) hrtEl.textContent = '💕';
-    else if (total >=  -20) hrtEl.textContent = '💔';
+    if      (total >= 50)  hrtEl.textContent = '💕💕💕💕💕';
+    else if (total >= 20)  hrtEl.textContent = '💕💕💕💕';
+    else if (total >= 10)  hrtEl.textContent = '💕💕💕';
+    else if (total >=  1)  hrtEl.textContent = '💕💕';
+    else if (total >=  0)  hrtEl.textContent = '💕';
+    else if (total >= -10) hrtEl.textContent = '💔';
     else                   hrtEl.textContent = '💔💔';
   }
 
+  // ── 戀愛百分比（本月正分分類佔比）──
+  const pctDiv = document.getElementById('love-pct-list');
+  if (pctDiv) {
+    const catMap = {};
+    monthEvts.filter(e => evtScore(e) > 0).forEach(e => {
+      const cat = evtCat(e);
+      catMap[cat] = (catMap[cat] || 0) + evtScore(e);
+    });
+    const totalPos = Object.values(catMap).reduce((s, v) => s + v, 0);
+    const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+    if (!sorted.length) {
+      pctDiv.innerHTML = '<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>';
+    } else {
+      pctDiv.innerHTML = sorted.map(([cat, pts]) => {
+        const pct   = totalPos ? Math.round(pts / totalPos * 100) : 0;
+        const color = CAT_COLORS[cat] || '#9ca3af';
+        const emoji = LOVE_EMOJIS[cat] || '📝';
+        return '<div class="pct-row">' +
+          '<div class="pct-cat">' + emoji + ' ' + cat + '</div>' +
+          '<div class="pct-bar-track"><div class="pct-bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' +
+          '<div class="pct-val" style="color:' + color + '">' + pct + '%</div></div>';
+      }).join('');
+    }
+  }
+
+  // ── 本月明細 ──
   const hist = document.getElementById('love-score-history');
   if (!hist) return;
-  if (!evts.length) {
-    hist.innerHTML = '<div class="empty-state">還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>';
+  if (!monthEvts.length) {
+    hist.innerHTML = '<div class="empty-state">本月還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>';
     return;
   }
-  hist.innerHTML = evts.map(e => {
+  hist.innerHTML = monthEvts.map(e => {
     const cat   = evtCat(e);
     const score = evtScore(e);
     const emoji = LOVE_EMOJIS[cat] || '📝';
     const color = CAT_COLORS[cat] || '#9ca3af';
     const sc    = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
-    const stxt  = score > 0 ? '+'+score+' 分' : score === 0 ? '±0 分' : score+' 分';
+    const stxt  = score > 0 ? '+' + score + ' 分' : score === 0 ? '±0 分' : score + ' 分';
+    const wc    = whoClass(e.who || '');
+    const whoName = (e.who || '').split(' ')[0];
     return `<div class="score-hist-item">
       <div class="score-hist-emoji">${emoji}</div>
       <div class="score-hist-info">
-        <div class="score-hist-cat" style="display:flex;align-items:center;gap:5px">
+        <div class="score-hist-cat" style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
           <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0"></span>
           ${cat}
+          ${whoName ? '<span class="who-badge ' + wc + '">' + whoName + '</span>' : ''}
         </div>
         <div class="score-hist-date">${e.date}</div>
         ${e.note ? `<div class="score-hist-note">${e.note}</div>` : ''}
@@ -1632,6 +1760,9 @@ function renderLoveScore() {
     </div>`;
   }).join('');
 }
+
+window.scorePrevMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()-1); renderLoveScore(); };
+window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()+1); renderLoveScore(); };
 
 </script>
 
@@ -1683,44 +1814,46 @@ function renderLoveScore() {
 <div class="love-page" id="page-love-score">
   <div class="love-page-header">
     <h1>💯 愛情分數</h1>
-    <p>你們的愛情帳本 · 所有回憶的分數總計</p>
+    <p>查理 ❤️ 妮妮的愛情帳本</p>
   </div>
 
+  <!-- 在一起幾個月幾天 -->
+  <div class="love-stats-card">
+    <div style="font-size:1.5rem;margin-bottom:6px">🌹</div>
+    <div class="love-stats-days" id="love-days-number">計算中…</div>
+    <div class="love-stats-label">在一起的時光</div>
+    <div class="love-stats-sub" id="love-days-label"></div>
+    <div style="font-size:.67rem;color:var(--muted);margin-top:6px;opacity:.75">從 2026年3月15日 開始 🫶</div>
+  </div>
+
+  <!-- 月份切換 -->
+  <div class="score-month-nav">
+    <button onclick="scorePrevMonth()">◀</button>
+    <span class="score-month-lbl" id="score-month-lbl"></span>
+    <button onclick="scoreNextMonth()">▶</button>
+  </div>
+
+  <!-- 本月分數 -->
   <div class="score-big-card">
-    <div class="score-lbl">累積愛情分數</div>
+    <div class="score-lbl" id="love-score-lbl">本月累積愛情分數</div>
     <div class="score-number" id="love-score-number">0</div>
     <div class="score-unit">分</div>
     <div class="score-hearts" id="love-score-hearts">💕</div>
   </div>
 
+  <!-- 戀愛百分比 -->
   <div class="score-rules-card">
-    <h3>計分規則</h3>
-    <div class="score-rule-row">
-      <span class="score-rule-cat">🍽️ 吃飯</span>
-      <span class="score-rule-pts pos">+2 分</span>
-    </div>
-    <div class="score-rule-row">
-      <span class="score-rule-cat">✈️ 旅遊</span>
-      <span class="score-rule-pts pos">+5 分</span>
-    </div>
-    <div class="score-rule-row">
-      <span class="score-rule-cat">💕 愛愛</span>
-      <span class="score-rule-pts pos">+2 分</span>
-    </div>
-    <div class="score-rule-row">
-      <span class="score-rule-cat">💢 吵架</span>
-      <span class="score-rule-pts neg">-5 分</span>
-    </div>
-    <div class="score-rule-row">
-      <span class="score-rule-cat">📝 其他</span>
-      <span class="score-rule-pts zero">0 分</span>
+    <h3>戀愛百分比</h3>
+    <div id="love-pct-list">
+      <div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>
     </div>
   </div>
 
+  <!-- 本月明細 -->
   <div class="list-section">
-    <h2 style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">得分明細</h2>
+    <h2 style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">本月得分明細</h2>
     <div class="score-hist-list" id="love-score-history">
-      <div class="empty-state">還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>
+      <div class="empty-state">本月還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>
     </div>
   </div>
 </div>
