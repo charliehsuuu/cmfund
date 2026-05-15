@@ -801,7 +801,7 @@ body {
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getDatabase, ref, push, onValue, remove, get, set, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
 const firebaseConfig = {
@@ -835,7 +835,18 @@ let editType = 'income';
 let monthSortAsc = true; // true=舊到新, false=新到舊
 
 // ── Auth ──
-document.getElementById('login-btn').onclick = () => signInWithPopup(auth, provider);
+// 手機用 redirect，桌面用 popup
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+document.getElementById('login-btn').onclick = () => {
+  if (isMobile) {
+    signInWithRedirect(auth, provider);
+  } else {
+    signInWithPopup(auth, provider);
+  }
+};
+
+// 處理 redirect 回傳結果
+getRedirectResult(auth).catch(err => console.error('Redirect error:', err));
 document.getElementById('logout-btn').onclick = () => signOut(auth);
 
 onAuthStateChanged(auth, user => {
@@ -1522,7 +1533,7 @@ function renderCalendar() {
     }).join('');
     if (dayEvts.length > 3) chips += '<div class="cal-ev-chip" style="background:#9ca3af">+' + (dayEvts.length - 3) + ' 筆</div>';
     html += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' selected' : '') +
-      '" onclick="selectCalDay('' + dateStr + '')">' +
+      '" onclick="selectCalDay(\'' + dateStr + '\')">' +
       '<div class="cal-dn">' + d + '</div>' + chips + '</div>';
   }
   document.getElementById('cal-grid').innerHTML = html;
