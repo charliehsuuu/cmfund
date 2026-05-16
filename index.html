@@ -489,10 +489,10 @@ body {
 .day-ev-cat { font-size:1rem; font-weight:700; color:var(--text); white-space:nowrap; }
 .day-ev-note { font-size:.88rem; color:var(--muted); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .day-ev-score { font-family:'DM Mono',monospace; font-size:1rem; font-weight:700; flex-shrink:0; }
-.day-ev-del { background:none; border:none; color:#d08080; cursor:pointer; font-size:1.1rem; opacity:.5; transition:opacity .15s; padding:4px 6px; margin-left:4px; }
-.day-ev-del:hover { opacity:1; color:#c04030; }
-.day-ev-edit { background:none; border:none; color:#a080c0; cursor:pointer; font-size:1.1rem; opacity:.5; transition:opacity .15s; padding:4px 6px; margin-left:4px; }
-.day-ev-edit:hover { opacity:1; color:#7040a0; }
+.day-ev-del { background:#fff0f0; border:1.5px solid #e0a0a0; color:#c04030; cursor:pointer; font-size:.75rem; font-weight:700; font-family:'Noto Sans TC',sans-serif; border-radius:8px; padding:4px 10px; margin-left:6px; transition:all .15s; white-space:nowrap; }
+.day-ev-del:hover { background:#c04030; color:#fff; border-color:#c04030; }
+.day-ev-edit { background:#f5f0ff; border:1.5px solid #c0a0e0; color:#7040a0; cursor:pointer; font-size:.75rem; font-weight:700; font-family:'Noto Sans TC',sans-serif; border-radius:8px; padding:4px 10px; margin-left:6px; transition:all .15s; white-space:nowrap; }
+.day-ev-edit:hover { background:#7040a0; color:#fff; border-color:#7040a0; }
 
 /* 翻頁桌曆 */
 .flip-group { display:flex; align-items:flex-end; gap:10px; justify-content:center; margin:8px 0; }
@@ -1654,8 +1654,8 @@ function renderDayPanel() {
         '<span class="day-ev-cat">' + cat + '</span>' +
         (e.note ? '<span class="day-ev-note">' + e.note + '</span>' : '<span class="day-ev-note"></span>') +
         '<span class="day-ev-score ' + sc + '">' + stxt + ' 分</span>' +
-        (isOwn ? `<button class="day-ev-edit" onclick="editLoveEvent('${safeId}')">✏️</button>` : '') +
-        (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')">✕</button>` : '') +
+        (isOwn ? `<button class="day-ev-edit" onclick="editLoveEvent('${safeId}')">編輯</button>` : '') +
+        (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')">刪除</button>` : '') +
         '</div>';
     }).join('');
   }
@@ -2069,12 +2069,13 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
     </svg></span>
   </button>
   <button class="nav-item" id="nav-love-score" onclick="switchPage('love-score')">
-    <span class="nav-icon"><svg width="36" height="28" viewBox="0 0 54 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="5" y1="4" x2="5" y2="24"/>
-      <line x1="2" y1="6" x2="5" y2="4"/>
-      <rect x="12" y="4" width="10" height="20" rx="3"/>
-      <rect x="30" y="4" width="10" height="20" rx="3"/>
-      <rect x="47" y="4" width="6" height="20" rx="3"/>
+    <span class="nav-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="10" width="5" height="11" rx="1"/>
+      <rect x="9.5" y="5" width="5" height="16" rx="1"/>
+      <rect x="17" y="13" width="5" height="8" rx="1"/>
+      <line x1="1" y1="22" x2="23" y2="22"/>
+      <line x1="10.5" y1="3" x2="13.5" y2="3"/>
+      <line x1="12" y1="3" x2="12" y2="5"/>
     </svg></span>
   </button>
 </nav>
