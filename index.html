@@ -1579,6 +1579,11 @@ window.selectCalDay = function(dateStr) {
     selectedCalDay = dateStr;
     renderCalendar();
     renderDayPanel();
+    // 自動捲動到日程面板
+    setTimeout(() => {
+      const p = document.getElementById('day-panel');
+      if (p) p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
   }
 };
 
@@ -1586,7 +1591,7 @@ function renderDayPanel() {
   if (!selectedCalDay) return;
   const panel = document.getElementById('day-panel');
   if (!panel) return;
-  const evts = getLoveEvents().filter(e => e.date === selectedCalDay);
+  const evts = loveEvents.filter(e => e.date === selectedCalDay);
   const parts = selectedCalDay.split('-');
   document.getElementById('day-panel-title').textContent =
     parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日的回憶';
