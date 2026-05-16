@@ -424,6 +424,11 @@ body {
 .score-lbl { font-size: .8rem; color: rgba(255,255,255,.85); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
 .score-number { font-family: 'DM Mono', monospace; font-size: 5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.2); line-height: 1; }
 .score-unit { font-size: 1.1rem; color: rgba(255,255,255,.9); margin-top: 8px; }
+.love-index-wrap { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,.3); }
+.love-index-label { font-size:.72rem; color:rgba(255,255,255,.85); margin-bottom:8px; font-weight:600; }
+.love-index-bar-track { background:rgba(255,255,255,.25); border-radius:99px; height:12px; overflow:hidden; margin-bottom:6px; }
+.love-index-bar-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#fff8b0,#ffe066); transition:width .6s ease; }
+.love-index-pct { font-family:'DM Mono',monospace; font-size:1.6rem; font-weight:700; color:#fff; letter-spacing:.02em; }
 .score-hearts { font-size: 1.6rem; margin-top: 14px; letter-spacing: .4rem; }
 
 .score-rules-card {
@@ -1824,6 +1829,15 @@ function renderLoveScore() {
     else                   hrtEl.textContent = '💔💔';
   }
 
+  // ── 愛情指標：本月分數 / 55 × 100% ──
+  const PERFECT = 55;
+  const rawPct = Math.round(Math.max(0, total) / PERFECT * 100);
+  const clampPct = Math.min(rawPct, 100);
+  const barEl = document.getElementById('love-index-bar');
+  const pctEl = document.getElementById('love-index-pct');
+  if (barEl) barEl.style.width = clampPct + '%';
+  if (pctEl) pctEl.textContent = clampPct + '%';
+
   // ── 戀愛百分比（本月正分分類佔比）──
   const pctDiv = document.getElementById('love-pct-list');
   if (pctDiv) {
@@ -1982,6 +1996,14 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
     <div class="score-number" id="love-score-number">0</div>
     <div class="score-unit">分</div>
     <div class="score-hearts" id="love-score-hearts">💕</div>
+    <!-- 愛情指標 -->
+    <div class="love-index-wrap">
+      <div class="love-index-label">💘 愛情指標（滿分55分）</div>
+      <div class="love-index-bar-track">
+        <div class="love-index-bar-fill" id="love-index-bar"></div>
+      </div>
+      <div class="love-index-pct" id="love-index-pct">0%</div>
+    </div>
   </div>
 
   <!-- 戀愛百分比 -->
