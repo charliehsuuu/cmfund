@@ -335,7 +335,7 @@ body {
   transition: all .2s; border: none; background: transparent;
 }
 .nav-icon { font-size: 1.5rem; line-height: 1; transition: transform .2s; }
-.nav-label { font-size: .6rem; color: #a08070; font-family: 'Noto Sans TC', sans-serif; font-weight: 500; white-space: nowrap; transition: color .2s; }
+.nav-label { font-size: .75rem; color: #a08070; font-family: 'Noto Sans TC', sans-serif; font-weight: 500; white-space: nowrap; transition: color .2s; }
 .nav-item.active .nav-icon { transform: translateY(-2px); filter: drop-shadow(0 0 6px rgba(201,122,138,.8)); }
 .nav-item.active .nav-label { color: #c97a8a; font-weight: 700; }
 .nav-item:active .nav-icon { transform: scale(.9); }
@@ -363,14 +363,14 @@ body {
 }
 .love-cat-btn:active, .love-cat-btn.selected { transform: translateY(3px); box-shadow: 0 1px 0 #c08090; }
 .love-cat-btn.selected { background: #f0b0c8; border-color: #c07090; }
-.love-cat-btn[data-cat="吃飯"] { background: #fff3e0; border-color: #e0a060; color: #804020; box-shadow: 0 4px 0 #c07030; }
-.love-cat-btn[data-cat="吃飯"].selected { background: #ffe0b0; transform: translateY(3px); box-shadow: 0 1px 0 #c07030; }
+.love-cat-btn[data-cat="吃飯"] { background: #fef9e7; border-color: #d4a017; color: #6b4c00; box-shadow: 0 4px 0 #a07810; }
+.love-cat-btn[data-cat="吃飯"].selected { background: #fdeea0; transform: translateY(3px); box-shadow: 0 1px 0 #a07810; }
 .love-cat-btn[data-cat="旅遊"] { background: #e0f0ff; border-color: #60a0e0; color: #204070; box-shadow: 0 4px 0 #3070b0; }
 .love-cat-btn[data-cat="旅遊"].selected { background: #c0e0ff; transform: translateY(3px); box-shadow: 0 1px 0 #3070b0; }
 .love-cat-btn[data-cat="愛愛"] { background: #ffe0ec; border-color: #e060a0; color: #901040; box-shadow: 0 4px 0 #b03070; }
 .love-cat-btn[data-cat="愛愛"].selected { background: #ffc0dc; transform: translateY(3px); box-shadow: 0 1px 0 #b03070; }
-.love-cat-btn[data-cat="吵架"] { background: #ffe8e0; border-color: #e07060; color: #802010; box-shadow: 0 4px 0 #b04030; }
-.love-cat-btn[data-cat="吵架"].selected { background: #ffcfbf; transform: translateY(3px); box-shadow: 0 1px 0 #b04030; }
+.love-cat-btn[data-cat="吵架"] { background: #f3f4f6; border-color: #6b7280; color: #1f2937; box-shadow: 0 4px 0 #374151; }
+.love-cat-btn[data-cat="吵架"].selected { background: #d1d5db; transform: translateY(3px); box-shadow: 0 1px 0 #374151; }
 .love-cat-btn[data-cat="其他"] { background: #eeeef8; border-color: #8888b8; color: #303068; box-shadow: 0 4px 0 #5858a0; }
 .love-cat-btn[data-cat="其他"].selected { background: #d8d8ef; transform: translateY(3px); box-shadow: 0 1px 0 #5858a0; }
 
@@ -505,23 +505,23 @@ body {
 .pie-legend-name { flex:1; color:var(--text); font-weight:500; }
 .pie-legend-pct { font-family:'DM Mono',monospace; font-weight:700; font-size:.82rem; }
 /* FAB */
-.love-fab { position:fixed; bottom:80px; right:18px; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#e8708a,#d05070); border:none; color:#fff; font-size:2rem; cursor:pointer; box-shadow:0 6px 0 #903050, 0 8px 18px rgba(180,60,80,.4); transition:all .15s; z-index:200; display:none; align-items:center; justify-content:center; line-height:1; font-weight:300; }
+.love-fab { position:fixed; bottom:80px; right:18px; width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg,#f08098,#d05878); border:none; color:#fff; font-size:2rem; cursor:pointer; box-shadow:0 4px 16px rgba(200,60,100,.35); transition:all .18s ease; z-index:200; display:none; align-items:center; justify-content:center; line-height:1; font-weight:300; }
 .love-fab.show { display:flex; }
-.love-fab:active { transform:translateY(4px); box-shadow:0 2px 0 #903050; }
+.love-fab:active { transform:scale(.93); box-shadow:0 2px 8px rgba(200,60,100,.25); }
 /* Add Event Modal */
 .ae-modal { max-width:360px; }
 .ae-cat-grid { display:flex; flex-wrap:wrap; gap:8px; }
 .ae-cat-btn { padding:8px 12px; border-radius:14px; font-size:.88rem; cursor:pointer; font-family:'Noto Sans TC',sans-serif; font-weight:600; transition:all .1s; border:2px solid; }
-.ae-cat-btn[data-cat="吃飯"] { background:#fff3e0; border-color:#e0a060; color:#804020; box-shadow:0 3px 0 #c07030; }
+.ae-cat-btn[data-cat="吃飯"] { background:#fef9e7; border-color:#d4a017; color:#6b4c00; box-shadow:0 3px 0 #a07810; }
 .ae-cat-btn[data-cat="旅遊"] { background:#e0f0ff; border-color:#60a0e0; color:#204070; box-shadow:0 3px 0 #3070b0; }
 .ae-cat-btn[data-cat="愛愛"] { background:#ffe0ec; border-color:#e060a0; color:#901040; box-shadow:0 3px 0 #b03070; }
-.ae-cat-btn[data-cat="吵架"] { background:#ffe8e0; border-color:#e07060; color:#802010; box-shadow:0 3px 0 #b04030; }
+.ae-cat-btn[data-cat="吵架"] { background:#f3f4f6; border-color:#6b7280; color:#1f2937; box-shadow:0 3px 0 #374151; }
 .ae-cat-btn[data-cat="其他"] { background:#eeeef8; border-color:#8888b8; color:#303068; box-shadow:0 3px 0 #5858a0; }
 .ae-cat-btn.sel { transform:translateY(2px); }
-.ae-cat-btn[data-cat="吃飯"].sel { box-shadow:0 1px 0 #c07030; background:#ffe0b0; }
+.ae-cat-btn[data-cat="吃飯"].sel { box-shadow:0 1px 0 #a07810; background:#fdeea0; }
 .ae-cat-btn[data-cat="旅遊"].sel { box-shadow:0 1px 0 #3070b0; background:#c0e0ff; }
 .ae-cat-btn[data-cat="愛愛"].sel { box-shadow:0 1px 0 #b03070; background:#ffc0dc; }
-.ae-cat-btn[data-cat="吵架"].sel { box-shadow:0 1px 0 #b04030; background:#ffcfbf; }
+.ae-cat-btn[data-cat="吵架"].sel { box-shadow:0 1px 0 #374151; background:#d1d5db; }
 .ae-cat-btn[data-cat="其他"].sel { box-shadow:0 1px 0 #5858a0; background:#d8d8ef; }
 .ae-field { margin-bottom:13px; }
 .ae-label { font-size:.72rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:5px; font-weight:600; }
@@ -1457,7 +1457,7 @@ window.switchPage = function(page) {
 // ══════════════════════════════════════════
 const LOVE_SCORES  = { '吃飯': 2, '旅遊': 5, '愛愛': 2, '吵架': -5, '其他': 0 };
 const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝' };
-const CAT_COLORS   = { '吃飯': '#f97316', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#b91c1c', '其他': '#9ca3af' };
+const CAT_COLORS   = { '吃飯': '#d4a017', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#374151', '其他': '#9ca3af' };
 const LOVE_KEY     = 'cmfund_love_events'; // 舊 localStorage key（僅用於搬移）
 
 // Helpers
@@ -1906,10 +1906,10 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
 
   <!-- 顏色圖例 -->
   <div class="cal-legend">
-    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#f97316"></span>吃飯</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#d4a017"></span>吃飯</span>
     <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#3b82f6"></span>旅遊</span>
     <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#ec4899"></span>愛愛</span>
-    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#b91c1c"></span>吵架</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#374151"></span>吵架</span>
     <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#9ca3af"></span>其他</span>
   </div>
 </div>
