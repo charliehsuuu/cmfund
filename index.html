@@ -476,17 +476,17 @@ body {
 /* Day panel */
 .day-panel { background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:14px; margin-bottom:14px; box-shadow:0 4px 0 #c8b090; display:none; }
 .day-panel.open { display:block; }
-.day-panel-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:10px; }
-.day-ev-row { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px dashed #f0e0d0; }
+.day-panel-title { font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:12px; }
+.day-ev-row { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px dashed #f0e0d0; }
 .day-ev-row:last-child { border-bottom:none; }
-.day-ev-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-.day-ev-cat { font-size:.88rem; font-weight:600; color:var(--text); white-space:nowrap; }
-.day-ev-note { font-size:.75rem; color:var(--muted); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.day-ev-score { font-family:'DM Mono',monospace; font-size:.88rem; font-weight:700; flex-shrink:0; }
-.day-ev-del { background:none; border:none; color:var(--muted); cursor:pointer; font-size:.85rem; opacity:.3; transition:opacity .15s; padding:0; }
+.day-ev-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+.day-ev-cat { font-size:1rem; font-weight:700; color:var(--text); white-space:nowrap; }
+.day-ev-note { font-size:.88rem; color:var(--muted); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.day-ev-score { font-family:'DM Mono',monospace; font-size:1rem; font-weight:700; flex-shrink:0; }
+.day-ev-del { background:none; border:none; color:#d08080; cursor:pointer; font-size:1.1rem; opacity:.5; transition:opacity .15s; padding:4px 6px; margin-left:4px; }
 .day-ev-del:hover { opacity:1; color:#c04030; }
-.day-ev-edit { background:none; border:none; color:var(--muted); cursor:pointer; font-size:.85rem; opacity:.3; transition:opacity .15s; padding:0; margin-right:2px; }
-.day-ev-edit:hover { opacity:1; color:#a060c0; }
+.day-ev-edit { background:none; border:none; color:#a080c0; cursor:pointer; font-size:1.1rem; opacity:.5; transition:opacity .15s; padding:4px 6px; margin-left:4px; }
+.day-ev-edit:hover { opacity:1; color:#7040a0; }
 
 /* 翻頁桌曆 */
 .flip-group { display:flex; align-items:flex-end; gap:10px; justify-content:center; margin:8px 0; }
@@ -1656,10 +1656,14 @@ window.deleteLoveEvent = async function(id) {
   if (evt && evt.who && evt.who !== currentWho()) {
     showToast('⚠ 不能刪除對方的記錄！', 'error'); return;
   }
+  // 雙重確認視窗
+  const cat = evt ? (evtCat(evt)) : '記錄';
+  const note = evt && evt.note ? '「' + evt.note + '」' : '';
+  const confirmed = window.confirm('確定要刪除這筆記錄嗎？\n\n' + cat + (note ? ' ' + note : '') + '\n\n刪除後無法復原！');
+  if (!confirmed) return;
   try {
     await remove(ref(db, 'love_events/' + id));
     showToast('已刪除', '');
-    // onValue listener 會自動重繪
   } catch(err) {
     showToast('⚠ 刪除失敗', 'error');
   }
