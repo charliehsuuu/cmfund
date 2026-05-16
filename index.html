@@ -345,6 +345,13 @@ body {
 /* ── PAGES ── */
 .love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
 .love-page.active { display: block; }
+/* 頁面轉場 */
+.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
+.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+@keyframes slideInLeft  { from { opacity:0; transform:translateX(40px);  } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+#app.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
+#app.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
 
 /* ── LOVE CALENDAR PAGE ── */
 .love-page-header { text-align: center; margin-bottom: 20px; }
@@ -1495,46 +1502,48 @@ function prefillTimeInput() {
 // ══════════════════════════════════════════
 // PAGE NAVIGATION
 // ══════════════════════════════════════════
-window.switchPage = function(page) {
-  // Hide CMfund app
-  document.getElementById('app').style.display = 'none';
-  // Hide love pages
-  document.querySelectorAll('.love-page').forEach(p => p.classList.remove('active'));
-  // Deactivate all nav items
+const PAGE_ORDER_MAIN = ['cmfund', 'love-calendar', 'love-score'];
+let _currentPageKey = 'cmfund';
+
+window.switchPage = function(page, direction) {
+  const animClass = direction === 'left' ? 'page-slide-enter-left' : direction === 'right' ? 'page-slide-enter-right' : '';
+
+  // Hide all
+  const appEl = document.getElementById('app');
+  appEl.style.display = 'none';
+  appEl.classList.remove('page-slide-enter-left','page-slide-enter-right');
+  document.querySelectorAll('.love-page').forEach(p => {
+    p.classList.remove('active','page-slide-enter-left','page-slide-enter-right');
+  });
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  // Hide FAB
   const fab = document.querySelector('.love-fab');
   if (fab) fab.classList.remove('show');
 
+  _currentPageKey = page;
+
   if (page === 'cmfund') {
-    document.getElementById('app').style.display = 'block';
+    appEl.style.display = 'block';
+    if (animClass) { void appEl.offsetWidth; appEl.classList.add(animClass); }
     document.getElementById('nav-cmfund').classList.add('active');
   } else if (page === 'love-calendar') {
     const pg = document.getElementById('page-love-calendar');
     pg.classList.add('active');
+    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
     document.getElementById('nav-love-cal').classList.add('active');
     if (fab) fab.classList.add('show');
     renderCalendar();
   } else if (page === 'love-score') {
     const pg = document.getElementById('page-love-score');
     pg.classList.add('active');
+    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
     document.getElementById('nav-love-score').classList.add('active');
     renderLoveScore();
   }
 };
 
-// ── 左右滑動切換頁面 ──
+// ── 左右滑動切換頁面（含轉場方向）──
 (function() {
-  const PAGE_ORDER = ['cmfund', 'love-calendar', 'love-score'];
-  let currentPageKey = 'cmfund';
   let touchStartX = 0, touchStartY = 0;
-
-  // 記錄目前頁面
-  const origSwitch = window.switchPage;
-  window.switchPage = function(page) {
-    currentPageKey = page;
-    origSwitch(page);
-  };
 
   document.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
@@ -1545,9 +1554,12 @@ window.switchPage = function(page) {
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
-    const idx = PAGE_ORDER.indexOf(currentPageKey);
-    if (dx < 0 && idx < PAGE_ORDER.length - 1) window.switchPage(PAGE_ORDER[idx + 1]);
-    else if (dx > 0 && idx > 0) window.switchPage(PAGE_ORDER[idx - 1]);
+    const idx = PAGE_ORDER_MAIN.indexOf(_currentPageKey);
+    if (dx < 0 && idx < PAGE_ORDER_MAIN.length - 1) {
+      window.switchPage(PAGE_ORDER_MAIN[idx + 1], 'left');
+    } else if (dx > 0 && idx > 0) {
+      window.switchPage(PAGE_ORDER_MAIN[idx - 1], 'right');
+    }
   }, { passive: true });
 })();
 
