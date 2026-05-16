@@ -1783,18 +1783,11 @@ function renderLoveScore() {
   const dt = getDaysTogether();
   const dEl = document.getElementById('love-days-number');
   const dLb = document.getElementById('love-days-label');
-  // 翻頁桌曆風格
-  if (dEl) {
-    let html = '<div class="flip-group">';
-    if (dt.months > 0) {
-      html += '<div class="flip-unit"><div class="flip-card"><span class="flip-card-num">' + dt.months + '</span></div><div class="flip-card-lbl">個月</div></div>';
-      html += '<div class="flip-sep">+</div>';
-    }
-    html += '<div class="flip-unit"><div class="flip-card"><span class="flip-card-num">' + dt.days + '</span></div><div class="flip-card-lbl">天</div></div>';
-    html += '</div>';
-    dEl.innerHTML = html;
-  }
-  if (dLb) dLb.textContent = '（共 ' + dt.total + ' 天 🌹）';
+  // 翻頁桌曆：直接填入數字
+  const mEl = document.getElementById('flip-months');
+  const dDEl = document.getElementById('flip-days');
+  if (mEl) mEl.textContent = dt.months;
+  if (dDEl) dDEl.textContent = dt.days;
 
   // ── 月份標籤 ──
   const sy = scoreMonthDate.getFullYear();
@@ -1960,17 +1953,26 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
 <!-- ═══ PAGE: 愛情分數 ═══ -->
 <div class="love-page" id="page-love-score">
   <div class="love-page-header">
-    <h1>💯 愛情分數</h1>
+    <h1>💯 愛情診斷</h1>
     <p>查理 ❤️ 妮妮的愛情帳本</p>
   </div>
 
   <!-- 在一起幾個月幾天 -->
   <div class="love-stats-card">
-    <div style="font-size:1.5rem;margin-bottom:6px">🌹</div>
-    <div class="love-stats-days" id="love-days-number"><div class="flip-group"><div class="flip-unit"><div class="flip-card"><span class="flip-card-num">…</span></div><div class="flip-card-lbl">計算中</div></div></div></div>
-    <div class="love-stats-label">在一起的時光</div>
-    <div class="love-stats-sub" id="love-days-label"></div>
-    <div style="font-size:.67rem;color:var(--muted);margin-top:6px;opacity:.75">從 2026年3月15日 開始 🫶</div>
+    <div style="font-size:1.2rem;margin-bottom:8px">🌹 在一起的時光</div>
+    <div id="love-days-number">
+      <div class="flip-group">
+        <div class="flip-unit">
+          <div class="flip-card"><span class="flip-card-num" id="flip-months">…</span></div>
+          <div class="flip-card-lbl">個月</div>
+        </div>
+        <div class="flip-sep">又</div>
+        <div class="flip-unit">
+          <div class="flip-card"><span class="flip-card-num" id="flip-days">…</span></div>
+          <div class="flip-card-lbl">天</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 月份切換 -->
