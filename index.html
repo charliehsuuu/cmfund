@@ -1230,9 +1230,7 @@ async function loadDate() {
   document.getElementById('list-title').textContent = '載入中…';
   if (unsubscribe) { unsubscribe(); unsubscribe = null; }
   await calcCarryBalance();
-  // 同時支援本地日期 key 和舊版 UTC 日期 key（相容性修正）
   const localDateKey = formatDate(currentDate).replace(/-/g,'_');
-  const utcDateKey   = currentDate.toISOString().split('T')[0].replace(/-/g,'_');
   const dbRef = ref(db, `transactions/${localDateKey}`);
 
   // ── 初始載入（用 get 讀伺服器資料）──
@@ -1247,20 +1245,7 @@ async function loadDate() {
         }
       });
     }
-    // 相容舊版：若本地 key 與 UTC key 不同，也讀舊版資料（UTC key）
-    if (utcDateKey !== localDateKey) {
-      try {
-        const utcSnap = await get(ref(db, `transactions/${utcDateKey}`));
-        if (utcSnap.exists()) {
-          utcSnap.forEach(c => {
-            const val = c.val();
-            if (val && typeof val === 'object' && !transactions.find(t => t.id === c.key)) {
-              transactions.push({ id: c.key, ...val });
-            }
-          });
-        }
-      } catch(e2) { /* 舊版 key 不存在則忽略 */ }
-    }
+
     transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
     document.getElementById('list-title').textContent = '今日明細';
     setSyncStatus('online');
@@ -1269,7 +1254,8 @@ async function loadDate() {
     updateBudgetBar();
   } catch(e) {
     console.error('loadDate error:', e);
-    document.getElementById('list-title').textContent = '載入失敗，請重新整理';
+    showToast('⚠ 載入失敗，請重新整理', 'error');
+    document.getElementById('list-title').textContent = '今日明細';
     renderSummary();
     renderList();
   }
@@ -1322,26 +1308,18 @@ function addTransaction() {
     who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
   };
 
-  // ── 樂觀更新：Firebase push() 立即產生本地 key，完全不需要 await ──
-  // push() 回傳 ThenableReference，.key 馬上可用，網路同步在背景自動完成
+  // push() 寫入 Firebase，onValue 監聽器會自動觸發並重新渲染，不需樂觀更新
   const pushRef = push(ref(db, `transactions/${dateKey}`), txData);
 
-  // 立刻更新畫面，不等 Firebase 回應
-  transactions.push({ id: pushRef.key, ...txData });
-  transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
-  renderSummary();
-  renderList();
+  // 清除輸入欄位（onValue 觸發後會自動更新列表）
   document.getElementById('desc-input').value = '';
   document.getElementById('amount-input').value = '';
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
   selectedCat = '';
   prefillTimeInput();
   showToast('💕 已新增！', 'success');
-
-  // 立刻還原按鈕（完全不依賴 Firebase 回應）
   btn.disabled = false;
 
-  // 背景監聽同步結果（不影響 UI）
   setSyncStatus('saving');
   pushRef.then(() => {
     setSyncStatus('online');
