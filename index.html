@@ -1164,7 +1164,11 @@ function renderList() {
     return catMatch && kwMatch;
   });
   if (!filtered.length) {
-    list.innerHTML = `<div class="empty-state">${keyword||filterCat!=='all' ? '找不到符合的記錄 🔍' : '今天還沒有記錄<br>新增第一筆，一起記帳 💕'}</div>`;
+    const isToday = formatDate(currentDate) === formatDate(new Date());
+    const noRecordMsg = isToday
+      ? '今天還沒有記錄<br>新增第一筆，一起記帳 💕'
+      : `${formatDateDisplay(currentDate)}<br>這天沒有記帳記錄`;
+    list.innerHTML = `<div class="empty-state">${keyword||filterCat!=='all' ? '找不到符合的記錄 🔍' : noRecordMsg}</div>`;
     return;
   }
   let running = carryBalance;
@@ -1199,12 +1203,14 @@ function renderList() {
 // ── Load date ──
 async function loadDate() {
   document.getElementById('list-title').textContent = '載入中…';
-  if (unsubscribe) unsubscribe();
+  if (unsubscribe) { unsubscribe(); unsubscribe = null; }
   await calcCarryBalance();
-  const dateKey = formatDate(currentDate).replace(/-/g,'_');
-  const dbRef = ref(db, `transactions/${dateKey}`);
+  // 同時支援本地日期 key 和舊版 UTC 日期 key（相容性修正）
+  const localDateKey = formatDate(currentDate).replace(/-/g,'_');
+  const utcDateKey   = currentDate.toISOString().split('T')[0].replace(/-/g,'_');
+  const dbRef = ref(db, `transactions/${localDateKey}`);
 
-  // Initial load with get()
+  // ── 初始載入（用 get 讀伺服器資料）──
   try {
     const snap = await get(dbRef);
     transactions = [];
@@ -1216,6 +1222,20 @@ async function loadDate() {
         }
       });
     }
+    // 相容舊版：若本地 key 與 UTC key 不同，也讀舊版資料（UTC key）
+    if (utcDateKey !== localDateKey) {
+      try {
+        const utcSnap = await get(ref(db, `transactions/${utcDateKey}`));
+        if (utcSnap.exists()) {
+          utcSnap.forEach(c => {
+            const val = c.val();
+            if (val && typeof val === 'object' && !transactions.find(t => t.id === c.key)) {
+              transactions.push({ id: c.key, ...val });
+            }
+          });
+        }
+      } catch(e2) { /* 舊版 key 不存在則忽略 */ }
+    }
     transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
     document.getElementById('list-title').textContent = '今日明細';
     setSyncStatus('online');
@@ -1224,10 +1244,15 @@ async function loadDate() {
     updateBudgetBar();
   } catch(e) {
     console.error('loadDate error:', e);
+    document.getElementById('list-title').textContent = '載入失敗，請重新整理';
+    renderSummary();
+    renderList();
   }
 
-  // Real-time listener for updates
+  // ── 即時監聽（跳過第一次立即觸發，避免蓋掉 get() 已載入的資料）──
+  let isFirstFire = true;
   unsubscribe = onValue(dbRef, snap => {
+    if (isFirstFire) { isFirstFire = false; return; }
     transactions = [];
     if (snap.exists()) {
       snap.forEach(c => {
@@ -1238,13 +1263,13 @@ async function loadDate() {
       });
     }
     transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
-    document.getElementById('list-title').textContent = '今日明細';
     setSyncStatus('online');
     renderSummary();
     renderList();
     updateBudgetBar();
   }, (error) => {
     console.error('onValue error:', error);
+    setSyncStatus('');
   });
 }
 
@@ -1269,20 +1294,28 @@ async function addTransaction() {
   setSyncStatus('saving');
   try {
     const dateKey = formatDate(currentDate).replace(/-/g,'_');
-    await push(ref(db, `transactions/${dateKey}`), {
+    const txData = {
       type: currentType, desc: desc || cat, amount, cat, time,
       ts: Date.now(),
       who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
-    });
+    };
+    const newRef = await push(ref(db, `transactions/${dateKey}`), txData);
+    // ── 立即更新畫面（不等 onValue，確保新增後馬上顯示）──
+    transactions.push({ id: newRef.key, ...txData });
+    transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
+    renderSummary();
+    renderList();
     document.getElementById('desc-input').value = '';
     document.getElementById('amount-input').value = '';
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
     selectedCat = '';
     prefillTimeInput();
     showToast('💕 已新增！', 'success');
-  } catch(e) {
-    showToast('⚠ 新增失敗，請檢查網路', 'error');
     setSyncStatus('online');
+  } catch(e) {
+    console.error('addTransaction error:', e);
+    showToast('⚠ 新增失敗：' + (e.code || e.message || '請檢查網路'), 'error');
+    setSyncStatus('');
   }
   btn.disabled = false;
   document.getElementById('spinner').style.display = 'none';
@@ -1292,8 +1325,16 @@ window.addTransaction = addTransaction;
 
 window.deleteTx = async (id) => {
   const dateKey = formatDate(currentDate).replace(/-/g,'_');
-  await remove(ref(db, `transactions/${dateKey}/${id}`));
-  showToast('已刪除', '');
+  try {
+    await remove(ref(db, `transactions/${dateKey}/${id}`));
+    // 立即從本地移除並更新畫面
+    transactions = transactions.filter(t => t.id !== id);
+    renderSummary();
+    renderList();
+    showToast('已刪除', '');
+  } catch(e) {
+    showToast('⚠ 刪除失敗：' + (e.code || '請檢查網路'), 'error');
+  }
 };
 
 // ── Edit Modal ──
