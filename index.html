@@ -769,7 +769,7 @@ body {
         <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
       </div>
       <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
-      <div class="input-row"><input type="number" id="amount-input" placeholder="金額 TWD" min="0" /></div>
+      <div class="input-row"><input type="number" id="amount-input" placeholder="金額 TWD" min="0" inputmode="decimal" /></div>
       <div class="time-row">
         <label>⏰ 時間</label>
         <input type="time" id="time-input" />
@@ -851,7 +851,7 @@ body {
     </div>
     <div class="modal-field">
       <div class="modal-label">金額 TWD</div>
-      <input type="number" id="edit-amount" placeholder="金額" min="0" />
+      <input type="number" id="edit-amount" placeholder="金額" min="0" inputmode="decimal" />
     </div>
     <div class="modal-field">
       <div class="modal-label">分類</div>
@@ -905,7 +905,7 @@ body {
 <div class="modal-overlay" id="budget-modal">
   <div class="modal">
     <h3>⚙️ 設定每月支出預算</h3>
-    <input type="number" id="budget-input" placeholder="輸入預算金額 TWD" />
+    <input type="number" id="budget-input" placeholder="輸入預算金額 TWD" inputmode="numeric" />
     <div class="modal-btns">
       <button class="modal-cancel" onclick="closeBudgetModal()">取消</button>
       <button class="modal-confirm" onclick="saveBudget()">儲存</button>
@@ -2252,7 +2252,7 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
     </div>
     <div class="ae-field">
       <div class="ae-label">分數</div>
-      <input type="number" id="ae-score" class="ae-input" placeholder="選分類後自動填入" />
+      <input type="number" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="numeric" />
       <div class="ae-score-hint" id="ae-score-hint">選擇分類後自動填入預設分數</div>
     </div>
     <div class="ae-field">
