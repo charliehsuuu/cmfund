@@ -1274,7 +1274,7 @@ async function loadDate() {
 }
 
 // ── Add transaction ──
-async function addTransaction() {
+function addTransaction() {
   const desc = document.getElementById('desc-input').value.trim();
   const amount = parseFloat(document.getElementById('amount-input').value);
   if (!amount || amount <= 0) {
@@ -1289,44 +1289,42 @@ async function addTransaction() {
   const time = timeVal || (now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0'));
   const btn = document.getElementById('add-btn');
   btn.disabled = true;
-  document.getElementById('spinner').style.display = 'block';
-  document.getElementById('btn-text').textContent = '新增中…';
+
+  const dateKey = formatDate(currentDate).replace(/-/g,'_');
+  const txData = {
+    type: currentType, desc: desc || cat, amount, cat, time,
+    ts: Date.now(),
+    who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
+  };
+
+  // ── 樂觀更新：Firebase push() 立即產生本地 key，完全不需要 await ──
+  // push() 回傳 ThenableReference，.key 馬上可用，網路同步在背景自動完成
+  const pushRef = push(ref(db, `transactions/${dateKey}`), txData);
+
+  // 立刻更新畫面，不等 Firebase 回應
+  transactions.push({ id: pushRef.key, ...txData });
+  transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
+  renderSummary();
+  renderList();
+  document.getElementById('desc-input').value = '';
+  document.getElementById('amount-input').value = '';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  selectedCat = '';
+  prefillTimeInput();
+  showToast('💕 已新增！', 'success');
+
+  // 立刻還原按鈕（完全不依賴 Firebase 回應）
+  btn.disabled = false;
+
+  // 背景監聽同步結果（不影響 UI）
   setSyncStatus('saving');
-  try {
-    const dateKey = formatDate(currentDate).replace(/-/g,'_');
-    const txData = {
-      type: currentType, desc: desc || cat, amount, cat, time,
-      ts: Date.now(),
-      who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
-    };
-    // 加上 10 秒 timeout，避免 Firebase 沒回應導致按鈕永遠卡住
-    const pushWithTimeout = (dbRef, data, ms = 10000) => Promise.race([
-      push(dbRef, data),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('新增逾時，請檢查網路')), ms))
-    ]);
-    const newRef = await pushWithTimeout(ref(db, `transactions/${dateKey}`), txData);
-    // ── 立即更新畫面（不等 onValue，確保新增後馬上顯示）──
-    transactions.push({ id: newRef.key, ...txData });
-    transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
-    renderSummary();
-    renderList();
-    document.getElementById('desc-input').value = '';
-    document.getElementById('amount-input').value = '';
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-    selectedCat = '';
-    prefillTimeInput();
-    showToast('💕 已新增！', 'success');
+  pushRef.then(() => {
     setSyncStatus('online');
-  } catch(e) {
-    console.error('addTransaction error:', e);
-    showToast('⚠ 新增失敗：' + (e.code || e.message || '請檢查網路'), 'error');
+  }).catch(e => {
+    console.error('Firebase 同步失敗:', e);
     setSyncStatus('');
-  } finally {
-    // 不管成功、失敗、timeout，一定還原按鈕狀態
-    btn.disabled = false;
-    document.getElementById('spinner').style.display = 'none';
-    document.getElementById('btn-text').textContent = '💕 新增記錄';
-  }
+    showToast('⚠ 同步失敗：' + (e.message || '請檢查網路'), 'error');
+  });
 }
 window.addTransaction = addTransaction;
 
