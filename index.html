@@ -231,8 +231,15 @@ body {
 .tx-amount { font-family:'DM Mono',monospace; font-size:1.05rem; font-weight:700; flex-shrink:0; }
 .tx-amount.income { color:#4a8830; }
 .tx-amount.expense { color:#c04030; }
-.tx-delete { background:none; border:none; color:var(--muted); cursor:pointer; font-size:.9rem; padding:0 0 0 4px; opacity:.3; transition:opacity .15s; }
-.tx-delete:hover { opacity:1; color:#c04030; }
+.tx-delete { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; }
+.tx-delete:hover { background:#fff0f0; color:#c04030; }
+/* Delete confirm modal */
+.delete-confirm-modal .modal { border-top:4px solid #c04030; }
+.delete-confirm-icon { font-size:2.2rem; text-align:center; margin-bottom:6px; }
+.delete-confirm-msg { text-align:center; color:var(--text); font-size:.9rem; line-height:1.6; margin-bottom:2px; font-weight:600; }
+.delete-confirm-sub { text-align:center; color:var(--muted); font-size:.78rem; margin-bottom:8px; }
+.modal-delete { background:#c04030; color:#fff; border:none; border-radius:12px; padding:10px 24px; font-size:1rem; font-family:'Noto Sans TC',sans-serif; font-weight:700; cursor:pointer; flex:1; transition:background .15s; }
+.modal-delete:hover { background:#a03020; }
 .balance-line { text-align:right; font-family:'DM Mono',monospace; font-size:.75rem; color:var(--muted); margin-top:3px; }
 .empty-state { text-align:center; padding:36px 20px; color:var(--muted); font-size:.88rem; line-height:2.4; }
 
@@ -420,8 +427,8 @@ body {
 .love-event-score.pos { color: #4a8830; }
 .love-event-score.neg { color: #c04030; }
 .love-event-score.zero { color: var(--muted); }
-.love-event-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; opacity: .3; transition: opacity .15s; padding: 0 0 0 4px; }
-.love-event-del:hover { opacity: 1; color: #c04030; }
+.love-event-del { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; }
+.love-event-del:hover { background:#fff0f0; color:#c04030; }
 
 /* ── LOVE SCORE PAGE ── */
 .score-big-card {
@@ -503,8 +510,8 @@ body {
 .day-ev-cat { font-size:1rem; font-weight:700; color:var(--text); white-space:nowrap; }
 .day-ev-note { font-size:.88rem; color:var(--muted); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .day-ev-score { font-family:'DM Mono',monospace; font-size:1rem; font-weight:700; flex-shrink:0; }
-.day-ev-del { background:#fff0f0; border:1.5px solid #e0a0a0; color:#c04030; cursor:pointer; font-size:.75rem; font-weight:700; font-family:'Noto Sans TC',sans-serif; border-radius:8px; padding:4px 10px; margin-left:6px; transition:all .15s; white-space:nowrap; }
-.day-ev-del:hover { background:#c04030; color:#fff; border-color:#c04030; }
+.day-ev-del { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; margin-left:4px; }
+.day-ev-del:hover { background:#fff0f0; color:#c04030; }
 .day-ev-edit { background:#f5f0ff; border:1.5px solid #c0a0e0; color:#7040a0; cursor:pointer; font-size:.75rem; font-weight:700; font-family:'Noto Sans TC',sans-serif; border-radius:8px; padding:4px 10px; margin-left:6px; transition:all .15s; white-space:nowrap; }
 .day-ev-edit:hover { background:#7040a0; color:#fff; border-color:#7040a0; }
 
@@ -881,6 +888,19 @@ body {
   </div>
 </div>
 
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay delete-confirm-modal" id="delete-confirm-modal">
+  <div class="modal">
+    <div class="delete-confirm-icon">🗑️</div>
+    <div class="delete-confirm-msg" id="delete-confirm-msg">確定要刪除嗎？</div>
+    <div class="delete-confirm-sub">刪除後無法復原</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeDeleteConfirm()">取消</button>
+      <button class="modal-delete" id="delete-confirm-btn">確認刪除</button>
+    </div>
+  </div>
+</div>
+
 <!-- Budget modal -->
 <div class="modal-overlay" id="budget-modal">
   <div class="modal">
@@ -1200,7 +1220,7 @@ function renderList() {
       </div>
       <div class="tx-amount ${cls}">${sign}${fmt(t.amount)}</div>
       <button class="tx-edit" onclick="openEditModal('${t.id}')">✏️</button>
-      <button class="tx-delete" onclick="deleteTx('${t.id}')">✕</button>
+      <button class="tx-delete" onclick="deleteTx('${t.id}')" title="刪除">🗑️</button>
     </div>`;
   }).join('');
 }
@@ -1333,18 +1353,37 @@ function addTransaction() {
 }
 window.addTransaction = addTransaction;
 
-window.deleteTx = async (id) => {
-  const dateKey = formatDate(currentDate).replace(/-/g,'_');
-  try {
-    await remove(ref(db, `transactions/${dateKey}/${id}`));
-    // 立即從本地移除並更新畫面
-    transactions = transactions.filter(t => t.id !== id);
-    renderSummary();
-    renderList();
-    showToast('已刪除', '');
-  } catch(e) {
-    showToast('⚠ 刪除失敗：' + (e.code || '請檢查網路'), 'error');
-  }
+// ── Delete Confirm Modal ──
+let _deleteConfirmCallback = null;
+function showDeleteConfirm(msg, onConfirm) {
+  document.getElementById('delete-confirm-msg').textContent = msg;
+  _deleteConfirmCallback = onConfirm;
+  document.getElementById('delete-confirm-modal').classList.add('open');
+  document.getElementById('delete-confirm-btn').onclick = () => {
+    closeDeleteConfirm();
+    if (_deleteConfirmCallback) _deleteConfirmCallback();
+  };
+}
+window.closeDeleteConfirm = () => {
+  document.getElementById('delete-confirm-modal').classList.remove('open');
+  _deleteConfirmCallback = null;
+};
+
+window.deleteTx = (id) => {
+  const tx = transactions.find(t => t.id === id);
+  const label = tx ? `${tx.desc || tx.cat}　${tx.type === 'income' ? '+' : '-'}${fmt(tx.amount)}` : '這筆記錄';
+  showDeleteConfirm(`確定要刪除「${label}」嗎？`, async () => {
+    const dateKey = formatDate(currentDate).replace(/-/g,'_');
+    try {
+      await remove(ref(db, `transactions/${dateKey}/${id}`));
+      transactions = transactions.filter(t => t.id !== id);
+      renderSummary();
+      renderList();
+      showToast('已刪除', '');
+    } catch(e) {
+      showToast('⚠ 刪除失敗：' + (e.code || '請檢查網路'), 'error');
+    }
+  });
 };
 
 // ── Edit Modal ──
@@ -1829,7 +1868,7 @@ function renderDayPanel() {
         (e.note ? '<span class="day-ev-note">' + e.note + '</span>' : '<span class="day-ev-note"></span>') +
         '<span class="day-ev-score ' + sc + '">' + stxt + ' 分</span>' +
         (isOwn ? `<button class="day-ev-edit" onclick="editLoveEvent('${safeId}')">編輯</button>` : '') +
-        (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')">刪除</button>` : '') +
+        (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')" title="刪除">🗑️</button>` : '') +
         '</div>';
     }).join('');
   }
@@ -1865,22 +1904,21 @@ window.selectAECat = function(btn) {
 
 // confirmAddEvent 已移至 editLoveEvent 區塊
 
-window.deleteLoveEvent = async function(id) {
+window.deleteLoveEvent = function(id) {
   const evt = loveEvents.find(e => e.id === id);
   if (evt && evt.who && evt.who !== currentWho()) {
     showToast('⚠ 不能刪除對方的記錄！', 'error'); return;
   }
-  // 雙重確認視窗
   const cat = evt ? (evtCat(evt)) : '記錄';
-  const note = evt && evt.note ? '「' + evt.note + '」' : '';
-  const confirmed = window.confirm('確定要刪除這筆記錄嗎？\n\n' + cat + (note ? ' ' + note : '') + '\n\n刪除後無法復原！');
-  if (!confirmed) return;
-  try {
-    await remove(ref(db, 'love_events/' + id));
-    showToast('已刪除', '');
-  } catch(err) {
-    showToast('⚠ 刪除失敗', 'error');
-  }
+  const note = evt && evt.note ? `「${evt.note}」` : '';
+  showDeleteConfirm(`確定要刪除 ${cat}${note ? ' ' + note : ''} 嗎？`, async () => {
+    try {
+      await remove(ref(db, 'love_events/' + id));
+      showToast('已刪除', '');
+    } catch(err) {
+      showToast('⚠ 刪除失敗', 'error');
+    }
+  });
 };
 
 // ── Edit Event ──
