@@ -1079,7 +1079,12 @@ window.openBudgetModal = () => {
 window.closeBudgetModal = () => document.getElementById('budget-modal').classList.remove('open');
 window.saveBudget = () => {
   const v = parseInt(document.getElementById('budget-input').value);
-  if (v > 0) { monthBudget = v; localStorage.setItem('cmfund_budget', v); }
+  if (v > 0) {
+    monthBudget = v;
+    localStorage.setItem('cmfund_budget', v);
+    // 同時存進 Firebase，讓所有裝置重開 App 都能讀到
+    set(ref(db, 'settings/monthBudget'), v).catch(e => console.error('預算儲存失敗:', e));
+  }
   closeBudgetModal();
   updateBudgetBar();
   showToast('預算已設定 ✓', 'success');
@@ -1577,6 +1582,17 @@ function init() {
   // Prefill time input with current time
   prefillTimeInput();
   loadDate();
+  // 從 Firebase 載入預算（覆蓋 localStorage 快取，確保跨裝置同步）
+  get(ref(db, 'settings/monthBudget')).then(snap => {
+    if (snap.exists()) {
+      const v = parseInt(snap.val());
+      if (v > 0) {
+        monthBudget = v;
+        localStorage.setItem('cmfund_budget', v);
+        updateBudgetBar();
+      }
+    }
+  }).catch(e => console.error('預算載入失敗:', e));
 }
 
 function prefillTimeInput() {
