@@ -1299,7 +1299,12 @@ async function addTransaction() {
       ts: Date.now(),
       who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
     };
-    const newRef = await push(ref(db, `transactions/${dateKey}`), txData);
+    // 加上 10 秒 timeout，避免 Firebase 沒回應導致按鈕永遠卡住
+    const pushWithTimeout = (dbRef, data, ms = 10000) => Promise.race([
+      push(dbRef, data),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('新增逾時，請檢查網路')), ms))
+    ]);
+    const newRef = await pushWithTimeout(ref(db, `transactions/${dateKey}`), txData);
     // ── 立即更新畫面（不等 onValue，確保新增後馬上顯示）──
     transactions.push({ id: newRef.key, ...txData });
     transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
@@ -1316,10 +1321,12 @@ async function addTransaction() {
     console.error('addTransaction error:', e);
     showToast('⚠ 新增失敗：' + (e.code || e.message || '請檢查網路'), 'error');
     setSyncStatus('');
+  } finally {
+    // 不管成功、失敗、timeout，一定還原按鈕狀態
+    btn.disabled = false;
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('btn-text').textContent = '💕 新增記錄';
   }
-  btn.disabled = false;
-  document.getElementById('spinner').style.display = 'none';
-  document.getElementById('btn-text').textContent = '💕 新增記錄';
 }
 window.addTransaction = addTransaction;
 
