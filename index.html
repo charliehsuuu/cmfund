@@ -1048,6 +1048,7 @@ function whoLabel(name) {
 function setSyncStatus(s) {
   const dot = document.getElementById('sync-dot');
   const lbl = document.getElementById('sync-label');
+  if (!dot || !lbl) return;
   if (s==='online') { dot.className='sync-dot online'; lbl.textContent='即時同步中 · 多人共用'; }
   else if (s==='saving') { dot.className='sync-dot saving'; lbl.textContent='同步中…'; }
   else { dot.className='sync-dot'; lbl.textContent='連線中…'; }
