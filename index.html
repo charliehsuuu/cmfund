@@ -352,13 +352,20 @@ body {
 /* ── PAGES ── */
 .love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
 .love-page.active { display: block; }
-/* 頁面轉場 */
-.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
-.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
-@keyframes slideInLeft  { from { opacity:0; transform:translateX(40px);  } to { opacity:1; transform:translateX(0); } }
-@keyframes slideInRight { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
-#app.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
-#app.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+/* 頁面轉場 — Enter */
+.page-slide-enter-left  { animation: slideInLeft  .34s cubic-bezier(.22,.68,0,1.1) both; }
+.page-slide-enter-right { animation: slideInRight .34s cubic-bezier(.22,.68,0,1.1) both; }
+@keyframes slideInLeft  { from { opacity:0; transform:translateX(110px) scale(.95); } to { opacity:1; transform:translateX(0) scale(1); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(-110px) scale(.95); } to { opacity:1; transform:translateX(0) scale(1); } }
+#app.page-slide-enter-left  { animation: slideInLeft  .34s cubic-bezier(.22,.68,0,1.1) both; }
+#app.page-slide-enter-right { animation: slideInRight .34s cubic-bezier(.22,.68,0,1.1) both; }
+/* 頁面轉場 — Exit */
+.page-slide-exit-left   { animation: slideOutLeft  .22s cubic-bezier(.55,0,1,.45) both; }
+.page-slide-exit-right  { animation: slideOutRight .22s cubic-bezier(.55,0,1,.45) both; }
+@keyframes slideOutLeft  { from { opacity:1; transform:translateX(0) scale(1); } to { opacity:0; transform:translateX(-80px) scale(.95); } }
+@keyframes slideOutRight { from { opacity:1; transform:translateX(0) scale(1); } to { opacity:0; transform:translateX(80px) scale(.95); } }
+#app.page-slide-exit-left   { animation: slideOutLeft  .22s cubic-bezier(.55,0,1,.45) both; }
+#app.page-slide-exit-right  { animation: slideOutRight .22s cubic-bezier(.55,0,1,.45) both; }
 
 /* ── LOVE CALENDAR PAGE ── */
 .love-page-header { text-align: center; margin-bottom: 20px; }
@@ -1626,39 +1633,66 @@ const PAGE_ORDER_MAIN = ['cmfund', 'love-calendar', 'love-score'];
 let _currentPageKey = 'cmfund';
 
 window.switchPage = function(page, direction) {
-  const animClass = direction === 'left' ? 'page-slide-enter-left' : direction === 'right' ? 'page-slide-enter-right' : '';
+  if (page === _currentPageKey) return;
 
-  // Hide all
-  const appEl = document.getElementById('app');
-  appEl.style.display = 'none';
-  appEl.classList.remove('page-slide-enter-left','page-slide-enter-right');
-  document.querySelectorAll('.love-page').forEach(p => {
-    p.classList.remove('active','page-slide-enter-left','page-slide-enter-right');
-  });
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const fab = document.querySelector('.love-fab');
-  if (fab) fab.classList.remove('show');
+  const appEl  = document.getElementById('app');
+  const prevKey = _currentPageKey;
 
-  _currentPageKey = page;
+  // 決定進出動畫 class
+  const exitClass  = direction === 'left'  ? 'page-slide-exit-left'
+                   : direction === 'right' ? 'page-slide-exit-right' : '';
+  const enterClass = direction === 'left'  ? 'page-slide-enter-left'
+                   : direction === 'right' ? 'page-slide-enter-right' : '';
 
-  if (page === 'cmfund') {
-    appEl.style.display = 'block';
-    if (animClass) { void appEl.offsetWidth; appEl.classList.add(animClass); }
-    document.getElementById('nav-cmfund').classList.add('active');
-  } else if (page === 'love-calendar') {
-    const pg = document.getElementById('page-love-calendar');
-    pg.classList.add('active');
-    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
-    document.getElementById('nav-love-cal').classList.add('active');
-    if (fab) fab.classList.add('show');
-    renderCalendar();
-  } else if (page === 'love-score') {
-    const pg = document.getElementById('page-love-score');
-    pg.classList.add('active');
-    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
-    document.getElementById('nav-love-score').classList.add('active');
-    renderLoveScore();
+  // 取得正在顯示的頁面元素
+  function getPageEl(key) {
+    if (key === 'cmfund')         return appEl;
+    if (key === 'love-calendar')  return document.getElementById('page-love-calendar');
+    if (key === 'love-score')     return document.getElementById('page-love-score');
+    return null;
   }
+
+  // 先播 exit 動畫
+  const outEl = getPageEl(prevKey);
+  if (exitClass && outEl) {
+    void outEl.offsetWidth;
+    outEl.classList.add(exitClass);
+  }
+
+  const EXIT_MS = exitClass ? 230 : 0;
+
+  setTimeout(() => {
+    // 清除所有頁面狀態
+    appEl.style.display = 'none';
+    appEl.classList.remove('page-slide-enter-left','page-slide-enter-right','page-slide-exit-left','page-slide-exit-right');
+    document.querySelectorAll('.love-page').forEach(p => {
+      p.classList.remove('active','page-slide-enter-left','page-slide-enter-right','page-slide-exit-left','page-slide-exit-right');
+    });
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const fab = document.querySelector('.love-fab');
+    if (fab) fab.classList.remove('show');
+
+    _currentPageKey = page;
+
+    if (page === 'cmfund') {
+      appEl.style.display = 'block';
+      if (enterClass) { void appEl.offsetWidth; appEl.classList.add(enterClass); }
+      document.getElementById('nav-cmfund').classList.add('active');
+    } else if (page === 'love-calendar') {
+      const pg = document.getElementById('page-love-calendar');
+      pg.classList.add('active');
+      if (enterClass) { void pg.offsetWidth; pg.classList.add(enterClass); }
+      document.getElementById('nav-love-cal').classList.add('active');
+      if (fab) fab.classList.add('show');
+      renderCalendar();
+    } else if (page === 'love-score') {
+      const pg = document.getElementById('page-love-score');
+      pg.classList.add('active');
+      if (enterClass) { void pg.offsetWidth; pg.classList.add(enterClass); }
+      document.getElementById('nav-love-score').classList.add('active');
+      renderLoveScore();
+    }
+  }, EXIT_MS);
 };
 
 // ── 左右滑動切換頁面（含轉場方向）──
