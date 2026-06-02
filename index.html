@@ -151,12 +151,12 @@ body {
 }
 .type-btn:active { transform:translateY(4px); box-shadow:0 1px 0 #a09040; }
 .type-btn.active-income {
-  background:#f5eebb; border-color:#c8b86a; color:#6a7830;
-  box-shadow:0 5px 0 #a09040, 0 7px 12px rgba(150,130,40,.25);
+  background:linear-gradient(160deg,#c0e880,#a8d860); border-color:#68b018; color:#265608;
+  box-shadow:0 5px 0 #3c7e10, 0 7px 14px rgba(60,130,20,.35);
 }
 .type-btn.active-expense {
-  background:#b8e8d0; border-color:#5aab82; color:#2a6040;
-  box-shadow:0 5px 0 #3a8060, 0 7px 12px rgba(50,130,80,.25);
+  background:linear-gradient(160deg,#ffb8a8,#f09080); border-color:#d05040; color:#780808;
+  box-shadow:0 5px 0 #a02828, 0 7px 14px rgba(200,50,40,.35);
 }
 
 /* Category buttons — each with its own colour */
@@ -167,19 +167,30 @@ body {
   background:#f5eebb; border:2px solid #c8b86a; color:#6a7830;
   box-shadow:0 4px 0 #a09040;
 }
-.cat-btn:active, .cat-btn.selected { transform:translateY(3px); box-shadow:0 1px 0 #a09040; }
-.cat-btn.selected { background:#ede0a0; border-color:#a09040; color:#5a6820; }
-/* Individual cat colours */
-.cat-btn:nth-child(1) { background:#ffd6e0; border-color:#e09090; color:#903040; box-shadow:0 4px 0 #b06060; }
-.cat-btn:nth-child(1).selected { background:#ffb8cc; }
-.cat-btn:nth-child(2) { background:#ffd6e0; border-color:#e090a0; color:#903040; box-shadow:0 4px 0 #b06060; }
-.cat-btn:nth-child(2).selected { background:#ffb8cc; }
-.cat-btn:nth-child(3) { background:#ffe0b8; border-color:#d8a060; color:#804020; box-shadow:0 4px 0 #a06030; }
-.cat-btn:nth-child(4) { background:#ffe8b0; border-color:#d0a840; color:#705820; box-shadow:0 4px 0 #a07830; }
-.cat-btn:nth-child(5) { background:#d0e8f8; border-color:#6898c8; color:#204870; box-shadow:0 4px 0 #4870a0; }
-.cat-btn:nth-child(6) { background:#d8e8c0; border-color:#70a860; color:#204820; box-shadow:0 4px 0 #508040; }
-.cat-btn:nth-child(7) { background:#e8d0f0; border-color:#9870b8; color:#402860; box-shadow:0 4px 0 #705090; }
-.cat-btn:nth-child(8) { background:#f8d0c0; border-color:#d07858; color:#602818; box-shadow:0 4px 0 #a05038; }
+.cat-btn:active { transform:translateY(4px); filter:brightness(0.78) saturate(1.4); box-shadow:0 0 0 rgba(0,0,0,0) !important; }
+/* Selected: stays pressed + deep color + outline ring */
+.cat-btn.selected {
+  transform:translateY(3px);
+  filter:brightness(0.72) saturate(1.6);
+  border-width:3px;
+  font-weight:800;
+  outline:3px solid rgba(0,0,0,.22);
+  outline-offset:2px;
+  box-shadow:0 1px 0 rgba(0,0,0,.3) !important;
+}
+/* ── Income cats: sage/mint green family ── */
+#cat-income .cat-btn:nth-child(1) { background:#ceedb0; border-color:#72b840; color:#285510; box-shadow:0 4px 0 #488828; }
+#cat-income .cat-btn:nth-child(2) { background:#c0e8c0; border-color:#60a860; color:#205018; box-shadow:0 4px 0 #388038; }
+#cat-income .cat-btn:nth-child(3) { background:#e0efb0; border-color:#90b840; color:#385010; box-shadow:0 4px 0 #587828; }
+/* ── Expense cats: warm coral/rose family, each distinct ── */
+#cat-expense .cat-btn:nth-child(1) { background:#ffd8c0; border-color:#e09060; color:#803018; box-shadow:0 4px 0 #b05030; } /* 餐飲 */
+#cat-expense .cat-btn:nth-child(2) { background:#c8e0f8; border-color:#6090c8; color:#184068; box-shadow:0 4px 0 #3868a0; } /* 交通 */
+#cat-expense .cat-btn:nth-child(3) { background:#ffd0d8; border-color:#e08098; color:#901838; box-shadow:0 4px 0 #b04060; } /* 購物 */
+#cat-expense .cat-btn:nth-child(4) { background:#ffebb0; border-color:#d0a840; color:#705020; box-shadow:0 4px 0 #a07028; } /* 住房 */
+#cat-expense .cat-btn:nth-child(5) { background:#e8d8f8; border-color:#9878c0; color:#402870; box-shadow:0 4px 0 #705098; } /* 醫療 */
+#cat-expense .cat-btn:nth-child(6) { background:#ffd8b0; border-color:#d89050; color:#704018; box-shadow:0 4px 0 #a05828; } /* 娛樂 */
+#cat-expense .cat-btn:nth-child(7) { background:#ffc8b8; border-color:#d07060; color:#701818; box-shadow:0 4px 0 #a04030; } /* 帳單 */
+#cat-expense .cat-btn:nth-child(8) { background:#f0d8d8; border-color:#c09898; color:#602828; box-shadow:0 4px 0 #906868; } /* 其他支出 */
 
 .input-row { display:flex; gap:9px; margin-bottom:10px; }
 .input-row input { flex:1; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:14px; padding:12px 14px; font-family:'Noto Sans TC',sans-serif; font-size:1rem; outline:none; transition:border-color .15s; box-shadow:inset 0 2px 4px rgba(160,100,60,.08); }
