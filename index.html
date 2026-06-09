@@ -846,7 +846,7 @@ body {
         <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
       </div>
       <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
-      <div class="input-row"><input type="text" id="amount-input" placeholder="金額 TWD" inputmode="none" readonly /></div>
+      <div class="input-row"><input type="text" id="amount-input" placeholder="金額 TWD" inputmode="none" readonly ontouchstart="event.preventDefault();openKeypad(this)" onclick="openKeypad(this)" /></div>
       <div class="time-row">
         <label>⏰ 時間</label>
         <input type="time" id="time-input" />
@@ -928,7 +928,7 @@ body {
     </div>
     <div class="modal-field">
       <div class="modal-label">金額 TWD</div>
-      <input type="text" id="edit-amount" placeholder="金額" inputmode="none" readonly />
+      <input type="text" id="edit-amount" placeholder="金額" inputmode="none" readonly ontouchstart="event.preventDefault();openKeypad(this)" onclick="openKeypad(this)" />
     </div>
     <div class="modal-field">
       <div class="modal-label">分類</div>
@@ -2406,7 +2406,7 @@ function kpConfirm() {
     </div>
     <div class="ae-field">
       <div class="ae-label">分數</div>
-      <input type="text" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="none" readonly />
+      <input type="text" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="none" readonly ontouchstart="event.preventDefault();openKeypad(this)" onclick="openKeypad(this)" />
       <div class="ae-score-hint" id="ae-score-hint">選擇分類後自動填入預設分數</div>
     </div>
     <div class="ae-field">
