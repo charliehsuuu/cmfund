@@ -2229,6 +2229,20 @@ document.addEventListener('DOMContentLoaded', function() {
   ['amount-input','edit-amount','ae-score'].forEach(id => {
     _initKeypadInput(document.getElementById(id));
   });
+  function _addCloseListener(el) {
+    if (!el) return;
+    el.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeKeypad();
+    }, { passive: false });
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeKeypad();
+    });
+  }
+  _addCloseListener(document.getElementById('kp-close-btn'));
+  _addCloseListener(document.getElementById('keypad-backdrop'));
 });
 function closeKeypad() {
   document.getElementById('keypad-overlay').classList.remove('open');
@@ -2442,11 +2456,11 @@ function kpConfirm() {
 
 <!-- Custom Numeric Keypad -->
 <div class="keypad-overlay" id="keypad-overlay">
-  <div class="keypad-backdrop" onclick="closeKeypad()"></div>
+  <div class="keypad-backdrop" id="keypad-backdrop"></div>
   <div class="keypad-sheet">
     <div class="keypad-header">
       <div class="keypad-preview" id="keypad-preview">0</div>
-      <button class="kp-close" onclick="closeKeypad()">✕ 收起</button>
+      <button class="kp-close" id="kp-close-btn">✕ 收起</button>
     </div>
     <div class="keypad-grid">
       <button class="kp-btn" onclick="kpInput('7')">7</button>
