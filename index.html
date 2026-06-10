@@ -2276,6 +2276,14 @@ function kpConfirm() {
   closeKeypad();
 }
 
+// Expose keypad functions to global scope (required for inline onclick handlers in <script type="module">)
+window.openKeypad = openKeypad;
+window.closeKeypad = closeKeypad;
+window.kpInput = kpInput;
+window.kpToggleNeg = kpToggleNeg;
+window.kpDelete = kpDelete;
+window.kpConfirm = kpConfirm;
+
 </script>
 
 <!-- ═══ PAGE: 滿滿回憶 ═══ -->
