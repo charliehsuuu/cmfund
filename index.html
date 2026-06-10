@@ -1,1 +1,2282 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ec4899">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CMfund">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22CMfund%20%F0%9F%92%95%22%2C%22short_name%22%3A%22CMfund%22%2C%22start_url%22%3A%22/%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fdf2f8%22%2C%22theme_color%22%3A%22%23ec4899%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage/svg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BCiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMDAiIGZpbGw9IiNmZGYyZjgiLz4KICA8IS0tIE1pbm5pZSBsZWZ0IGVhciAtLT4KICA8Y2lyY2xlIGN4PSIzMjgiIGN5PSIxMzIiIHI9IjY2IiBmaWxsPSIjM2QyMzE0Ii8%2BCiAgPCEtLSBNaW5uaWUgcmlnaHQgZWFyIC0tPgogIDxjaXJjbGUgY3g9IjQ0NiIgY3k9IjExNiIgcj0iNjYiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pbm5pZSBib3cgLS0%2BCiAgPGVsbGlwc2UgY3g9IjI4MiIgY3k9Ijg2IiByeD0iMzAiIHJ5PSIyMCIgZmlsbD0iI2UxMWQ0OCIgdHJhbnNmb3JtPSJyb3RhdGUoLTI1IDI4MiA4NikiLz4KICA8ZWxsaXBzZSBjeD0iMzI4IiBjeT0iNzAiIHJ4PSIzMCIgcnk9IjIwIiBmaWxsPSIjZTExZDQ4IiB0cmFuc2Zvcm09InJvdGF0ZSgyNSAzMjggNzApIi8%2BCiAgPGNpcmNsZSBjeD0iMzA1IiBjeT0iNzgiIHI9IjE1IiBmaWxsPSIjZjQzZjVlIi8%2BCiAgPGNpcmNsZSBjeD0iMjg2IiBjeT0iNzYiIHI9IjUiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjciLz4KICA8Y2lyY2xlIGN4PSIzMjQiIGN5PSI2NiIgcj0iNSIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gTWlubmllIGhlYWQgLS0%2BCiAgPGNpcmNsZSBjeD0iMzgwIiBjeT0iMjcwIiByPSIxMTIiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pbm5pZSBmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSIzODAiIGN5PSIyODgiIHJ4PSI3NiIgcnk9IjY0IiBmaWxsPSIjZjVkNWIwIi8%2BCiAgPCEtLSBNaW5uaWUgZXllcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzQ0IiBjeT0iMjU0IiByeD0iMTUiIHJ5PSIxOCIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjM0OSIgY3k9IjI0OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iNDE2IiBjeT0iMjU0IiByeD0iMTUiIHJ5PSIxOCIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjQyMSIgY3k9IjI0OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8IS0tIE1pbm5pZSBsYXNoZXMgLS0%2BCiAgPGxpbmUgeDE9IjMzNCIgeTE9IjIzOCIgeDI9IjMyNiIgeTI9IjIyOCIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIzNDQiIHkxPSIyMzYiIHgyPSIzNDIiIHkyPSIyMjQiIHN0cm9rZT0iIzNkMjMxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNDI2IiB5MT0iMjM4IiB4Mj0iNDM0IiB5Mj0iMjI4IiBzdHJva2U9IiMzZDIzMTQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8%2BCiAgPGxpbmUgeDE9IjQxNiIgeTE9IjIzNiIgeDI9IjQxOCIgeTI9IjIyNCIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gTWlubmllIG5vc2UgLS0%2BCiAgPGVsbGlwc2UgY3g9IjM4MCIgY3k9IjI4NCIgcng9IjEzIiByeT0iOSIgZmlsbD0iIzNkMjMxNCIvPgogIDwhLS0gTWlubmllIHNtaWxlIC0tPgogIDxwYXRoIGQ9Ik0gMzQ4IDMwMSBRIDM4MCAzMjAgNDEyIDMwMSIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gTWlubmllIGNoZWVrcyAtLT4KICA8Y2lyY2xlIGN4PSIzMjgiIGN5PSIyOTYiIHI9IjE4IiBmaWxsPSIjZThhMGEwIiBvcGFjaXR5PSIwLjUiLz4KICA8Y2lyY2xlIGN4PSI0MzIiIGN5PSIyOTYiIHI9IjE4IiBmaWxsPSIjZThhMGEwIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIE1pY2tleSBsZWZ0IGVhciAtLT4KICA8Y2lyY2xlIGN4PSI5OCIgY3k9IjE0MCIgcj0iNzAiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pY2tleSByaWdodCBlYXIgLS0%2BCiAgPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTIyIiByPSI3MCIgZmlsbD0iIzNkMjMxNCIvPgogIDwhLS0gTWlja2V5IGhlYWQgLS0%2BCiAgPGNpcmNsZSBjeD0iMTU4IiBjeT0iMjgwIiByPSIxMTYiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pY2tleSBmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIyOTgiIHJ4PSI3OCIgcnk9IjY2IiBmaWxsPSIjZjVkNWIwIi8%2BCiAgPCEtLSBNaWNrZXkgZXllcyAtLT4KICA8ZWxsaXBzZSBjeD0iMTIyIiBjeT0iMjY0IiByeD0iMTYiIHJ5PSIxOSIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjEyNyIgY3k9IjI1OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iMTk0IiBjeT0iMjY0IiByeD0iMTYiIHJ5PSIxOSIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjE5OSIgY3k9IjI1OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8IS0tIE1pY2tleSBub3NlIC0tPgogIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIyOTYiIHJ4PSIxNCIgcnk9IjEwIiBmaWxsPSIjM2QyMzE0Ii8%2BCiAgPCEtLSBNaWNrZXkgc21pbGUgLS0%2BCiAgPHBhdGggZD0iTSAxMjggMzE0IFEgMTU4IDMzNCAxODggMzE0IiBzdHJva2U9IiMzZDIzMTQiIHN0cm9rZS13aWR0aD0iNS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIE1pY2tleSBjaGVla3MgLS0%2BCiAgPGNpcmNsZSBjeD0iMTA4IiBjeT0iMzEwIiByPSIyMCIgZmlsbD0iI2U4YTBhMCIgb3BhY2l0eT0iMC40NSIvPgogIDxjaXJjbGUgY3g9IjIwOCIgY3k9IjMxMCIgcj0iMjAiIGZpbGw9IiNlOGEwYTAiIG9wYWNpdHk9IjAuNDUiLz4KICA8IS0tIEhlYXJ0IC0tPgogIDxwYXRoIGQ9Ik0gMjU2IDM3NSBDIDI1NiAzNjcgMjQ2IDM1OCAyMzUgMzU4IEMgMjI0IDM1OCAyMTUgMzY3IDIxNSAzNzUgQyAyMTUgMzg1IDI1NiA0MDUgMjU2IDQwNSBDIDI1NiA0MDUgMjk3IDM4NSAyOTcgMzc1IEMgMjk3IDM2NyAyODggMzU4IDI3NyAzNTggQyAyNjYgMzU4IDI1NiAzNjcgMjU2IDM3NSBaIiBmaWxsPSIjZTExZDQ4Ii8%2BCiAgPCEtLSBUZXh0IC0tPgogIDx0ZXh0IHg9IjI1NiIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjZWM0ODk5Ij5DTWZ1bmQ8L3RleHQ%2BCjwvc3ZnPg%3D%3D%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg%2Bxml%22%7D%5D%7D">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMDAiIGZpbGw9IiNmZGYyZjgiLz4KICA8IS0tIE1pbm5pZSBsZWZ0IGVhciAtLT4KICA8Y2lyY2xlIGN4PSIzMjgiIGN5PSIxMzIiIHI9IjY2IiBmaWxsPSIjM2QyMzE0Ii8+CiAgPCEtLSBNaW5uaWUgcmlnaHQgZWFyIC0tPgogIDxjaXJjbGUgY3g9IjQ0NiIgY3k9IjExNiIgcj0iNjYiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pbm5pZSBib3cgLS0+CiAgPGVsbGlwc2UgY3g9IjI4MiIgY3k9Ijg2IiByeD0iMzAiIHJ5PSIyMCIgZmlsbD0iI2UxMWQ0OCIgdHJhbnNmb3JtPSJyb3RhdGUoLTI1IDI4MiA4NikiLz4KICA8ZWxsaXBzZSBjeD0iMzI4IiBjeT0iNzAiIHJ4PSIzMCIgcnk9IjIwIiBmaWxsPSIjZTExZDQ4IiB0cmFuc2Zvcm09InJvdGF0ZSgyNSAzMjggNzApIi8+CiAgPGNpcmNsZSBjeD0iMzA1IiBjeT0iNzgiIHI9IjE1IiBmaWxsPSIjZjQzZjVlIi8+CiAgPGNpcmNsZSBjeD0iMjg2IiBjeT0iNzYiIHI9IjUiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjciLz4KICA8Y2lyY2xlIGN4PSIzMjQiIGN5PSI2NiIgcj0iNSIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gTWlubmllIGhlYWQgLS0+CiAgPGNpcmNsZSBjeD0iMzgwIiBjeT0iMjcwIiByPSIxMTIiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pbm5pZSBmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSIzODAiIGN5PSIyODgiIHJ4PSI3NiIgcnk9IjY0IiBmaWxsPSIjZjVkNWIwIi8+CiAgPCEtLSBNaW5uaWUgZXllcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzQ0IiBjeT0iMjU0IiByeD0iMTUiIHJ5PSIxOCIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjM0OSIgY3k9IjI0OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iNDE2IiBjeT0iMjU0IiByeD0iMTUiIHJ5PSIxOCIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjQyMSIgY3k9IjI0OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8IS0tIE1pbm5pZSBsYXNoZXMgLS0+CiAgPGxpbmUgeDE9IjMzNCIgeTE9IjIzOCIgeDI9IjMyNiIgeTI9IjIyOCIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIzNDQiIHkxPSIyMzYiIHgyPSIzNDIiIHkyPSIyMjQiIHN0cm9rZT0iIzNkMjMxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iNDI2IiB5MT0iMjM4IiB4Mj0iNDM0IiB5Mj0iMjI4IiBzdHJva2U9IiMzZDIzMTQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjQxNiIgeTE9IjIzNiIgeDI9IjQxOCIgeTI9IjIyNCIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gTWlubmllIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjM4MCIgY3k9IjI4NCIgcng9IjEzIiByeT0iOSIgZmlsbD0iIzNkMjMxNCIvPgogIDwhLS0gTWlubmllIHNtaWxlIC0tPgogIDxwYXRoIGQ9Ik0gMzQ4IDMwMSBRIDM4MCAzMjAgNDEyIDMwMSIgc3Ryb2tlPSIjM2QyMzE0IiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gTWlubmllIGNoZWVrcyAtLT4KICA8Y2lyY2xlIGN4PSIzMjgiIGN5PSIyOTYiIHI9IjE4IiBmaWxsPSIjZThhMGEwIiBvcGFjaXR5PSIwLjUiLz4KICA8Y2lyY2xlIGN4PSI0MzIiIGN5PSIyOTYiIHI9IjE4IiBmaWxsPSIjZThhMGEwIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIE1pY2tleSBsZWZ0IGVhciAtLT4KICA8Y2lyY2xlIGN4PSI5OCIgY3k9IjE0MCIgcj0iNzAiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pY2tleSByaWdodCBlYXIgLS0+CiAgPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTIyIiByPSI3MCIgZmlsbD0iIzNkMjMxNCIvPgogIDwhLS0gTWlja2V5IGhlYWQgLS0+CiAgPGNpcmNsZSBjeD0iMTU4IiBjeT0iMjgwIiByPSIxMTYiIGZpbGw9IiMzZDIzMTQiLz4KICA8IS0tIE1pY2tleSBmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIyOTgiIHJ4PSI3OCIgcnk9IjY2IiBmaWxsPSIjZjVkNWIwIi8+CiAgPCEtLSBNaWNrZXkgZXllcyAtLT4KICA8ZWxsaXBzZSBjeD0iMTIyIiBjeT0iMjY0IiByeD0iMTYiIHJ5PSIxOSIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjEyNyIgY3k9IjI1OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8ZWxsaXBzZSBjeD0iMTk0IiBjeT0iMjY0IiByeD0iMTYiIHJ5PSIxOSIgZmlsbD0iIzNkMjMxNCIvPgogIDxjaXJjbGUgY3g9IjE5OSIgY3k9IjI1OCIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8IS0tIE1pY2tleSBub3NlIC0tPgogIDxlbGxpcHNlIGN4PSIxNTgiIGN5PSIyOTYiIHJ4PSIxNCIgcnk9IjEwIiBmaWxsPSIjM2QyMzE0Ii8+CiAgPCEtLSBNaWNrZXkgc21pbGUgLS0+CiAgPHBhdGggZD0iTSAxMjggMzE0IFEgMTU4IDMzNCAxODggMzE0IiBzdHJva2U9IiMzZDIzMTQiIHN0cm9rZS13aWR0aD0iNS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIE1pY2tleSBjaGVla3MgLS0+CiAgPGNpcmNsZSBjeD0iMTA4IiBjeT0iMzEwIiByPSIyMCIgZmlsbD0iI2U4YTBhMCIgb3BhY2l0eT0iMC40NSIvPgogIDxjaXJjbGUgY3g9IjIwOCIgY3k9IjMxMCIgcj0iMjAiIGZpbGw9IiNlOGEwYTAiIG9wYWNpdHk9IjAuNDUiLz4KICA8IS0tIEhlYXJ0IC0tPgogIDxwYXRoIGQ9Ik0gMjU2IDM3NSBDIDI1NiAzNjcgMjQ2IDM1OCAyMzUgMzU4IEMgMjI0IDM1OCAyMTUgMzY3IDIxNSAzNzUgQyAyMTUgMzg1IDI1NiA0MDUgMjU2IDQwNSBDIDI1NiA0MDUgMjk3IDM4NSAyOTcgMzc1IEMgMjk3IDM2NyAyODggMzU4IDI3NyAzNTggQyAyNjYgMzU4IDI1NiAzNjcgMjU2IDM3NSBaIiBmaWxsPSIjZTExZDQ4Ii8+CiAgPCEtLSBUZXh0IC0tPgogIDx0ZXh0IHg9IjI1NiIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjZWM0ODk5Ij5DTWZ1bmQ8L3RleHQ+Cjwvc3ZnPg==">
+<title>CMfund 💕 查理與妮妮的記帳本</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&family=Zen+Maru+Gothic:wght@700&display=swap');
+:root {
+  --bg: #f5efe6;
+  --surface: #fffdf9;
+  --surface2: #fde8d8;
+  --border: #e8d5c0;
+  --income: #7a9e5e;
+  --expense: #c0614a;
+  --accent: #d4607a;
+  --accent2: #e8a0b0;
+  --gold: #d4a84b;
+  --text: #5c3d2e;
+  --muted: #a08070;
+  --tag-bg: #fdf6ee;
+  --charlie: #5b8dd9;
+  --nini: #d4607a;
+  --shadow: rgba(160,100,70,.18);
+  /* macaron card colours */
+  --card-income-bg: #f5eebb;
+  --card-income-border: #c8b86a;
+  --card-income-shadow: #b0962a;
+  --card-expense-bg: #b8e8d0;
+  --card-expense-border: #5aab82;
+  --card-expense-shadow: #3a8a62;
+  --card-balance-bg: #e8a0a8;
+  --card-balance-border: #c06878;
+  --card-balance-shadow: #9a3848;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* Polka dot background */
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle, #d4a8b820 10px, transparent 10px),
+    radial-gradient(circle, #a8c8a820 8px, transparent 8px),
+    radial-gradient(circle, #c8b8e820 6px, transparent 6px);
+  background-size: 80px 80px, 60px 60px, 100px 100px;
+  background-position: 0 0, 30px 30px, 50px 10px;
+  color:var(--text); font-family:'Noto Sans TC','PingFang TC','Hiragino Sans GB','Microsoft JhengHei',sans-serif; min-height:100vh; font-size:18px;
+}
+
+/* ── LOGIN SCREEN ── */
+#login-screen {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; padding:2rem;
+  background: linear-gradient(135deg, #fdf0e8 0%, #f5e8d8 50%, #efe0d0 100%);
+}
+#login-screen h1 { font-size:1.8rem; font-weight:700; color:var(--accent); text-align:center; margin-bottom:.5rem; }
+#login-screen p { color:var(--muted); font-size:.95rem; text-align:center; margin-bottom:2rem; line-height:1.8; }
+.google-btn {
+  display:flex; align-items:center; gap:12px; background:#fffdf9; color:#5c3d2e;
+  border:2px solid var(--border); border-radius:50px; padding:14px 28px; font-size:1rem;
+  font-weight:500; cursor:pointer;
+  box-shadow: 0 5px 0 #c8b090, 0 8px 16px rgba(160,100,70,.2);
+  transition:transform .1s, box-shadow .1s;
+}
+.google-btn:hover { transform:translateY(-2px); box-shadow: 0 7px 0 #c8b090, 0 10px 20px rgba(160,100,70,.25); }
+.google-btn:active { transform:translateY(3px); box-shadow: 0 2px 0 #c8b090, 0 4px 8px rgba(160,100,70,.2); }
+.google-btn img { width:22px; }
+
+/* ── MAIN APP ── */
+#app { display:none; padding:20px 16px 60px; max-width:540px; margin:0 auto; }
+
+/* Header */
+.header { text-align:center; margin-bottom:24px; }
+.header-deco { font-size:2rem; margin-bottom:4px; }
+.header h1 { font-size:1.6rem; font-weight:700; color:var(--accent); }
+.header-title-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.5; margin-top:4px; }
+.header-subtitle-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:.9rem; color:#c084a0; font-weight:700; letter-spacing:.06em; }
+.user-badge {
+  display:inline-flex; align-items:center; gap:8px; margin-top:8px;
+  background:#fffdf9; border:1.5px solid var(--border);
+  border-radius:20px; padding:5px 14px; font-size:.8rem;
+  box-shadow:0 3px 0 var(--border), 0 4px 10px var(--shadow);
+}
+.user-avatar { width:22px; height:22px; border-radius:50%; }
+.user-name { color:var(--text); font-weight:500; }
+.logout-btn { background:none; border:none; color:var(--muted); font-size:.75rem; cursor:pointer; margin-left:4px; }
+.logout-btn:hover { color:var(--expense); }
+.sync-badge { display:inline-flex; align-items:center; gap:6px; margin-top:6px; font-size:.72rem; color:var(--muted); background:#fff; border:1px solid var(--border); padding:3px 10px; border-radius:20px; }
+.sync-dot { width:6px; height:6px; border-radius:50%; background:#ccc; transition:background .3s; }
+.sync-dot.online { background:#22c55e; box-shadow:0 0 6px #22c55e; }
+.sync-dot.saving { background:var(--gold); }
+
+/* Tab nav */
+.tab-nav { display:flex; gap:6px; margin-bottom:20px; background:#ede0d0; border-radius:20px; padding:5px; box-shadow:0 4px 0 #c8b090, 0 6px 14px var(--shadow); border:1.5px solid #d8c8b0; }
+.tab-btn { flex:1; padding:10px 4px; border:none; border-radius:14px; background:transparent; color:var(--muted); font-family:'Noto Sans TC',sans-serif; font-size:.92rem; cursor:pointer; transition:all .15s; font-weight:500; }
+.tab-btn.active { background:#d4607a; color:#fff; font-weight:700; box-shadow:0 3px 0 #9a3848, 0 4px 10px rgba(180,60,80,.3); transform:translateY(-1px); }
+.tab-btn.active:nth-child(2) { background:#9b8dc8; box-shadow:0 3px 0 #6b5d98, 0 4px 10px rgba(120,90,180,.3); }
+
+/* Date nav */
+.date-nav { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px; }
+.date-nav button { background:#fffdf9; border:2px solid var(--border); color:var(--accent); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:.9rem; transition:all .1s; box-shadow:0 4px 0 #c8b090, 0 5px 10px var(--shadow); }
+.date-nav button:hover { background:#f5e8d0; }
+.date-nav button:active { transform:translateY(3px); box-shadow:0 1px 0 #c8b090; }
+#current-date { font-family:'Noto Sans TC',sans-serif; font-size:1.1rem; color:#fff; min-width:160px; text-align:center; font-weight:700; background:#e8708a; border-radius:30px; padding:8px 20px; box-shadow:0 5px 0 #9a3848, 0 7px 16px rgba(180,60,80,.3); letter-spacing:.02em; }
+
+/* Summary cards — macaron 3D */
+.summary { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px; }
+.card { border-radius:20px; padding:16px 8px; text-align:center; transition:transform .1s; }
+.card:active { transform:translateY(3px); }
+.card .label { font-size:.75rem; color:var(--muted); letter-spacing:.05em; margin-bottom:6px; font-weight:500; }
+.card .amount { font-family:'DM Mono',monospace; font-size:1.15rem; font-weight:700; }
+.income-card { background:#f5eebb; border:2px solid #c8b86a; box-shadow:0 6px 0 #a09040, 0 8px 16px rgba(160,130,40,.25); }
+.income-card .label { color:#806a30; }
+.income-card .amount { color:#6a8830; }
+.expense-card { background:#b8e8d0; border:2px solid #5aab82; box-shadow:0 6px 0 #3a8060, 0 8px 16px rgba(50,130,80,.25); }
+.expense-card .label { color:#2a6040; }
+.expense-card .amount { color:#2a6040; }
+.balance-card { background:#f0a0b0; border:2px solid #c06878; box-shadow:0 6px 0 #903050, 0 8px 16px rgba(180,60,80,.3); }
+.balance-card .label { color:#803040 !important; }
+.balance-card .amount { color:#fff !important; text-shadow:0 1px 3px rgba(0,0,0,.25); font-size:1.2rem; }
+.carry-lbl { font-size:.58rem; color:rgba(255,255,255,.9) !important; margin-top:3px; }
+
+/* Budget bar */
+.budget-bar-wrap { margin-bottom:16px; background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:12px 14px; box-shadow:0 4px 0 #c8b090, 0 6px 12px var(--shadow); }
+.budget-top { display:flex; justify-content:space-between; font-size:.78rem; color:var(--muted); margin-bottom:8px; }
+.budget-top span:last-child { color:var(--accent); font-weight:600; }
+.budget-track { height:10px; background:#ede0d0; border-radius:5px; overflow:hidden; }
+.budget-fill { height:100%; border-radius:5px; background:linear-gradient(90deg,#f0c0a0,#e8708a); transition:width .4s; }
+.budget-fill.warn { background:linear-gradient(90deg,#f0c050,#e85040); }
+.budget-set-btn { background:none; border:1.5px dashed var(--border); border-radius:10px; color:var(--muted); font-size:.75rem; padding:6px 10px; cursor:pointer; margin-top:8px; width:100%; font-family:'Noto Sans TC',sans-serif; }
+.budget-set-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+/* Input section */
+.input-section { background:#fffdf9; border:2px solid var(--border); border-radius:22px; padding:18px; margin-bottom:18px; box-shadow:0 4px 0 #c8b090, 0 6px 14px var(--shadow); }
+.section-title { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; font-weight:600; }
+
+/* Income / Expense toggle — 3D macaron */
+.type-toggle { display:flex; gap:10px; margin-bottom:14px; }
+.type-btn {
+  flex:1; padding:13px; border-radius:16px; font-family:'Noto Sans TC',sans-serif;
+  font-size:1rem; cursor:pointer; transition:all .1s; font-weight:600;
+  border:2px solid #d0c8a8; background:#f5eebb; color:#8a7a30;
+  box-shadow:0 5px 0 #a09040, 0 7px 12px rgba(160,140,40,.2);
+}
+.type-btn:active { transform:translateY(4px); box-shadow:0 1px 0 #a09040; }
+.type-btn.active-income {
+  background:#f5eebb; border-color:#c8b86a; color:#6a7830;
+  box-shadow:0 5px 0 #a09040, 0 7px 12px rgba(150,130,40,.25);
+}
+.type-btn.active-expense {
+  background:#b8e8d0; border-color:#5aab82; color:#2a6040;
+  box-shadow:0 5px 0 #3a8060, 0 7px 12px rgba(50,130,80,.25);
+}
+
+/* Category buttons — each with its own colour */
+.categories { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.cat-btn {
+  padding:8px 14px; border-radius:20px; font-size:.88rem; cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif; font-weight:600; transition:all .1s;
+  background:#f5eebb; border:2px solid #c8b86a; color:#6a7830;
+  box-shadow:0 4px 0 #a09040;
+}
+.cat-btn:active, .cat-btn.selected { transform:translateY(3px); box-shadow:0 1px 0 #a09040; }
+.cat-btn.selected { background:#ede0a0; border-color:#a09040; color:#5a6820; }
+/* Individual cat colours */
+.cat-btn:nth-child(1) { background:#ffd6e0; border-color:#e09090; color:#903040; box-shadow:0 4px 0 #b06060; }
+.cat-btn:nth-child(1).selected { background:#ffb8cc; }
+.cat-btn:nth-child(2) { background:#ffd6e0; border-color:#e090a0; color:#903040; box-shadow:0 4px 0 #b06060; }
+.cat-btn:nth-child(2).selected { background:#ffb8cc; }
+.cat-btn:nth-child(3) { background:#ffe0b8; border-color:#d8a060; color:#804020; box-shadow:0 4px 0 #a06030; }
+.cat-btn:nth-child(4) { background:#ffe8b0; border-color:#d0a840; color:#705820; box-shadow:0 4px 0 #a07830; }
+.cat-btn:nth-child(5) { background:#d0e8f8; border-color:#6898c8; color:#204870; box-shadow:0 4px 0 #4870a0; }
+.cat-btn:nth-child(6) { background:#d8e8c0; border-color:#70a860; color:#204820; box-shadow:0 4px 0 #508040; }
+.cat-btn:nth-child(7) { background:#e8d0f0; border-color:#9870b8; color:#402860; box-shadow:0 4px 0 #705090; }
+.cat-btn:nth-child(8) { background:#f8d0c0; border-color:#d07858; color:#602818; box-shadow:0 4px 0 #a05038; }
+
+.input-row { display:flex; gap:9px; margin-bottom:10px; }
+.input-row input { flex:1; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:14px; padding:12px 14px; font-family:'Noto Sans TC',sans-serif; font-size:1rem; outline:none; transition:border-color .15s; box-shadow:inset 0 2px 4px rgba(160,100,60,.08); }
+.input-row input:focus { border-color:#e8708a; background:#fff; box-shadow:inset 0 2px 4px rgba(160,100,60,.06), 0 0 0 3px rgba(220,100,120,.12); }
+.input-row input::placeholder { color:var(--muted); }
+#amount-input { font-family:'DM Mono',monospace; }
+
+/* Add button — big 3D */
+.add-btn {
+  width:100%; padding:16px; border-radius:20px; border:none;
+  background:linear-gradient(160deg,#e8708a,#d05070);
+  color:#fff; font-family:'Noto Sans TC',sans-serif; font-size:1.1rem; font-weight:700;
+  cursor:pointer; transition:all .1s; display:flex; align-items:center; justify-content:center;
+  gap:8px; letter-spacing:.05em;
+  box-shadow:0 6px 0 #903050, 0 8px 18px rgba(180,60,80,.3);
+}
+.add-btn:hover { background:linear-gradient(160deg,#f07890,#e05878); }
+.add-btn:active { transform:translateY(5px); box-shadow:0 1px 0 #903050, 0 3px 8px rgba(180,60,80,.2); }
+.add-btn:disabled { opacity:.5; cursor:not-allowed; }
+.spinner { width:14px; height:14px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .6s linear infinite; display:none; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Search & filter */
+.search-bar { display:flex; gap:8px; margin-bottom:12px; }
+.search-bar input { flex:1; background:#fffdf9; border:2px solid var(--border); color:var(--text); border-radius:14px; padding:10px 14px; font-family:'Noto Sans TC',sans-serif; font-size:.88rem; outline:none; box-shadow:0 3px 0 #c8b090; }
+.search-bar input:focus { border-color:#e8708a; }
+.filter-chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
+.filter-chip { padding:5px 14px; border-radius:20px; border:2px solid var(--border); background:#fffdf9; color:var(--muted); font-size:.75rem; cursor:pointer; transition:all .1s; box-shadow:0 3px 0 #c8b090; font-weight:500; }
+.filter-chip:active { transform:translateY(2px); box-shadow:0 1px 0 #c8b090; }
+.filter-chip.active { background:#e8708a; border-color:#c04868; color:#fff; font-weight:700; box-shadow:0 3px 0 #903050; }
+
+/* Transaction list */
+.list-section h2 { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; font-weight:600; }
+.tx-list { display:flex; flex-direction:column; gap:8px; }
+.tx-item { background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:13px 15px; display:flex; align-items:center; gap:11px; animation:slideIn .2s ease; box-shadow:0 4px 0 #c8b090, 0 6px 12px var(--shadow); }
+@keyframes slideIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+.tx-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.tx-dot.income { background:#7ab85e; box-shadow:0 0 8px rgba(100,180,80,.5); }
+.tx-dot.expense { background:#e07058; box-shadow:0 0 8px rgba(220,100,80,.5); }
+.tx-info { flex:1; min-width:0; }
+.tx-desc { font-size:1rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; }
+.tx-meta { display:flex; align-items:center; gap:7px; margin-top:3px; flex-wrap:wrap; }
+.tx-tag { font-size:.75rem; padding:3px 10px; border-radius:10px; background:#f5eebb; border:1.5px solid #c8b86a; color:#806a30; font-weight:500; }
+.tx-time { font-family:'DM Mono',monospace; font-size:.75rem; color:var(--muted); }
+.tx-who { font-size:.68rem; padding:2px 8px; border-radius:10px; font-weight:700; }
+.tx-who.charlie { background:#d0e8f8; color:#204870; border:1.5px solid #6898c8; }
+.tx-who.nini { background:#ffd6e0; color:#903040; border:1.5px solid #e09090; }
+.tx-who.other { background:#e8d0f0; color:#402860; border:1.5px solid #9870b8; }
+.tx-amount { font-family:'DM Mono',monospace; font-size:1.05rem; font-weight:700; flex-shrink:0; }
+.tx-amount.income { color:#4a8830; }
+.tx-amount.expense { color:#c04030; }
+.tx-delete { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; }
+.tx-delete:hover { background:#fff0f0; color:#c04030; }
+/* Delete confirm modal */
+.delete-confirm-modal .modal { border-top:4px solid #c04030; }
+.delete-confirm-icon { font-size:2.2rem; text-align:center; margin-bottom:6px; }
+.delete-confirm-msg { text-align:center; color:var(--text); font-size:.9rem; line-height:1.6; margin-bottom:2px; font-weight:600; }
+.delete-confirm-sub { text-align:center; color:var(--muted); font-size:.78rem; margin-bottom:8px; }
+.modal-delete { background:#c04030; color:#fff; border:none; border-radius:12px; padding:10px 24px; font-size:1rem; font-family:'Noto Sans TC',sans-serif; font-weight:700; cursor:pointer; flex:1; transition:background .15s; }
+.modal-delete:hover { background:#a03020; }
+.balance-line { text-align:right; font-family:'DM Mono',monospace; font-size:.75rem; color:var(--muted); margin-top:3px; }
+.empty-state { text-align:center; padding:36px 20px; color:var(--muted); font-size:.88rem; line-height:2.4; }
+
+/* Monthly overview */
+.monthly-section { display:none; }
+.month-nav { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px; }
+.month-nav button { background:#fffdf9; border:2px solid var(--border); color:var(--accent); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:.9rem; box-shadow:0 4px 0 #c8b090; transition:all .1s; }
+.month-nav button:active { transform:translateY(3px); box-shadow:0 1px 0 #c8b090; }
+#current-month { font-family:'Noto Sans TC',sans-serif; font-size:1rem; color:#fff; min-width:120px; text-align:center; font-weight:700; background:#9b8dc8; border-radius:24px; padding:7px 18px; box-shadow:0 4px 0 #6b5d98; }
+.month-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.month-list { display:flex; flex-direction:column; gap:6px; }
+.month-day-row { background:#fffdf9; border:2px solid var(--border); border-radius:14px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; font-size:.85rem; box-shadow:0 3px 0 #c8b090; }
+.month-day-row .day-label { color:var(--muted); font-family:'DM Mono',monospace; }
+.month-day-row .day-net { font-family:'DM Mono',monospace; font-weight:600; }
+.cat-breakdown { background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:14px; margin-bottom:14px; box-shadow:0 4px 0 #c8b090; }
+.cat-breakdown h3 { font-size:.75rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; font-weight:600; }
+.cat-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.cat-row-name { font-size:.82rem; color:var(--text); width:80px; flex-shrink:0; }
+.cat-bar-track { flex:1; height:8px; background:#ede0d0; border-radius:4px; overflow:hidden; }
+.cat-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#f0c0a0,#e8708a); }
+.cat-row-amt { font-family:'DM Mono',monospace; font-size:.78rem; color:var(--muted); width:70px; text-align:right; flex-shrink:0; }
+
+/* Export section */
+.export-section { background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:16px; margin-bottom:16px; box-shadow:0 4px 0 #c8b090; }
+.export-section h3 { font-size:.75rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px; font-weight:600; }
+.export-row { display:flex; gap:8px; margin-bottom:10px; }
+.export-row input { flex:1; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:8px 12px; font-family:'Noto Sans TC',sans-serif; font-size:.85rem; outline:none; }
+.export-btn { padding:10px 18px; border-radius:14px; border:none; background:#9b8dc8; color:#fff; font-family:'Noto Sans TC',sans-serif; font-size:.85rem; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 4px 0 #6b5d98; transition:all .1s; }
+.export-btn:active { transform:translateY(3px); box-shadow:0 1px 0 #6b5d98; }
+
+/* Toast */
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:#fffdf9; border:2px solid var(--border); color:var(--text); padding:10px 20px; border-radius:20px; font-size:.84rem; transition:transform .3s ease; z-index:999; white-space:nowrap; pointer-events:none; box-shadow:0 4px 0 #c8b090, 0 6px 14px var(--shadow); }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast.success { border-color:#5aab82; color:#2a6040; }
+.toast.error { border-color:#c06050; color:#803030; }
+.toast.warn { border-color:#d0a840; color:#705820; }
+
+/* Budget modal */
+.modal-overlay { position:fixed; inset:0; background:rgba(160,100,70,.2); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:400; padding:20px; }
+.modal-overlay.open { display:flex; }
+.modal { background:#fffdf9; border:2px solid var(--border); border-radius:24px; padding:24px; width:100%; max-width:320px; box-shadow:0 8px 0 #c8b090, 0 12px 32px var(--shadow); }
+.modal h3 { font-size:1rem; color:var(--text); margin-bottom:16px; font-weight:700; }
+.modal input { width:100%; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:10px 14px; font-family:'DM Mono',monospace; font-size:1rem; outline:none; margin-bottom:14px; }
+.modal-btns { display:flex; gap:8px; }
+.modal-btns button { flex:1; padding:11px; border-radius:14px; border:none; font-family:'Noto Sans TC',sans-serif; font-size:.9rem; cursor:pointer; font-weight:700; transition:all .1s; }
+.modal-confirm { background:#e8708a; color:#fff; box-shadow:0 4px 0 #903050; }
+.modal-confirm:active { transform:translateY(3px); box-shadow:0 1px 0 #903050; }
+.modal-cancel { background:#ede0d0; color:var(--muted); box-shadow:0 4px 0 #c8b090; }
+.modal-cancel:active { transform:translateY(3px); box-shadow:0 1px 0 #c8b090; }
+
+/* Edit modal */
+.edit-modal { max-width:360px; }
+.edit-modal .modal-label { font-size:.75rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; font-weight:600; }
+.edit-modal .modal-field { margin-bottom:14px; }
+.edit-modal input[type="text"],
+.edit-modal input[type="number"],
+.edit-modal input[type="date"],
+.edit-modal input[type="time"] { font-family:'Noto Sans TC',sans-serif; }
+.edit-modal select { width:100%; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:10px 14px; font-family:'Noto Sans TC',sans-serif; font-size:.95rem; outline:none; margin-bottom:0; appearance:none; }
+.edit-type-toggle { display:flex; gap:8px; margin-bottom:0; }
+.edit-type-btn { flex:1; padding:10px; border:2px solid var(--border); border-radius:12px; background:#fdf6ee; color:var(--muted); font-family:'Noto Sans TC',sans-serif; font-size:.9rem; cursor:pointer; font-weight:600; box-shadow:0 3px 0 #c8b090; transition:all .1s; }
+.edit-type-btn:active { transform:translateY(2px); box-shadow:0 1px 0 #c8b090; }
+.edit-type-btn.active-income { background:#f5eebb; border-color:#c8b86a; color:#6a7830; box-shadow:0 3px 0 #a09040; }
+.edit-type-btn.active-expense { background:#b8e8d0; border-color:#5aab82; color:#2a6040; box-shadow:0 3px 0 #3a8060; }
+
+/* Time input in add form */
+.time-row { display:flex; gap:9px; margin-bottom:10px; align-items:center; }
+.time-row label { font-size:.78rem; color:var(--muted); white-space:nowrap; flex-shrink:0; font-weight:500; }
+.time-row input[type="time"] { flex:1; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:10px 14px; font-family:'DM Mono',monospace; font-size:.95rem; outline:none; }
+.time-row input[type="time"]:focus { border-color:#e8708a; background:#fff; }
+
+/* tx edit button */
+.tx-edit { background:none; border:none; color:var(--muted); cursor:pointer; font-size:.85rem; padding:0 2px; opacity:.3; transition:opacity .15s; }
+.tx-edit:hover { opacity:1; color:var(--accent); }
+
+/* Sync badge */
+.user-name { color:var(--text); font-weight:500; }
+.logout-btn { background:none; border:none; color:var(--muted); font-size:.75rem; cursor:pointer; margin-left:4px; }
+.logout-btn:hover { color:#c04030; }
+.sync-badge { display:inline-flex; align-items:center; gap:6px; margin-top:6px; font-size:.72rem; color:var(--muted); background:#fffdf9; border:1.5px solid var(--border); padding:4px 12px; border-radius:20px; box-shadow:0 2px 0 #c8b090; }
+.sync-dot { width:7px; height:7px; border-radius:50%; background:#ccc; transition:background .3s; }
+.sync-dot.online { background:#5aab82; box-shadow:0 0 6px #5aab82; }
+.sync-dot.saving { background:var(--gold); }
+
+/* ── BOTTOM NAV (Richart style) ── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 65px;
+  background: #f0e0d0;
+  border-top: 2px solid #ddd0c0;
+  box-shadow: 0 -4px 12px rgba(160,100,70,.12);
+  display: none; /* shown after login */
+  align-items: center;
+  justify-content: space-around;
+  z-index: 300;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px; cursor: pointer; padding: 8px 4px;
+  transition: all .2s; border: none; background: transparent;
+}
+.nav-icon { font-size: 1.5rem; line-height: 1; transition: transform .2s; display:flex; align-items:center; justify-content:center; color:#a08070; }
+.nav-label { font-size: .75rem; color: #a08070; font-family: 'Noto Sans TC', sans-serif; font-weight: 500; white-space: nowrap; transition: color .2s; }
+.nav-item.active .nav-icon { transform: translateY(-2px); filter: drop-shadow(0 0 6px rgba(201,122,138,.8)); color:#c97a8a; }
+.nav-item.active .nav-label { color: #c97a8a; font-weight: 700; }
+.nav-item:active .nav-icon { transform: scale(.9); }
+
+/* ── PAGES ── */
+.love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
+.love-page.active { display: block; }
+/* 頁面轉場 */
+.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
+.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+@keyframes slideInLeft  { from { opacity:0; transform:translateX(40px);  } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+#app.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
+#app.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+
+/* ── LOVE CALENDAR PAGE ── */
+.love-page-header { text-align: center; margin-bottom: 20px; }
+.love-page-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.love-page-header p { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+.love-add-card {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 22px;
+  padding: 18px; margin-bottom: 18px;
+  box-shadow: 0 4px 0 #c8b090, 0 6px 14px var(--shadow);
+}
+.love-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.love-cat-btn {
+  padding: 10px 14px; border-radius: 20px; font-size: .95rem; cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif; font-weight: 600; transition: all .1s;
+  border: 2px solid #e0c0d0; background: #fdf0f5; color: #903050;
+  box-shadow: 0 4px 0 #c08090;
+}
+.love-cat-btn:active, .love-cat-btn.selected { transform: translateY(3px); box-shadow: 0 1px 0 #c08090; }
+.love-cat-btn.selected { background: #f0b0c8; border-color: #c07090; }
+.love-cat-btn[data-cat="吃飯"] { background: #fef9e7; border-color: #d4a017; color: #6b4c00; box-shadow: 0 4px 0 #a07810; }
+.love-cat-btn[data-cat="吃飯"].selected { background: #fdeea0; transform: translateY(3px); box-shadow: 0 1px 0 #a07810; }
+.love-cat-btn[data-cat="旅遊"] { background: #e0f0ff; border-color: #60a0e0; color: #204070; box-shadow: 0 4px 0 #3070b0; }
+.love-cat-btn[data-cat="旅遊"].selected { background: #c0e0ff; transform: translateY(3px); box-shadow: 0 1px 0 #3070b0; }
+.love-cat-btn[data-cat="愛愛"] { background: #ffe0ec; border-color: #e060a0; color: #901040; box-shadow: 0 4px 0 #b03070; }
+.love-cat-btn[data-cat="愛愛"].selected { background: #ffc0dc; transform: translateY(3px); box-shadow: 0 1px 0 #b03070; }
+.love-cat-btn[data-cat="吵架"] { background: #f3f4f6; border-color: #6b7280; color: #1f2937; box-shadow: 0 4px 0 #374151; }
+.love-cat-btn[data-cat="吵架"].selected { background: #d1d5db; transform: translateY(3px); box-shadow: 0 1px 0 #374151; }
+.love-cat-btn[data-cat="其他"] { background: #eeeef8; border-color: #8888b8; color: #303068; box-shadow: 0 4px 0 #5858a0; }
+.love-cat-btn[data-cat="其他"].selected { background: #d8d8ef; transform: translateY(3px); box-shadow: 0 1px 0 #5858a0; }
+.love-cat-btn[data-cat="大運動"] { background: #e0f7f5; border-color: #0d9488; color: #064e3b; box-shadow: 0 4px 0 #0a7060; }
+.love-cat-btn[data-cat="大運動"].selected { background: #b2f0ea; transform: translateY(3px); box-shadow: 0 1px 0 #0a7060; }
+.love-cat-btn[data-cat="小運動"] { background: #e0f4ff; border-color: #38bdf8; color: #0c4a6e; box-shadow: 0 4px 0 #0284c7; }
+.love-cat-btn[data-cat="小運動"].selected { background: #bae6fd; transform: translateY(3px); box-shadow: 0 1px 0 #0284c7; }
+.love-cat-btn[data-cat="鬥嘴"] { background: #fef3e2; border-color: #92400e; color: #451a03; box-shadow: 0 4px 0 #78350f; }
+.love-cat-btn[data-cat="鬥嘴"].selected { background: #fde68a; transform: translateY(3px); box-shadow: 0 1px 0 #78350f; }
+
+.love-field-row { display: flex; gap: 9px; margin-bottom: 10px; align-items: center; }
+.love-field-row label { font-size: .78rem; color: var(--muted); flex-shrink: 0; font-weight: 500; }
+.love-field-row input { flex: 1; background: #fdf6ee; border: 2px solid var(--border); color: var(--text); border-radius: 12px; padding: 10px 14px; font-family: 'Noto Sans TC', sans-serif; font-size: .95rem; outline: none; }
+.love-field-row input:focus { border-color: #e8708a; background: #fff; }
+.love-note-input { width: 100%; background: #fdf6ee; border: 2px solid var(--border); color: var(--text); border-radius: 12px; padding: 10px 14px; font-family: 'Noto Sans TC', sans-serif; font-size: .95rem; outline: none; margin-bottom: 14px; }
+.love-note-input:focus { border-color: #e8708a; }
+.love-add-btn {
+  width: 100%; padding: 16px; border-radius: 20px; border: none;
+  background: linear-gradient(160deg, #e8708a, #d05070);
+  color: #fff; font-family: 'Noto Sans TC', sans-serif; font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; transition: all .1s;
+  box-shadow: 0 6px 0 #903050, 0 8px 18px rgba(180,60,80,.3);
+}
+.love-add-btn:active { transform: translateY(5px); box-shadow: 0 1px 0 #903050; }
+
+.love-events-list { display: flex; flex-direction: column; gap: 8px; }
+.love-event-item {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 18px;
+  padding: 13px 15px; display: flex; align-items: center; gap: 11px;
+  box-shadow: 0 4px 0 #c8b090, 0 6px 12px var(--shadow);
+  animation: slideIn .2s ease;
+}
+.love-event-emoji { font-size: 1.6rem; flex-shrink: 0; }
+.love-event-info { flex: 1; min-width: 0; }
+.love-event-cat { font-size: 1rem; font-weight: 700; color: var(--text); }
+.love-event-date { font-size: .78rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.love-event-note { font-size: .82rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.love-event-score { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 700; flex-shrink: 0; }
+.love-event-score.pos { color: #4a8830; }
+.love-event-score.neg { color: #c04030; }
+.love-event-score.zero { color: var(--muted); }
+.love-event-del { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; }
+.love-event-del:hover { background:#fff0f0; color:#c04030; }
+
+/* ── LOVE SCORE PAGE ── */
+.score-big-card {
+  background: linear-gradient(135deg, #f0a0b8 0%, #e07090 100%);
+  border-radius: 28px; padding: 36px 24px; text-align: center; margin-bottom: 20px;
+  box-shadow: 0 8px 0 #903050, 0 12px 28px rgba(180,60,80,.3);
+  border: 2px solid #c06878;
+}
+.score-lbl { font-size: .8rem; color: rgba(255,255,255,.85); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+.score-number { font-family: 'DM Mono', monospace; font-size: 5rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.2); line-height: 1; }
+.score-unit { font-size: 1.1rem; color: rgba(255,255,255,.9); margin-top: 8px; }
+.love-index-wrap { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,.3); }
+.love-index-label { font-size:.72rem; color:rgba(255,255,255,.85); margin-bottom:8px; font-weight:600; }
+.love-index-bar-track { background:rgba(255,255,255,.25); border-radius:99px; height:12px; overflow:hidden; margin-bottom:6px; }
+.love-index-bar-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#fff8b0,#ffe066); transition:width .6s ease; }
+.love-index-pct { font-family:'DM Mono',monospace; font-size:2.4rem; font-weight:700; color:#fff; letter-spacing:.02em; }
+.score-hearts { font-size: 1.6rem; margin-top: 14px; letter-spacing: .4rem; }
+
+.score-rules-card {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 20px;
+  padding: 16px 18px; margin-bottom: 18px;
+  box-shadow: 0 4px 0 #c8b090;
+}
+.score-rules-card h3 { font-size: .75rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+.score-rule-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #f0e0d0; }
+.score-rule-row:last-child { border-bottom: none; }
+.score-rule-cat { font-size: .9rem; color: var(--text); }
+.score-rule-pts { font-family: 'DM Mono', monospace; font-size: .95rem; font-weight: 700; }
+.score-rule-pts.pos { color: #4a8830; }
+.score-rule-pts.neg { color: #c04030; }
+.score-rule-pts.zero { color: var(--muted); }
+
+.score-hist-list { display: flex; flex-direction: column; gap: 8px; }
+.score-hist-item {
+  background: #fffdf9; border: 2px solid var(--border); border-radius: 16px;
+  padding: 12px 15px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 3px 0 #c8b090;
+  animation: slideIn .2s ease;
+}
+.score-hist-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.score-hist-info { flex: 1; min-width: 0; }
+.score-hist-cat { font-size: .9rem; font-weight: 600; color: var(--text); }
+.score-hist-date { font-size: .75rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+.score-hist-note { font-size: .78rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.score-hist-pts { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.score-hist-pts.pos { color: #4a8830; }
+.score-hist-pts.neg { color: #c04030; }
+.score-hist-pts.zero { color: var(--muted); }
+
+/* ── 滿滿回憶 CALENDAR ── */
+.cal-nav { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px; }
+.cal-nav-btn { background:#fffdf9; border:2px solid var(--border); color:var(--accent); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:.9rem; box-shadow:0 4px 0 #c8b090; transition:all .1s; flex-shrink:0; }
+.cal-nav-btn:active { transform:translateY(3px); box-shadow:0 1px 0 #c8b090; }
+.cal-month-lbl { font-family:'Noto Sans TC',sans-serif; font-size:1.05rem; color:#fff; min-width:150px; text-align:center; font-weight:700; background:#e8708a; border-radius:30px; padding:8px 18px; box-shadow:0 5px 0 #9a3848, 0 7px 16px rgba(180,60,80,.3); }
+.cal-wrap { background:#fffdf9; border:2px solid var(--border); border-radius:22px; padding:12px 8px; box-shadow:0 4px 0 #c8b090, 0 6px 14px var(--shadow); margin-bottom:14px; }
+.cal-weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:4px; }
+.cal-wd { text-align:center; font-size:.72rem; font-weight:700; color:var(--muted); padding:4px 0; }
+.cal-wd:last-child { color:#e07090; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+.cal-cell { border-radius:10px; padding:3px 2px; cursor:pointer; text-align:center; min-height:80px; transition:background .12s; display:flex; flex-direction:column; align-items:center; gap:1px; overflow:hidden; }
+.cal-cell.empty { cursor:default; pointer-events:none; }
+.cal-cell:not(.empty):hover { background:#f5e8d0; }
+.cal-cell.today .cal-dn { background:#e8708a; color:#fff; border-radius:50%; box-shadow:0 2px 6px rgba(180,60,80,.4); font-weight:700; }
+.cal-cell.selected { background:#fde8f0; outline:1.5px solid #e8a0b0; }
+.cal-dn { font-size:.8rem; color:var(--text); width:26px; height:26px; display:flex; align-items:center; justify-content:center; margin:0 auto; font-weight:500; }
+.cal-dots { display:none; }
+.cal-dot { display:none; }
+.cal-ev-chip { font-size:.54rem; font-weight:700; padding:1px 3px; border-radius:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:calc(100% - 4px); text-align:center; color:#fff; margin:0 2px; flex-shrink:0; line-height:1.4; }
+.cal-legend { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; padding:0 2px; }
+.cal-legend-item { display:flex; align-items:center; gap:4px; font-size:.72rem; color:var(--muted); }
+.cal-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+/* Day panel */
+.day-panel { background:#fffdf9; border:2px solid var(--border); border-radius:18px; padding:14px; margin-bottom:14px; box-shadow:0 4px 0 #c8b090; display:none; }
+.day-panel.open { display:block; }
+.day-panel-title { font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:12px; }
+.day-ev-row { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px dashed #f0e0d0; }
+.day-ev-row:last-child { border-bottom:none; }
+.day-ev-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+.day-ev-cat { font-size:1rem; font-weight:700; color:var(--text); white-space:nowrap; }
+.day-ev-note { font-size:.88rem; color:var(--muted); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.day-ev-score { font-family:'DM Mono',monospace; font-size:1rem; font-weight:700; flex-shrink:0; }
+.day-ev-del { background:none; border:none; color:#d0a0a0; cursor:pointer; font-size:1.1rem; padding:4px 6px; border-radius:8px; transition:all .15s; line-height:1; margin-left:4px; }
+.day-ev-del:hover { background:#fff0f0; color:#c04030; }
+.day-ev-edit { background:#f5f0ff; border:1.5px solid #c0a0e0; color:#7040a0; cursor:pointer; font-size:.75rem; font-weight:700; font-family:'Noto Sans TC',sans-serif; border-radius:8px; padding:4px 10px; margin-left:6px; transition:all .15s; white-space:nowrap; }
+.day-ev-edit:hover { background:#7040a0; color:#fff; border-color:#7040a0; }
+
+/* 翻頁桌曆 */
+.flip-group { display:flex; align-items:flex-end; gap:10px; justify-content:center; margin:8px 0; }
+.single-flip-card { display:inline-flex; align-items:baseline; gap:2px; background:linear-gradient(to bottom,#fff8f5 0%,#fff8f5 50%,#f5e8ee 50%,#f5e8ee 100%); border-radius:16px; box-shadow:0 4px 14px rgba(180,80,100,.18),0 1px 3px rgba(0,0,0,.08); padding:10px 22px; border:1px solid rgba(210,160,170,.25); position:relative; }
+.single-flip-card::after { content:''; position:absolute; left:10px; right:10px; top:50%; height:1px; background:rgba(180,100,120,.15); }
+.single-flip-card span { font-family:'DM Mono',monospace; font-size:2rem; font-weight:700; color:#c06070; line-height:1.2; }
+.single-flip-card .flip-text { font-family:'Noto Sans TC',sans-serif; font-size:1.1rem; font-weight:600; color:#c06070; }
+.flip-unit { display:flex; flex-direction:column; align-items:center; gap:3px; }
+.flip-card { background:linear-gradient(to bottom,#fff8f5 0%,#fff8f5 50%,#f5e8ee 50%,#f5e8ee 100%); border-radius:12px; box-shadow:0 4px 12px rgba(180,80,100,.18),0 1px 3px rgba(0,0,0,.08); padding:8px 16px; min-width:58px; text-align:center; position:relative; border:1px solid rgba(210,160,170,.25); }
+.flip-card::after { content:''; position:absolute; left:6px; right:6px; top:50%; height:1px; background:rgba(180,100,120,.15); }
+.flip-card-num { font-family:'DM Mono',monospace; font-size:2.5rem; font-weight:700; color:#c06070; line-height:1.1; display:block; }
+.flip-card-lbl { font-size:.62rem; color:var(--muted); font-weight:600; letter-spacing:.05em; }
+.flip-sep { font-size:1.6rem; color:var(--accent); font-weight:700; align-self:center; margin-bottom:18px; opacity:.6; }
+
+/* 圓餅圖 */
+.pie-section { display:flex; align-items:center; gap:14px; padding:4px 0 8px; }
+.pie-legend { flex:1; display:flex; flex-direction:column; gap:7px; }
+.pie-legend-row { display:flex; align-items:center; gap:7px; font-size:.8rem; }
+.pie-legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.pie-legend-name { flex:1; color:var(--text); font-weight:500; }
+.pie-legend-pct { font-family:'DM Mono',monospace; font-weight:700; font-size:.82rem; }
+/* FAB */
+.love-fab { position:fixed; bottom:80px; right:18px; width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg,#f08098,#d05878); border:none; color:#fff; font-size:2rem; cursor:pointer; box-shadow:0 4px 16px rgba(200,60,100,.35); transition:all .18s ease; z-index:200; display:none; align-items:center; justify-content:center; line-height:1; font-weight:300; }
+.love-fab.show { display:flex; }
+.love-fab:active { transform:scale(.93); box-shadow:0 2px 8px rgba(200,60,100,.25); }
+/* Add Event Modal */
+.ae-modal { max-width:360px; }
+.ae-cat-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.ae-cat-btn { padding:8px 12px; border-radius:14px; font-size:.88rem; cursor:pointer; font-family:'Noto Sans TC',sans-serif; font-weight:600; transition:all .1s; border:2px solid; }
+.ae-cat-btn[data-cat="吃飯"] { background:#fef9e7; border-color:#d4a017; color:#6b4c00; box-shadow:0 3px 0 #a07810; }
+.ae-cat-btn[data-cat="旅遊"] { background:#e0f0ff; border-color:#60a0e0; color:#204070; box-shadow:0 3px 0 #3070b0; }
+.ae-cat-btn[data-cat="愛愛"] { background:#ffe0ec; border-color:#e060a0; color:#901040; box-shadow:0 3px 0 #b03070; }
+.ae-cat-btn[data-cat="吵架"] { background:#f3f4f6; border-color:#6b7280; color:#1f2937; box-shadow:0 3px 0 #374151; }
+.ae-cat-btn[data-cat="其他"] { background:#eeeef8; border-color:#8888b8; color:#303068; box-shadow:0 3px 0 #5858a0; }
+.ae-cat-btn[data-cat="大運動"] { background:#e0f7f5; border-color:#0d9488; color:#064e3b; box-shadow:0 3px 0 #0a7060; }
+.ae-cat-btn[data-cat="小運動"] { background:#e0f4ff; border-color:#38bdf8; color:#0c4a6e; box-shadow:0 3px 0 #0284c7; }
+.ae-cat-btn[data-cat="鬥嘴"] { background:#fef3e2; border-color:#92400e; color:#451a03; box-shadow:0 3px 0 #78350f; }
+.ae-cat-btn.sel { transform:translateY(2px); }
+.ae-cat-btn[data-cat="吃飯"].sel { box-shadow:0 1px 0 #a07810; background:#fdeea0; }
+.ae-cat-btn[data-cat="旅遊"].sel { box-shadow:0 1px 0 #3070b0; background:#c0e0ff; }
+.ae-cat-btn[data-cat="愛愛"].sel { box-shadow:0 1px 0 #b03070; background:#ffc0dc; }
+.ae-cat-btn[data-cat="吵架"].sel { box-shadow:0 1px 0 #374151; background:#d1d5db; }
+.ae-cat-btn[data-cat="其他"].sel { box-shadow:0 1px 0 #5858a0; background:#d8d8ef; }
+.ae-cat-btn[data-cat="大運動"].sel { box-shadow:0 1px 0 #0a7060; background:#b2f0ea; }
+.ae-cat-btn[data-cat="小運動"].sel { box-shadow:0 1px 0 #0284c7; background:#bae6fd; }
+.ae-cat-btn[data-cat="鬥嘴"].sel { box-shadow:0 1px 0 #78350f; background:#fde68a; }
+.ae-field { margin-bottom:13px; }
+.ae-label { font-size:.72rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:5px; font-weight:600; }
+.ae-input { width:100%; background:#fdf6ee; border:2px solid var(--border); color:var(--text); border-radius:12px; padding:10px 14px; font-family:'Noto Sans TC',sans-serif; font-size:.95rem; outline:none; }
+.ae-input:focus { border-color:#e8708a; }
+.ae-score-hint { font-size:.7rem; color:var(--muted); margin-top:3px; }
+/* Score month nav */
+.score-month-nav { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
+.score-month-nav button { background:#fffdf9; border:2px solid var(--border); color:var(--accent); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:.85rem; box-shadow:0 3px 0 #c8b090; transition:all .1s; }
+.score-month-nav button:active { transform:translateY(2px); box-shadow:0 1px 0 #c8b090; }
+.score-month-lbl { font-family:'Noto Sans TC',sans-serif; font-size:.95rem; color:#fff; min-width:120px; text-align:center; font-weight:700; background:#e8708a; border-radius:20px; padding:6px 14px; box-shadow:0 4px 0 #9a3848; }
+/* 在一起天數 */
+.love-stats-card { background:linear-gradient(135deg,#fff0f5,#fff8f0); border:2px solid #e8a0b0; border-radius:22px; padding:18px 14px; margin-bottom:16px; text-align:center; box-shadow:0 5px 0 #c8b090; }
+.love-stats-days { font-family:'DM Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--accent); line-height:1.15; }
+.love-stats-label { font-size:.8rem; color:var(--muted); margin-top:4px; letter-spacing:.04em; }
+.love-stats-sub { font-size:.7rem; color:var(--muted); margin-top:3px; opacity:.85; }
+/* 戀愛百分比 */
+.pct-row { display:flex; align-items:center; gap:8px; margin-bottom:9px; }
+.pct-cat { font-size:.82rem; color:var(--text); width:76px; flex-shrink:0; }
+.pct-bar-track { flex:1; height:9px; background:#ede0d0; border-radius:5px; overflow:hidden; }
+.pct-bar-fill { height:100%; border-radius:5px; transition:width .5s ease; }
+.pct-val { font-family:'DM Mono',monospace; font-size:.78rem; font-weight:700; width:40px; text-align:right; flex-shrink:0; }
+/* Who 標籤 */
+.who-badge { font-size:.62rem; padding:1px 5px; border-radius:8px; font-weight:700; flex-shrink:0; white-space:nowrap; }
+.who-badge.charlie { background:#d0e8f8; color:#204870; border:1px solid #6898c8; }
+.who-badge.nini    { background:#ffd6e0; color:#903040; border:1px solid #e09090; }
+.who-badge.other   { background:#e8d0f0; color:#402860; border:1px solid #9870b8; }
+
+
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <svg width="160" height="150" viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:12px">
+    <!-- Left ear -->
+    <circle cx="38" cy="42" r="34" fill="#111111"/>
+    <!-- Right ear -->
+    <circle cx="122" cy="42" r="34" fill="#111111"/>
+    <!-- Head -->
+    <circle cx="80" cy="95" r="52" fill="#111111"/>
+    <!-- Face skin -->
+    <ellipse cx="80" cy="100" rx="34" ry="28" fill="#f5d5b0"/>
+    <!-- Left eye -->
+    <ellipse cx="63" cy="84" rx="7" ry="8" fill="#111111"/>
+    <circle cx="65" cy="82" r="2" fill="white"/>
+    <!-- Right eye -->
+    <ellipse cx="97" cy="84" rx="7" ry="8" fill="#111111"/>
+    <circle cx="99" cy="82" r="2" fill="white"/>
+    <!-- Nose -->
+    <ellipse cx="80" cy="97" rx="6" ry="4" fill="#111111"/>
+    <!-- Smile -->
+    <path d="M 65 106 Q 80 118 95 106" stroke="#111111" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Cheeks -->
+    <circle cx="58" cy="105" r="8" fill="#e8a0a0" opacity="0.5"/>
+    <circle cx="102" cy="105" r="8" fill="#e8a0a0" opacity="0.5"/>
+    <!-- Minnie bow on left ear -->
+    <ellipse cx="18" cy="22" rx="10" ry="7" fill="#e11d48" transform="rotate(-30 18 22)"/>
+    <ellipse cx="38" cy="18" rx="10" ry="7" fill="#e11d48" transform="rotate(30 38 18)"/>
+    <circle cx="28" cy="20" r="5" fill="#ff6b8a"/>
+    <!-- White dots on bow -->
+    <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.7"/>
+    <circle cx="36" cy="16" r="1.5" fill="white" opacity="0.7"/>
+  </svg>
+  <h1>CMfund</h1>
+  <p>查理與妮妮的專屬記帳本<br>請登入 Google 帳號繼續</p>
+  <button class="google-btn" id="login-btn">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G">
+    使用 Google 登入
+  </button>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="header">
+    <div class="header-deco">
+      <svg width="320" height="155" viewBox="0 0 320 155" xmlns="http://www.w3.org/2000/svg">
+        <!-- ♪ 音符 -->
+        <text x="18" y="52" font-size="16" fill="#555" opacity="0.75">♪</text>
+        <text x="30" y="36" font-size="12" fill="#555" opacity="0.6">♫</text>
+        <!-- ★ 星星 (Mickey下方) -->
+        <polygon points="62,138 64.5,145 72,145 66,149 68,156 62,152 56,156 58,149 52,145 59.5,145" fill="#f0c040" opacity="0.9"/>
+
+        <!-- Mickey head (左) -->
+        <circle cx="40" cy="44" r="22" fill="#1a1a1a"/>
+        <circle cx="84" cy="38" r="22" fill="#1a1a1a"/>
+        <circle cx="62" cy="88" r="38" fill="#1a1a1a"/>
+        <ellipse cx="62" cy="94" rx="26" ry="22" fill="#f5d5b0"/>
+        <ellipse cx="51" cy="80" rx="5.5" ry="6.5" fill="#1a1a1a"/>
+        <circle cx="53" cy="78" r="1.8" fill="white"/>
+        <ellipse cx="73" cy="80" rx="5.5" ry="6.5" fill="#1a1a1a"/>
+        <circle cx="75" cy="78" r="1.8" fill="white"/>
+        <ellipse cx="62" cy="92" rx="4.5" ry="3.5" fill="#1a1a1a"/>
+        <path d="M 50 101 Q 62 112 74 101" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <circle cx="46" cy="98" r="8" fill="#e8a0a0" opacity="0.48"/>
+        <circle cx="78" cy="98" r="8" fill="#e8a0a0" opacity="0.48"/>
+
+        <!-- 中間 love + 心 -->
+        <text x="160" y="38" font-family="Georgia,serif" font-size="18" fill="#ec4899" font-style="italic" text-anchor="middle" opacity="0.95">love</text>
+        <path d="M174,52 C174,48 169,44 164,44 C159,44 154,48 154,52 C154,58 164,66 164,66 C164,66 174,58 174,52Z" fill="#ec4899" opacity="0.9"/>
+        <!-- 小心 -->
+        <path d="M138,80 C138,77 134,74 131,74 C128,74 124,77 124,80 C124,84 131,89 131,89 C131,89 138,84 138,80Z" fill="#f9a8d4" opacity="0.85"/>
+
+        <!-- Minnie head (右) -->
+        <!-- bow -->
+        <ellipse cx="222" cy="24" rx="16" ry="10" fill="#ec4899" transform="rotate(-25 222 24)"/>
+        <ellipse cx="248" cy="18" rx="16" ry="10" fill="#ec4899" transform="rotate(25 248 18)"/>
+        <circle cx="235" cy="21" r="7" fill="#f472b6"/>
+        <circle cx="226" cy="18" r="2.5" fill="white" opacity="0.55"/>
+        <!-- ears -->
+        <circle cx="214" cy="48" r="22" fill="#1a1a1a"/>
+        <circle cx="258" cy="40" r="22" fill="#1a1a1a"/>
+        <!-- head -->
+        <circle cx="236" cy="90" r="38" fill="#1a1a1a"/>
+        <ellipse cx="236" cy="96" rx="26" ry="22" fill="#f5d5b0"/>
+        <!-- eyes -->
+        <ellipse cx="225" cy="82" rx="5.5" ry="6.5" fill="#1a1a1a"/>
+        <circle cx="227" cy="80" r="1.8" fill="white"/>
+        <ellipse cx="247" cy="82" rx="5.5" ry="6.5" fill="#1a1a1a"/>
+        <circle cx="249" cy="80" r="1.8" fill="white"/>
+        <!-- lashes -->
+        <line x1="220" y1="76" x2="215" y2="70" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="225" y1="74" x2="224" y2="68" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="252" y1="76" x2="257" y2="70" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="247" y1="74" x2="248" y2="68" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- nose + smile -->
+        <ellipse cx="236" cy="94" rx="4.5" ry="3.5" fill="#1a1a1a"/>
+        <path d="M 224 103 Q 236 114 248 103" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- cheeks -->
+        <circle cx="220" cy="100" r="8" fill="#e8a0a0" opacity="0.48"/>
+        <circle cx="252" cy="100" r="8" fill="#e8a0a0" opacity="0.48"/>
+
+        <!-- 花 (Minnie右下) -->
+        <circle cx="296" cy="118" r="4.5" fill="#fbbf24"/>
+        <circle cx="296" cy="107" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
+        <circle cx="296" cy="129" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
+        <circle cx="285" cy="118" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
+        <circle cx="307" cy="118" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
+        <!-- ✦ 閃光 -->
+        <path d="M278,98 L280,92 L282,98 L288,100 L282,102 L280,108 L278,102 L272,100Z" fill="#fbbf24" opacity="0.88"/>
+        <!-- 愛心 (Minnie右上) -->
+        <path d="M305,52 C305,48 300,44 296,44 C292,44 287,48 287,52 C287,57 296,63 296,63 C296,63 305,57 305,52Z" fill="#f9a8d4" opacity="0.9"/>
+        <!-- 小圓點 -->
+        <circle cx="280" cy="75" r="3" fill="#ec4899" opacity="0.5"/>
+        <circle cx="275" cy="85" r="2" fill="#ec4899" opacity="0.35"/>
+      </svg>
+    </div>
+    <h1 class="header-title-cute">查理與妮妮<br><span class="header-subtitle-cute">愛與冒險的故事</span></h1>
+    <div class="user-badge">
+      <img class="user-avatar" id="user-avatar" src="" alt="">
+      <span class="user-name" id="user-name"></span>
+      <button class="logout-btn" id="logout-btn">登出</button>
+    </div>
+
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('daily')">📅 每日記帳</button>
+    <button class="tab-btn" onclick="switchTab('monthly')">📊 月度總覽</button>
+  </div>
+
+  <!-- DAILY TAB -->
+  <div id="tab-daily">
+    <div class="date-nav">
+      <button id="prev-day">◀</button>
+      <span id="current-date"></span>
+      <button id="next-day">▶</button>
+    </div>
+
+    <div class="summary">
+      <div class="card income-card"><div class="label">收入</div><div class="amount" id="total-income">$0</div></div>
+      <div class="card expense-card"><div class="label">支出</div><div class="amount" id="total-expense">$0</div></div>
+      <div class="card balance-card"><div class="label">餘額</div><div class="amount" id="total-balance">$0</div><div class="carry-lbl" id="carry-label"></div></div>
+    </div>
+
+    <!-- Budget bar -->
+    <div class="budget-bar-wrap" id="budget-wrap">
+      <div class="budget-top">
+        <span>本月支出預算</span>
+        <span id="budget-remain-text">設定預算</span>
+      </div>
+      <div class="budget-track"><div class="budget-fill" id="budget-fill" style="width:0%"></div></div>
+      <button class="budget-set-btn" onclick="openBudgetModal()">⚙️ 設定每月預算上限</button>
+    </div>
+
+    <!-- Input -->
+    <div class="input-section">
+      <div class="section-title">新增記錄</div>
+      <div class="type-toggle">
+        <button class="type-btn active-income" id="btn-income" onclick="setType('income')">💕 收入</button>
+        <button class="type-btn" id="btn-expense" onclick="setType('expense')">🛍 支出</button>
+      </div>
+      <div class="categories" id="cat-income">
+        <button class="cat-btn" onclick="selectCat(this)">💑 查理的愛</button>
+        <button class="cat-btn" onclick="selectCat(this)">👑 妮妮的愛</button>
+        <button class="cat-btn" onclick="selectCat(this)">🎁 其他收入</button>
+      </div>
+      <div class="categories" id="cat-expense" style="display:none">
+        <button class="cat-btn" onclick="selectCat(this)">🍜 餐飲</button>
+        <button class="cat-btn" onclick="selectCat(this)">🚇 交通</button>
+        <button class="cat-btn" onclick="selectCat(this)">🛒 購物</button>
+        <button class="cat-btn" onclick="selectCat(this)">🏠 住房</button>
+        <button class="cat-btn" onclick="selectCat(this)">🎮 娛樂</button>
+        <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
+      </div>
+      <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
+      <div class="input-row"><input type="number" id="amount-input" placeholder="金額 TWD" min="0" inputmode="decimal" /></div>
+      <div class="time-row">
+        <label>⏰ 時間</label>
+        <input type="time" id="time-input" />
+      </div>
+      <button class="add-btn" id="add-btn" onclick="addTransaction()">
+        <span class="spinner" id="spinner"></span>
+        <span id="btn-text">💕 新增記錄</span>
+      </button>
+    </div>
+
+    <!-- Search & filter -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="🔍 搜尋記錄關鍵字…" oninput="applyFilter()" />
+    </div>
+    <div class="filter-chips" id="filter-chips">
+      <span class="filter-chip active" data-cat="all" onclick="clickFilter(this)">全部</span>
+      <span class="filter-chip" data-cat="查理的愛" onclick="clickFilter(this)">查理的愛</span>
+      <span class="filter-chip" data-cat="妮妮的愛" onclick="clickFilter(this)">妮妮的愛</span>
+      <span class="filter-chip" data-cat="餐飲" onclick="clickFilter(this)">餐飲</span>
+      <span class="filter-chip" data-cat="交通" onclick="clickFilter(this)">交通</span>
+      <span class="filter-chip" data-cat="購物" onclick="clickFilter(this)">購物</span>
+      <span class="filter-chip" data-cat="娛樂" onclick="clickFilter(this)">娛樂</span>
+    </div>
+
+    <div class="list-section">
+      <h2 id="list-title">今日明細</h2>
+      <div class="tx-list" id="tx-list"></div>
+    </div>
+  </div>
+
+  <!-- MONTHLY TAB -->
+  <div id="tab-monthly" class="monthly-section">
+    <div class="month-nav">
+      <button id="prev-month">◀</button>
+      <span id="current-month"></span>
+      <button id="next-month">▶</button>
+    </div>
+    <div class="month-cards summary">
+      <div class="card income-card"><div class="label">月收入</div><div class="amount" id="m-income">$0</div></div>
+      <div class="card expense-card"><div class="label">月支出</div><div class="amount" id="m-expense">$0</div></div>
+      <div class="card balance-card"><div class="label">月結餘</div><div class="amount" id="m-balance">$0</div></div>
+    </div>
+    <div class="cat-breakdown">
+      <h3>支出分類佔比</h3>
+      <div id="cat-breakdown-list"></div>
+    </div>
+    <div class="export-section">
+      <h3>匯出 CSV（Excel）</h3>
+      <div class="export-row">
+        <input type="date" id="export-from" />
+        <input type="date" id="export-to" />
+      </div>
+      <button class="export-btn" onclick="exportCSV()">⬇️ 下載 CSV</button>
+    </div>
+    <div class="list-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h2 style="margin-bottom:0">月度明細</h2>
+        <button id="sort-toggle-btn" onclick="toggleMonthSort()" style="background:#fffdf9;border:2px solid var(--border);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.75rem;cursor:pointer;font-weight:700;box-shadow:0 3px 0 #c8b090;">⬇️ 新→舊</button>
+      </div>
+      <div class="tx-list" id="month-tx-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Transaction Modal -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal edit-modal">
+    <h3>✏️ 編輯記錄</h3>
+    <div class="modal-field">
+      <div class="modal-label">類型</div>
+      <div class="edit-type-toggle">
+        <button class="edit-type-btn active-income" id="edit-btn-income" onclick="setEditType('income')">💕 收入</button>
+        <button class="edit-type-btn" id="edit-btn-expense" onclick="setEditType('expense')">🛍 支出</button>
+      </div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">說明</div>
+      <input type="text" id="edit-desc" placeholder="說明" />
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">金額 TWD</div>
+      <input type="number" id="edit-amount" placeholder="金額" min="0" inputmode="decimal" />
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">分類</div>
+      <select id="edit-cat">
+        <optgroup label="收入">
+          <option value="查理的愛">💑 查理的愛</option>
+          <option value="妮妮的愛">👑 妮妮的愛</option>
+          <option value="其他收入">🎁 其他收入</option>
+        </optgroup>
+        <optgroup label="支出">
+          <option value="餐飲">🍜 餐飲</option>
+          <option value="交通">🚇 交通</option>
+          <option value="購物">🛒 購物</option>
+          <option value="住房">🏠 住房</option>
+          <option value="醫療">🏥 醫療</option>
+          <option value="娛樂">🎮 娛樂</option>
+          <option value="帳單">💡 帳單</option>
+          <option value="其他支出">📦 其他支出</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">交易日期</div>
+      <input type="date" id="edit-date" />
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">交易時間</div>
+      <input type="time" id="edit-time" />
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeEditModal()">取消</button>
+      <button class="modal-confirm" onclick="saveEditTx()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay delete-confirm-modal" id="delete-confirm-modal">
+  <div class="modal">
+    <div class="delete-confirm-icon">🗑️</div>
+    <div class="delete-confirm-msg" id="delete-confirm-msg">確定要刪除嗎？</div>
+    <div class="delete-confirm-sub">刪除後無法復原</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeDeleteConfirm()">取消</button>
+      <button class="modal-delete" id="delete-confirm-btn">確認刪除</button>
+    </div>
+  </div>
+</div>
+
+<!-- Budget modal -->
+<div class="modal-overlay" id="budget-modal">
+  <div class="modal">
+    <h3>⚙️ 設定每月支出預算</h3>
+    <input type="number" id="budget-input" placeholder="輸入預算金額 TWD" inputmode="numeric" />
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeBudgetModal()">取消</button>
+      <button class="modal-confirm" onclick="saveBudget()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, push, onValue, remove, get, set, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDqclPnJmFByXP5X9vbCSjl9pbtYSPBaY8",
+  authDomain: "cmfund-2ecb6.firebaseapp.com",
+  databaseURL: "https://cmfund-2ecb6-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "cmfund-2ecb6",
+  storageBucket: "cmfund-2ecb6.firebasestorage.app",
+  messagingSenderId: "901819984534",
+  appId: "1:901819984534:web:a7d557079cd816d1e3f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// ── State ──
+let currentUser = null;
+let currentType = 'income';
+let selectedCat = '';
+let currentDate = new Date();
+let currentMonthDate = new Date();
+let transactions = [];
+let allTxCache = {};
+let unsubscribe = null;
+let filterCat = 'all';
+let monthBudget = parseInt(localStorage.getItem('cmfund_budget') || '0');
+let editingTx = null; // { id, dateKey }
+let editType = 'income';
+let monthSortAsc = false; // true=舊到新, false=新到舊
+
+// ── Auth ──
+const loginBtn = document.getElementById('login-btn');
+const loginScreen = document.getElementById('login-screen');
+
+function showLoginError(msg) {
+  let errEl = document.getElementById('login-error-msg');
+  if (!errEl) {
+    errEl = document.createElement('p');
+    errEl.id = 'login-error-msg';
+    errEl.style.cssText = 'color:#e74c3c;font-size:.85rem;text-align:center;margin-top:1rem;white-space:pre-wrap;word-break:break-all;';
+    loginScreen.appendChild(errEl);
+  }
+  errEl.textContent = msg;
+}
+
+loginBtn.onclick = async () => {
+  loginBtn.disabled = true;
+  loginBtn.textContent = '登入中...';
+  const resetBtn = () => {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G"> 使用 Google 登入';
+  };
+  // 先嘗試 popup（手機桌機都支援），失敗再 redirect
+  try {
+    await signInWithPopup(auth, provider);
+  } catch(err) {
+    console.error('Popup error:', err.code);
+    if (err.code === 'auth/popup-blocked' ||
+        err.code === 'auth/popup-closed-by-user' ||
+        err.code === 'auth/cancelled-popup-request' ||
+        err.code === 'auth/operation-not-supported-in-this-environment') {
+      showLoginError('正在跳轉至 Google 登入頁面…');
+      try {
+        await signInWithRedirect(auth, provider);
+      } catch(err2) {
+        showLoginError('登入失敗：' + err2.code + '\n' + err2.message);
+        resetBtn();
+      }
+    } else {
+      showLoginError('登入失敗：' + err.code + '\n' + err.message);
+      resetBtn();
+    }
+  }
+};
+
+// 處理 redirect 回傳結果
+getRedirectResult(auth).then(result => {
+  if (result && result.user) console.log('Redirect login success:', result.user.email);
+}).catch(err => {
+  console.error('Redirect error:', err);
+  if (err.code !== 'auth/no-current-user') {
+    showLoginError('Redirect 登入失敗：' + err.code + '\n' + err.message);
+  }
+});
+document.getElementById('logout-btn').onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('bottom-nav').style.display = 'flex';
+    document.getElementById('user-name').textContent = user.displayName || user.email;
+    document.getElementById('user-avatar').src = user.photoURL || '';
+    init();
+    initLoveEvents();
+  } else {
+    currentUser = null;
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('bottom-nav').style.display = 'none';
+  }
+});
+
+// ── Helpers ──
+function formatDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function formatDateDisplay(d) {
+  const w = ['日','一','二','三','四','五','六'];
+  return `${d.getMonth()+1}月${d.getDate()}日（週${w[d.getDay()]}）`;
+}
+function formatMonth(d) { return `${d.getFullYear()}年${d.getMonth()+1}月`; }
+function fmt(n) { return '$' + Math.abs(Math.round(n)).toLocaleString('zh-TW'); }
+function whoClass(name) {
+  if (!name) return 'other';
+  if (name.includes('Charlie') || name.includes('查理') || name.includes('charlie')) return 'charlie';
+  if (name.includes('妮妮') || name.includes('Nini') || name.includes('nini')) return 'nini';
+  return 'other';
+}
+function whoLabel(name) {
+  if (!name) return '？';
+  const parts = name.split(' ');
+  return parts[0] || name;
+}
+
+function setSyncStatus(s) {
+  const dot = document.getElementById('sync-dot');
+  const lbl = document.getElementById('sync-label');
+  if (!dot || !lbl) return;
+  if (s==='online') { dot.className='sync-dot online'; lbl.textContent='即時同步中 · 多人共用'; }
+  else if (s==='saving') { dot.className='sync-dot saving'; lbl.textContent='同步中…'; }
+  else { dot.className='sync-dot'; lbl.textContent='連線中…'; }
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 2800);
+}
+
+// ── Tab ──
+window.switchTab = (tab) => {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (i===0&&tab==='daily')||(i===1&&tab==='monthly')));
+  document.getElementById('tab-daily').style.display = tab==='daily' ? 'block' : 'none';
+  document.getElementById('tab-monthly').style.display = tab==='monthly' ? 'block' : 'none';
+  if (tab==='monthly') renderMonthly();
+};
+
+// ── Type & Cat ──
+window.setType = (t) => {
+  currentType = t; selectedCat = '';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('btn-income').className = 'type-btn' + (t==='income' ? ' active-income' : '');
+  document.getElementById('btn-expense').className = 'type-btn' + (t==='expense' ? ' active-expense' : '');
+  document.getElementById('cat-income').style.display = t==='income' ? 'flex' : 'none';
+  document.getElementById('cat-expense').style.display = t==='expense' ? 'flex' : 'none';
+};
+window.selectCat = (btn) => {
+  btn.parentElement.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedCat = btn.textContent.trim().replace(/^\S+\s/,'');
+};
+
+// ── Filter ──
+window.clickFilter = (el) => {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filterCat = el.dataset.cat;
+  applyFilter();
+};
+window.applyFilter = () => { renderList(); };
+
+// ── Budget ──
+window.openBudgetModal = () => {
+  document.getElementById('budget-input').value = monthBudget || '';
+  document.getElementById('budget-modal').classList.add('open');
+};
+window.closeBudgetModal = () => document.getElementById('budget-modal').classList.remove('open');
+window.saveBudget = () => {
+  const v = parseInt(document.getElementById('budget-input').value);
+  if (v > 0) {
+    monthBudget = v;
+    localStorage.setItem('cmfund_budget', v);
+    // 同時存進 Firebase，讓所有裝置重開 App 都能讀到
+    set(ref(db, 'settings/monthBudget'), v).catch(e => console.error('預算儲存失敗:', e));
+  }
+  closeBudgetModal();
+  updateBudgetBar();
+  showToast('預算已設定 ✓', 'success');
+};
+
+async function updateBudgetBar() {
+  if (!monthBudget) {
+    document.getElementById('budget-remain-text').textContent = '尚未設定';
+    document.getElementById('budget-fill').style.width = '0%';
+    return;
+  }
+  // calculate this month's total expense
+  const y = new Date().getFullYear(), m = new Date().getMonth()+1;
+  let monthExpense = 0;
+  try {
+    const snap = await get(ref(db, 'transactions'));
+    if (snap.exists()) {
+      snap.forEach(daySnap => {
+        const [dy, dm] = daySnap.key.split('_').map(Number);
+        if (dy === y && dm === m) {
+          daySnap.forEach(tx => {
+            const t = tx.val();
+            if (t.type === 'expense') monthExpense += t.amount;
+          });
+        }
+      });
+    }
+  } catch(e) {}
+  const pct = Math.min(100, Math.round(monthExpense / monthBudget * 100));
+  const remain = monthBudget - monthExpense;
+  document.getElementById('budget-fill').style.width = pct + '%';
+  document.getElementById('budget-fill').className = 'budget-fill' + (pct >= 90 ? ' warn' : '');
+  document.getElementById('budget-remain-text').textContent = `${pct}% 已用 · 剩 ${fmt(remain)}`;
+  if (pct >= 100) showToast('⚠️ 本月支出已超過預算！', 'warn');
+  else if (pct >= 90) showToast('⚠️ 預算剩不到 10%，注意花費！', 'warn');
+}
+
+// ── Carry balance ──
+let carryBalance = 0;
+async function calcCarryBalance() {
+  const yesterday = new Date(currentDate);
+  yesterday.setDate(yesterday.getDate() - 1);
+  try {
+    const snap = await get(ref(db, 'transactions'));
+    let total = 0;
+    if (snap.exists()) {
+      const cutoff = formatDate(yesterday).replace(/-/g,'_');
+      snap.forEach(daySnap => {
+        if (daySnap.key <= cutoff) {
+          daySnap.forEach(tx => {
+            const t = tx.val();
+            total += t.type === 'income' ? t.amount : -t.amount;
+          });
+        }
+      });
+    }
+    carryBalance = total;
+  } catch(e) { carryBalance = 0; }
+}
+
+// ── Render Summary ──
+function renderSummary() {
+  const income = transactions.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+  const expense = transactions.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+  const bal = carryBalance + income - expense;
+  document.getElementById('total-income').textContent = fmt(income);
+  document.getElementById('total-expense').textContent = fmt(expense);
+  const balEl = document.getElementById('total-balance');
+  balEl.textContent = (bal<0?'-':'') + fmt(bal);
+  balEl.style.color = bal<0 ? 'var(--expense)' : bal>0 ? 'var(--income)' : '#fff';
+  const cl = document.getElementById('carry-label');
+  if (cl) cl.textContent = carryBalance !== 0 ? `含前日結轉 ${carryBalance>=0?'+':''}${carryBalance.toLocaleString('zh-TW')}` : '';
+}
+
+// ── Render List ──
+function renderList() {
+  const list = document.getElementById('tx-list');
+  const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+  let filtered = transactions.filter(t => {
+    const catMatch = filterCat === 'all' || t.cat === filterCat;
+    const kwMatch = !keyword || t.desc.toLowerCase().includes(keyword) || t.cat.toLowerCase().includes(keyword);
+    return catMatch && kwMatch;
+  });
+  if (!filtered.length) {
+    const isToday = formatDate(currentDate) === formatDate(new Date());
+    const noRecordMsg = isToday
+      ? '今天還沒有記錄<br>新增第一筆，一起記帳 💕'
+      : `${formatDateDisplay(currentDate)}<br>這天沒有記帳記錄`;
+    list.innerHTML = `<div class="empty-state">${keyword||filterCat!=='all' ? '找不到符合的記錄 🔍' : noRecordMsg}</div>`;
+    return;
+  }
+  let running = carryBalance;
+  // recalc running from full list
+  const beforeFilter = transactions.slice(0, transactions.indexOf(filtered[0]));
+  beforeFilter.forEach(t => running += t.type==='income' ? t.amount : -t.amount);
+  list.innerHTML = filtered.map(t => {
+    running += t.type === 'income' ? t.amount : -t.amount;
+    const cls = t.type === 'income' ? 'income' : 'expense';
+    const sign = t.type === 'income' ? '+' : '-';
+    const wc = whoClass(t.who);
+    const wl = (t.who && t.who !== '匿名') ? whoLabel(t.who) : '';
+    const whoSpan = wl ? `<span class="tx-who ${wc}">${wl}</span>` : '';
+    return `<div class="tx-item">
+      <div class="tx-dot ${cls}"></div>
+      <div class="tx-info">
+        <div class="tx-desc">${t.desc || ''}</div>
+        <div class="tx-meta">
+          <span class="tx-tag">${t.cat || ''}</span>
+          <span class="tx-time">${t.time || ''}</span>
+          ${whoSpan}
+        </div>
+        <div class="balance-line">累計 ${running>=0?'':'-'}${fmt(running)}</div>
+      </div>
+      <div class="tx-amount ${cls}">${sign}${fmt(t.amount)}</div>
+      <button class="tx-edit" onclick="openEditModal('${t.id}')">✏️</button>
+      <button class="tx-delete" onclick="deleteTx('${t.id}')" title="刪除">🗑️</button>
+    </div>`;
+  }).join('');
+}
+
+// ── Load date ──
+async function loadDate() {
+  document.getElementById('list-title').textContent = '載入中…';
+  if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+  await calcCarryBalance();
+  const localDateKey = formatDate(currentDate).replace(/-/g,'_');
+  const dbRef = ref(db, `transactions/${localDateKey}`);
+
+  // ── 初始載入（用 get 讀伺服器資料）──
+  try {
+    const snap = await get(dbRef);
+    transactions = [];
+    if (snap.exists()) {
+      snap.forEach(c => {
+        const val = c.val();
+        if (val && typeof val === 'object') {
+          transactions.push({ id: c.key, ...val });
+        }
+      });
+    }
+
+    transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
+    document.getElementById('list-title').textContent = '今日明細';
+    setSyncStatus('online');
+    renderSummary();
+    renderList();
+    updateBudgetBar();
+  } catch(e) {
+    console.error('loadDate error:', e);
+    showToast('⚠ 載入失敗，請重新整理', 'error');
+    document.getElementById('list-title').textContent = '今日明細';
+    renderSummary();
+    renderList();
+  }
+
+  // ── 即時監聽（跳過第一次立即觸發，避免蓋掉 get() 已載入的資料）──
+  let isFirstFire = true;
+  unsubscribe = onValue(dbRef, snap => {
+    if (isFirstFire) { isFirstFire = false; return; }
+    transactions = [];
+    if (snap.exists()) {
+      snap.forEach(c => {
+        const val = c.val();
+        if (val && typeof val === 'object') {
+          transactions.push({ id: c.key, ...val });
+        }
+      });
+    }
+    transactions.sort((a,b) => (a.ts||0) - (b.ts||0));
+    setSyncStatus('online');
+    renderSummary();
+    renderList();
+    updateBudgetBar();
+  }, (error) => {
+    console.error('onValue error:', error);
+    setSyncStatus('');
+  });
+}
+
+// ── Add transaction ──
+function addTransaction() {
+  const desc = document.getElementById('desc-input').value.trim();
+  const amount = parseFloat(document.getElementById('amount-input').value);
+  if (!amount || amount <= 0) {
+    const el = document.getElementById('amount-input');
+    el.style.borderColor = 'var(--expense)';
+    setTimeout(() => el.style.borderColor = '', 1000);
+    return;
+  }
+  const cat = selectedCat || (currentType==='income' ? '其他收入' : '其他支出');
+  const now = new Date();
+  const timeVal = document.getElementById('time-input').value;
+  const time = timeVal || (now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0'));
+  const btn = document.getElementById('add-btn');
+  btn.disabled = true;
+
+  const dateKey = formatDate(currentDate).replace(/-/g,'_');
+  const txData = {
+    type: currentType, desc: desc || cat, amount, cat, time,
+    ts: Date.now(),
+    who: currentUser ? currentUser.displayName || currentUser.email : '匿名'
+  };
+
+  // push() 寫入 Firebase，onValue 監聽器會自動觸發並重新渲染，不需樂觀更新
+  const pushRef = push(ref(db, `transactions/${dateKey}`), txData);
+
+  // 清除輸入欄位（onValue 觸發後會自動更新列表）
+  document.getElementById('desc-input').value = '';
+  document.getElementById('amount-input').value = '';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  selectedCat = '';
+  prefillTimeInput();
+  showToast('💕 已新增！', 'success');
+  btn.disabled = false;
+
+  setSyncStatus('saving');
+  pushRef.then(() => {
+    setSyncStatus('online');
+  }).catch(e => {
+    console.error('Firebase 同步失敗:', e);
+    setSyncStatus('');
+    showToast('⚠ 同步失敗：' + (e.message || '請檢查網路'), 'error');
+  });
+}
+window.addTransaction = addTransaction;
+
+// ── Delete Confirm Modal ──
+let _deleteConfirmCallback = null;
+function showDeleteConfirm(msg, onConfirm) {
+  document.getElementById('delete-confirm-msg').textContent = msg;
+  _deleteConfirmCallback = onConfirm;
+  document.getElementById('delete-confirm-modal').classList.add('open');
+  document.getElementById('delete-confirm-btn').onclick = () => {
+    const cb = _deleteConfirmCallback;
+    closeDeleteConfirm();
+    if (cb) cb();
+  };
+}
+window.closeDeleteConfirm = () => {
+  document.getElementById('delete-confirm-modal').classList.remove('open');
+  _deleteConfirmCallback = null;
+};
+
+window.deleteTx = (id) => {
+  const tx = transactions.find(t => t.id === id);
+  const label = tx ? `${tx.desc || tx.cat}　${tx.type === 'income' ? '+' : '-'}${fmt(tx.amount)}` : '這筆記錄';
+  showDeleteConfirm(`確定要刪除「${label}」嗎？`, async () => {
+    const dateKey = formatDate(currentDate).replace(/-/g,'_');
+    try {
+      await remove(ref(db, `transactions/${dateKey}/${id}`));
+      transactions = transactions.filter(t => t.id !== id);
+      renderSummary();
+      renderList();
+      showToast('已刪除', '');
+    } catch(e) {
+      showToast('⚠ 刪除失敗：' + (e.code || '請檢查網路'), 'error');
+    }
+  });
+};
+
+// ── Edit Modal ──
+window.openEditModal = (id) => {
+  const tx = transactions.find(t => t.id === id);
+  if (!tx) return;
+  editingTx = { id, dateKey: formatDate(currentDate).replace(/-/g,'_') };
+  editType = tx.type;
+  document.getElementById('edit-desc').value = tx.desc || '';
+  document.getElementById('edit-amount').value = tx.amount || '';
+  document.getElementById('edit-cat').value = tx.cat || '';
+  document.getElementById('edit-time').value = tx.time || '';
+  // set date from dateKey e.g. 2025_5_6 → 2025-05-06
+  const parts = editingTx.dateKey.split('_');
+  const dateStr = `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
+  document.getElementById('edit-date').value = dateStr;
+  // update type buttons
+  setEditType(editType);
+  document.getElementById('edit-modal').classList.add('open');
+};
+window.closeEditModal = () => {
+  document.getElementById('edit-modal').classList.remove('open');
+  editingTx = null;
+};
+window.setEditType = (t) => {
+  editType = t;
+  document.getElementById('edit-btn-income').className = 'edit-type-btn' + (t==='income' ? ' active-income' : '');
+  document.getElementById('edit-btn-expense').className = 'edit-type-btn' + (t==='expense' ? ' active-expense' : '');
+};
+window.saveEditTx = async () => {
+  if (!editingTx) return;
+  const desc = document.getElementById('edit-desc').value.trim();
+  const amount = parseFloat(document.getElementById('edit-amount').value);
+  const cat = document.getElementById('edit-cat').value;
+  const time = document.getElementById('edit-time').value;
+  const newDateRaw = document.getElementById('edit-date').value; // YYYY-MM-DD
+  if (!amount || amount <= 0) { showToast('請輸入有效金額', 'error'); return; }
+  const newDateKey = newDateRaw.replace(/-/g,'_');
+  const oldDateKey = editingTx.dateKey;
+  const updatedData = { type: editType, desc: desc || cat, amount, cat, time, ts: editingTx.ts || Date.now(), who: editingTx.who || (currentUser ? currentUser.displayName || currentUser.email : '匿名') };
+  try {
+    // Get the original tx to preserve 'who' and 'ts'
+    const origSnap = await get(ref(db, `transactions/${oldDateKey}/${editingTx.id}`));
+    if (origSnap.exists()) {
+      const orig = origSnap.val();
+      updatedData.ts = orig.ts || Date.now();
+      updatedData.who = orig.who || updatedData.who;
+    }
+    if (newDateKey !== oldDateKey) {
+      // Move to new date: delete from old, push to new
+      await remove(ref(db, `transactions/${oldDateKey}/${editingTx.id}`));
+      await push(ref(db, `transactions/${newDateKey}`), updatedData);
+      showToast('✓ 已移動到 ' + newDateRaw.replace(/-/g,'/'), 'success');
+    } else {
+      await update(ref(db, `transactions/${oldDateKey}/${editingTx.id}`), updatedData);
+      showToast('✓ 已更新！', 'success');
+    }
+  } catch(e) {
+    showToast('⚠ 儲存失敗', 'error');
+  }
+  closeEditModal();
+};
+
+// Open edit from monthly view (needs to fetch tx from Firebase)
+window.openEditModalFromMonthly = async (id, dateKey) => {
+  try {
+    const snap = await get(ref(db, `transactions/${dateKey}/${id}`));
+    if (!snap.exists()) { showToast('找不到此記錄', 'error'); return; }
+    const tx = snap.val();
+    editingTx = { id, dateKey };
+    editType = tx.type;
+    document.getElementById('edit-desc').value = tx.desc || '';
+    document.getElementById('edit-amount').value = tx.amount || '';
+    document.getElementById('edit-cat').value = tx.cat || '';
+    document.getElementById('edit-time').value = tx.time || '';
+    const parts = dateKey.split('_');
+    const dateStr = `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
+    document.getElementById('edit-date').value = dateStr;
+    setEditType(editType);
+    document.getElementById('edit-modal').classList.add('open');
+  } catch(e) { showToast('載入失敗', 'error'); }
+};
+
+// ── Monthly ──
+window.toggleMonthSort = function() {
+  monthSortAsc = !monthSortAsc;
+  const btn = document.getElementById('sort-toggle-btn');
+  if (btn) btn.textContent = monthSortAsc ? '⬆️ 舊→新' : '⬇️ 新→舊';
+  renderMonthly();
+}
+async function renderMonthly() {
+  const y = currentMonthDate.getFullYear();
+  const m = currentMonthDate.getMonth(); // 0-indexed
+  document.getElementById('current-month').textContent = formatMonth(currentMonthDate);
+  let monthIncome = 0, monthExpense = 0;
+  const dayMap = {};
+  const catMap = {};
+  const allTxs = [];
+  try {
+    const snap = await get(ref(db, 'transactions'));
+    if (snap.exists()) {
+      snap.forEach(daySnap => {
+        const parts = daySnap.key.split('_').map(Number);
+        if (parts[0] === y && parts[1] === m+1) {
+          daySnap.forEach(txSnap => {
+            const t = { id: txSnap.key, dateKey: daySnap.key, ...txSnap.val() };
+            allTxs.push(t);
+            if (t.type==='income') monthIncome += t.amount;
+            else { monthExpense += t.amount; catMap[t.cat] = (catMap[t.cat]||0) + t.amount; }
+            const dk = daySnap.key;
+            if (!dayMap[dk]) dayMap[dk] = { income:0, expense:0 };
+            dayMap[dk][t.type] += t.amount;
+          });
+        }
+      });
+    }
+  } catch(e) {}
+  const bal = monthIncome - monthExpense;
+  document.getElementById('m-income').textContent = fmt(monthIncome);
+  document.getElementById('m-expense').textContent = fmt(monthExpense);
+  const mb = document.getElementById('m-balance');
+  mb.textContent = (bal<0?'-':'') + fmt(bal);
+  mb.style.color = bal<0 ? 'var(--expense)' : bal>0 ? 'var(--income)' : '#fff';
+
+  // Cat breakdown
+  const cbList = document.getElementById('cat-breakdown-list');
+  const sorted = Object.entries(catMap).sort((a,b) => b[1]-a[1]);
+  cbList.innerHTML = sorted.length ? sorted.map(([cat, amt]) => {
+    const pct = monthExpense ? Math.round(amt/monthExpense*100) : 0;
+    return `<div class="cat-row">
+      <div class="cat-row-name">${cat}</div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
+      <div class="cat-row-amt">${fmt(amt)}</div>
+    </div>`;
+  }).join('') : '<div style="color:var(--muted);font-size:.85rem">本月無支出記錄</div>';
+
+  // Month tx list
+  allTxs.sort((a,b) => {
+    // Sort by date then time
+    const dir = monthSortAsc ? 1 : -1;
+    if (a.dateKey !== b.dateKey) return a.dateKey < b.dateKey ? -dir : dir;
+    return ((a.ts||0) - (b.ts||0)) * dir;
+  });
+  const currentUserWho = currentUser ? (currentUser.displayName || currentUser.email) : null;
+  const mtl = document.getElementById('month-tx-list');
+  mtl.innerHTML = allTxs.length ? allTxs.map(t => {
+    const cls = t.type==='income' ? 'income' : 'expense';
+    const sign = t.type==='income' ? '+' : '-';
+    const wc = whoClass(t.who);
+    const wl = t.who && t.who !== '匿名' ? whoLabel(t.who) : '';
+    const dateDisp = t.dateKey ? t.dateKey.replace(/_/g,'/') : '';
+    const safeId = t.id.replace(/['"]/g,'');
+    const safeDateKey = (t.dateKey||'').replace(/['"]/g,'');
+    const isOwner = !t.who || t.who === '匿名' || (currentUserWho && t.who === currentUserWho);
+    return `<div class="tx-item">
+      <div class="tx-dot ${cls}"></div>
+      <div class="tx-info">
+        <div class="tx-desc">${t.desc}</div>
+        <div class="tx-meta">
+          <span class="tx-tag">${t.cat}</span>
+          <span class="tx-time">${dateDisp} ${t.time}</span>
+          ${wl ? `<span class="tx-who ${wc}">${wl}</span>` : ''}
+        </div>
+      </div>
+      <div class="tx-amount ${cls}">${sign}${fmt(t.amount)}</div>
+      ${isOwner ? `<button class="tx-edit" onclick="openEditModalFromMonthly('${safeId}','${safeDateKey}')">✏️</button>` : '<button class="tx-edit" style="opacity:0;pointer-events:none;">✏️</button>'}
+    </div>`;
+  }).join('') : '<div class="empty-state">本月無記錄</div>';
+
+  // Set export defaults
+  const firstDay = new Date(y, m, 1);
+  const lastDay = new Date(y, m+1, 0);
+  document.getElementById('export-from').value = formatDate(firstDay);
+  document.getElementById('export-to').value = formatDate(lastDay);
+}
+
+// ── Export CSV ──
+window.exportCSV = async () => {
+  const from = document.getElementById('export-from').value;
+  const to = document.getElementById('export-to').value;
+  if (!from || !to) { showToast('請選擇日期區間', 'error'); return; }
+  const rows = [['日期','時間','類型','分類','說明','金額','記錄者']];
+  try {
+    const snap = await get(ref(db, 'transactions'));
+    if (snap.exists()) {
+      snap.forEach(daySnap => {
+        const dateStr = daySnap.key.replace(/_/g,'-');
+        if (dateStr >= from && dateStr <= to) {
+          daySnap.forEach(txSnap => {
+            const t = txSnap.val();
+            rows.push([dateStr, t.time, t.type==='income'?'收入':'支出', t.cat, t.desc, t.amount, t.who||'']);
+          });
+        }
+      });
+    }
+  } catch(e) { showToast('匯出失敗', 'error'); return; }
+  const csv = '\uFEFF' + rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `CMfund_${from}_${to}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('✓ CSV 已下載！', 'success');
+};
+
+// ── Date navigation ──
+document.getElementById('prev-day').onclick = () => {
+  currentDate.setDate(currentDate.getDate()-1);
+  document.getElementById('current-date').textContent = formatDateDisplay(currentDate);
+  loadDate();
+};
+document.getElementById('next-day').onclick = () => {
+  currentDate.setDate(currentDate.getDate()+1);
+  document.getElementById('current-date').textContent = formatDateDisplay(currentDate);
+  loadDate();
+};
+document.getElementById('prev-month').onclick = () => {
+  currentMonthDate.setMonth(currentMonthDate.getMonth()-1);
+  renderMonthly();
+};
+document.getElementById('next-month').onclick = () => {
+  currentMonthDate.setMonth(currentMonthDate.getMonth()+1);
+  renderMonthly();
+};
+
+document.getElementById('amount-input').addEventListener('keydown', e => { if(e.key==='Enter') addTransaction(); });
+document.getElementById('desc-input').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('amount-input').focus(); });
+
+function init() {
+  // Always start from today
+  currentDate = new Date();
+  currentMonthDate = new Date();
+  document.getElementById('current-date').textContent = formatDateDisplay(currentDate);
+  document.getElementById('current-month').textContent = formatMonth(currentMonthDate);
+  // Prefill time input with current time
+  prefillTimeInput();
+  loadDate();
+  // 從 Firebase 載入預算（覆蓋 localStorage 快取，確保跨裝置同步）
+  get(ref(db, 'settings/monthBudget')).then(snap => {
+    if (snap.exists()) {
+      const v = parseInt(snap.val());
+      if (v > 0) {
+        monthBudget = v;
+        localStorage.setItem('cmfund_budget', v);
+        updateBudgetBar();
+      }
+    }
+  }).catch(e => console.error('預算載入失敗:', e));
+}
+
+function prefillTimeInput() {
+  const now = new Date();
+  const hh = now.getHours().toString().padStart(2,'0');
+  const mm = now.getMinutes().toString().padStart(2,'0');
+  document.getElementById('time-input').value = `${hh}:${mm}`;
+}
+
+// ══════════════════════════════════════════
+// PAGE NAVIGATION
+// ══════════════════════════════════════════
+const PAGE_ORDER_MAIN = ['cmfund', 'love-calendar', 'love-score'];
+let _currentPageKey = 'cmfund';
+
+window.switchPage = function(page, direction) {
+  const animClass = direction === 'left' ? 'page-slide-enter-left' : direction === 'right' ? 'page-slide-enter-right' : '';
+
+  // Hide all
+  const appEl = document.getElementById('app');
+  appEl.style.display = 'none';
+  appEl.classList.remove('page-slide-enter-left','page-slide-enter-right');
+  document.querySelectorAll('.love-page').forEach(p => {
+    p.classList.remove('active','page-slide-enter-left','page-slide-enter-right');
+  });
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const fab = document.querySelector('.love-fab');
+  if (fab) fab.classList.remove('show');
+
+  _currentPageKey = page;
+
+  if (page === 'cmfund') {
+    appEl.style.display = 'block';
+    if (animClass) { void appEl.offsetWidth; appEl.classList.add(animClass); }
+    document.getElementById('nav-cmfund').classList.add('active');
+  } else if (page === 'love-calendar') {
+    const pg = document.getElementById('page-love-calendar');
+    pg.classList.add('active');
+    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
+    document.getElementById('nav-love-cal').classList.add('active');
+    if (fab) fab.classList.add('show');
+    renderCalendar();
+  } else if (page === 'love-score') {
+    const pg = document.getElementById('page-love-score');
+    pg.classList.add('active');
+    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
+    document.getElementById('nav-love-score').classList.add('active');
+    renderLoveScore();
+  }
+};
+
+// ── 左右滑動切換頁面（含轉場方向）──
+(function() {
+  let touchStartX = 0, touchStartY = 0;
+
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
+    const idx = PAGE_ORDER_MAIN.indexOf(_currentPageKey);
+    if (dx < 0 && idx < PAGE_ORDER_MAIN.length - 1) {
+      window.switchPage(PAGE_ORDER_MAIN[idx + 1], 'left');
+    } else if (dx > 0 && idx > 0) {
+      window.switchPage(PAGE_ORDER_MAIN[idx - 1], 'right');
+    }
+  }, { passive: true });
+})();
+
+// ══════════════════════════════════════════
+// LOVE EVENTS — Firebase 共享（兩人共用）
+// ══════════════════════════════════════════
+const LOVE_SCORES  = { '吃飯': 2, '旅遊': 5, '愛愛': 2, '吵架': -5, '其他': 0, '大運動': 3, '小運動': 1, '鬥嘴': -2 };
+const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝', '大運動': '🏋️', '小運動': '🚶', '鬥嘴': '🗣️' };
+const CAT_COLORS   = { '吃飯': '#d4a017', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#374151', '其他': '#9ca3af', '大運動': '#0d9488', '小運動': '#38bdf8', '鬥嘴': '#78350f' };
+const LOVE_KEY     = 'cmfund_love_events'; // 舊 localStorage key（僅用於搬移）
+
+// Helpers
+function evtCat(e)   { return e.category || e.cat || '其他'; }
+function evtScore(e) { return (e.score !== undefined && e.score !== null) ? Number(e.score) : (LOVE_SCORES[evtCat(e)] ?? 0); }
+function evtTs(e)    { return e.timestamp || e.ts || 0; }
+function currentWho() { return currentUser ? (currentUser.displayName || currentUser.email || '匿名') : '匿名'; }
+
+// 本機快取（Firebase listener 即時更新）
+let loveEvents = [];
+
+function initLoveEvents() {
+  // 舊 localStorage 資料搬移到 Firebase（一次性）
+  try {
+    const old = JSON.parse(localStorage.getItem(LOVE_KEY) || '[]');
+    if (old.length > 0) {
+      old.forEach(e => {
+        push(ref(db, 'love_events'), {
+          date: e.date || '',
+          category: evtCat(e),
+          score: evtScore(e),
+          note: e.note || '',
+          timestamp: evtTs(e) || Date.now(),
+          who: currentWho()
+        });
+      });
+      localStorage.removeItem(LOVE_KEY);
+    }
+  } catch(ex) {}
+
+  // 即時監聽 Firebase
+  onValue(ref(db, 'love_events'), snap => {
+    loveEvents = [];
+    if (snap.exists()) {
+      snap.forEach(child => { loveEvents.push({ id: child.key, ...child.val() }); });
+    }
+    loveEvents.sort((a, b) => {
+      if (b.date !== a.date) return b.date > a.date ? 1 : -1;
+      return evtTs(b) - evtTs(a);
+    });
+    // 主動刷新目前顯示頁面
+    const calPg   = document.getElementById('page-love-calendar');
+    const scorePg = document.getElementById('page-love-score');
+    if (calPg   && calPg.classList.contains('active'))   renderCalendar();
+    if (scorePg && scorePg.classList.contains('active')) renderLoveScore();
+  });
+}
+
+// ── Calendar / Score 狀態 ──
+let calendarDate  = new Date();
+let selectedCalDay = null;
+let aeModalCat    = '';
+let scoreMonthDate = new Date();
+
+// ── Render Calendar ──
+function renderCalendar() {
+  const y = calendarDate.getFullYear();
+  const m = calendarDate.getMonth();
+  document.getElementById('cal-month-lbl').textContent = y + '年' + (m + 1) + '月';
+
+  const evtByDate = {};
+  loveEvents.forEach(e => {
+    if (!e.date) return;
+    const p = e.date.split('-');
+    if (parseInt(p[0]) === y && parseInt(p[1]) === m + 1) {
+      if (!evtByDate[e.date]) evtByDate[e.date] = [];
+      evtByDate[e.date].push(e);
+    }
+  });
+
+  const firstDay = new Date(y, m, 1);
+  const lastDate = new Date(y, m + 1, 0).getDate();
+  let startOffset = firstDay.getDay();
+  startOffset = startOffset === 0 ? 6 : startOffset - 1;
+
+  const now = new Date();
+  const todayStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+
+  let html = '';
+  for (let i = 0; i < startOffset; i++) html += '<div class="cal-cell empty"></div>';
+  for (let d = 1; d <= lastDate; d++) {
+    const dateStr = y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const dayEvts = evtByDate[dateStr] || [];
+    const isToday = dateStr === todayStr;
+    const isSel   = dateStr === selectedCalDay;
+    // 最多顯示 3 個 chip
+    let chips = dayEvts.slice(0, 3).map(e => {
+      const cat = evtCat(e);
+      const col = CAT_COLORS[cat] || '#9ca3af';
+      const emoji = LOVE_EMOJIS[cat] || '📝';
+      return '<div class="cal-ev-chip" style="background:' + col + '">' + emoji + ' ' + cat + '</div>';
+    }).join('');
+    if (dayEvts.length > 3) chips += '<div class="cal-ev-chip" style="background:#9ca3af">+' + (dayEvts.length - 3) + ' 筆</div>';
+    html += '<div class="cal-cell' + (isToday ? ' today' : '') + (isSel ? ' selected' : '') +
+      '" onclick="selectCalDay(\'' + dateStr + '\')">' +
+      '<div class="cal-dn">' + d + '</div>' + chips + '</div>';
+  }
+  document.getElementById('cal-grid').innerHTML = html;
+
+  if (selectedCalDay) renderDayPanel();
+  else { const p = document.getElementById('day-panel'); if (p) p.classList.remove('open'); }
+}
+
+window.calPrevMonth = function() {
+  calendarDate.setMonth(calendarDate.getMonth() - 1);
+  renderCalendar();
+};
+window.calNextMonth = function() {
+  calendarDate.setMonth(calendarDate.getMonth() + 1);
+  renderCalendar();
+};
+
+window.selectCalDay = function(dateStr) {
+  if (selectedCalDay === dateStr) {
+    selectedCalDay = null;
+    document.getElementById('day-panel').classList.remove('open');
+    renderCalendar();
+  } else {
+    selectedCalDay = dateStr;
+    renderCalendar();
+    renderDayPanel();
+    // 自動捲動到日程面板
+    setTimeout(() => {
+      const p = document.getElementById('day-panel');
+      if (p) p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+};
+
+function renderDayPanel() {
+  if (!selectedCalDay) return;
+  const panel = document.getElementById('day-panel');
+  if (!panel) return;
+  const evts = loveEvents.filter(e => e.date === selectedCalDay);
+  const parts = selectedCalDay.split('-');
+  document.getElementById('day-panel-title').textContent =
+    parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日的回憶';
+  const body = panel.querySelector('.day-panel-body');
+  if (!evts.length) {
+    body.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:10px 0">這天還沒有記錄，點右下角 ＋ 新增吧 ✨</div>';
+  } else {
+    body.innerHTML = evts.map(e => {
+      const cat   = evtCat(e);
+      const score = evtScore(e);
+      const color = CAT_COLORS[cat] || '#9ca3af';
+      const emoji = LOVE_EMOJIS[cat] || '📝';
+      const sc    = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
+      const stxt  = score > 0 ? '+' + score : score === 0 ? '±0' : '' + score;
+      const safeId = e.id.replace(/'/g, '');
+      const isOwn = !e.who || e.who === currentWho();
+      return '<div class="day-ev-row">' +
+        '<div class="day-ev-dot" style="background:' + color + '"></div>' +
+        '<span style="font-size:1.1rem">' + emoji + '</span>' +
+        '<span class="day-ev-cat">' + cat + '</span>' +
+        (e.note ? '<span class="day-ev-note">' + e.note + '</span>' : '<span class="day-ev-note"></span>') +
+        '<span class="day-ev-score ' + sc + '">' + stxt + ' 分</span>' +
+        (isOwn ? `<button class="day-ev-edit" onclick="editLoveEvent('${safeId}')">編輯</button>` : '') +
+        (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')" title="刪除">🗑️</button>` : '') +
+        '</div>';
+    }).join('');
+  }
+  panel.classList.add('open');
+}
+
+// ── Add Event Modal ──
+window.openAddEventModal = function() {
+  aeModalCat = '';
+  document.querySelectorAll('.ae-cat-btn').forEach(b => b.classList.remove('sel'));
+  const now = new Date();
+  const todayStr = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0');
+  document.getElementById('ae-date').value = selectedCalDay || todayStr;
+  document.getElementById('ae-score').value = '';
+  document.getElementById('ae-note').value = '';
+  document.getElementById('ae-score-hint').textContent = '選擇分類後自動填入預設分數';
+  document.getElementById('add-event-modal').classList.add('open');
+};
+
+// closeAddEventModal 已移至 editLoveEvent 區塊
+
+window.selectAECat = function(btn) {
+  document.querySelectorAll('.ae-cat-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  aeModalCat = btn.dataset.cat;
+  const def = LOVE_SCORES[aeModalCat] ?? 0;
+  document.getElementById('ae-score').value = def;
+  const sign = def > 0 ? '+' : '';
+  document.getElementById('ae-score-hint').textContent = '預設 ' + sign + def + ' 分，可手動修改';
+};
+
+// confirmAddEvent 已移至 editLoveEvent 區塊
+
+window.deleteLoveEvent = function(id) {
+  const evt = loveEvents.find(e => e.id === id);
+  if (evt && evt.who && evt.who !== currentWho()) {
+    showToast('⚠ 不能刪除對方的記錄！', 'error'); return;
+  }
+  const cat = evt ? (evtCat(evt)) : '記錄';
+  const note = evt && evt.note ? `「${evt.note}」` : '';
+  showDeleteConfirm(`確定要刪除 ${cat}${note ? ' ' + note : ''} 嗎？`, async () => {
+    try {
+      await remove(ref(db, 'love_events/' + id));
+      showToast('已刪除', '');
+    } catch(err) {
+      showToast('⚠ 刪除失敗', 'error');
+    }
+  });
+};
+
+// ── Edit Event ──
+let editingEventId = null;
+
+window.editLoveEvent = function(id) {
+  const evt = loveEvents.find(e => e.id === id);
+  if (!evt) return;
+  editingEventId = id;
+  aeModalCat = evtCat(evt);
+  document.querySelectorAll('.ae-cat-btn').forEach(b => {
+    b.classList.toggle('sel', b.dataset.cat === aeModalCat);
+  });
+  document.getElementById('ae-date').value = evt.date || '';
+  document.getElementById('ae-score').value = evtScore(evt);
+  document.getElementById('ae-note').value = evt.note || '';
+  document.getElementById('ae-score-hint').textContent = '可修改分數';
+  const titleEl = document.getElementById('ae-modal-title');
+  if (titleEl) titleEl.textContent = '✏️ 編輯記錄';
+  const confirmBtn = document.querySelector('#add-event-modal .modal-confirm');
+  if (confirmBtn) confirmBtn.textContent = '確認修改';
+  document.getElementById('add-event-modal').classList.add('open');
+};
+
+window.closeAddEventModal = function() {
+  editingEventId = null;
+  const titleEl = document.getElementById('ae-modal-title');
+  if (titleEl) titleEl.textContent = '＋ 新增回憶';
+  const confirmBtn = document.querySelector('#add-event-modal .modal-confirm');
+  if (confirmBtn) confirmBtn.textContent = '確認新增';
+  document.getElementById('add-event-modal').classList.remove('open');
+};
+
+window.confirmAddEvent = async function() {
+  if (!aeModalCat) { showToast('請選擇分類！', 'error'); return; }
+  const date = document.getElementById('ae-date').value;
+  if (!date) { showToast('請選擇日期！', 'error'); return; }
+  const scoreRaw = document.getElementById('ae-score').value;
+  const score = scoreRaw !== '' ? parseInt(scoreRaw) : (LOVE_SCORES[aeModalCat] ?? 0);
+  const note = document.getElementById('ae-note').value.trim();
+  try {
+    if (editingEventId) {
+      await update(ref(db, 'love_events/' + editingEventId), { date, category: aeModalCat, score, note });
+      showToast('💕 已更新！', 'success');
+    } else {
+      await push(ref(db, 'love_events'), { date, category: aeModalCat, score, note, timestamp: Date.now(), who: currentWho() });
+      showToast('💕 已記錄！', 'success');
+    }
+    selectedCalDay = date;
+    closeAddEventModal();
+  } catch(err) {
+    showToast('⚠ 操作失敗，請檢查網路', 'error');
+  }
+};
+
+// ══════════════════════════════════════════
+// LOVE SCORE
+// ══════════════════════════════════════════
+function getDaysTogether() {
+  const start = new Date(2026, 2, 15); // 2026-03-15
+  const now   = new Date();
+  let months  = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  let days    = now.getDate() - start.getDate();
+  if (days < 0) {
+    months--;
+    days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+  }
+  const total = Math.max(0, Math.floor((now - start) / 86400000));
+  return { months: Math.max(0, months), days: Math.max(0, days), total };
+}
+
+function renderLoveScore() {
+  // ── 在一起天數 ──
+  const dt = getDaysTogether();
+  const dEl = document.getElementById('love-days-number');
+  const dLb = document.getElementById('love-days-label');
+  // 翻頁桌曆：直接填入數字
+  const mEl = document.getElementById('flip-months');
+  const dDEl = document.getElementById('flip-days');
+  if (mEl) mEl.textContent = dt.months;
+  if (dDEl) dDEl.textContent = dt.days;
+
+  // ── 月份標籤 ──
+  const sy = scoreMonthDate.getFullYear();
+  const sm = scoreMonthDate.getMonth();
+  const lblEl = document.getElementById('score-month-lbl');
+  if (lblEl) lblEl.textContent = sy + '年' + (sm + 1) + '月';
+
+  // ── 本月事件 ──
+  const monthEvts = loveEvents.filter(e => {
+    if (!e.date) return false;
+    const p = e.date.split('-');
+    return parseInt(p[0]) === sy && parseInt(p[1]) === sm + 1;
+  });
+
+  let total = 0;
+  monthEvts.forEach(e => { total += evtScore(e); });
+
+  const scoreLblEl = document.getElementById('love-score-lbl');
+  if (scoreLblEl) scoreLblEl.textContent = (sm + 1) + '月份累積愛情分數';
+  const numEl = document.getElementById('love-score-number');
+  const hrtEl = document.getElementById('love-score-hearts');
+  if (numEl) numEl.textContent = total;
+  if (hrtEl) {
+    if      (total >= 50)  hrtEl.textContent = '💕💕💕💕💕';
+    else if (total >= 20)  hrtEl.textContent = '💕💕💕💕';
+    else if (total >= 10)  hrtEl.textContent = '💕💕💕';
+    else if (total >=  1)  hrtEl.textContent = '💕💕';
+    else if (total >=  0)  hrtEl.textContent = '💕';
+    else if (total >= -10) hrtEl.textContent = '💔';
+    else                   hrtEl.textContent = '💔💔';
+  }
+
+  // ── 愛情指標：本月分數 / 55 × 100% ──
+  const PERFECT = 55;
+  const rawPct = Math.round(Math.max(0, total) / PERFECT * 100);
+  const clampPct = Math.min(rawPct, 100);
+  const barEl = document.getElementById('love-index-bar');
+  const pctEl = document.getElementById('love-index-pct');
+  if (barEl) barEl.style.width = clampPct + '%';
+  if (pctEl) pctEl.textContent = clampPct + '%';
+
+  // ── 戀愛百分比（本月正分分類佔比）──
+  const pctDiv = document.getElementById('love-pct-list');
+  if (pctDiv) {
+    const catMap = {};
+    monthEvts.filter(e => evtScore(e) > 0).forEach(e => {
+      const cat = evtCat(e);
+      catMap[cat] = (catMap[cat] || 0) + evtScore(e);
+    });
+    const totalPos = Object.values(catMap).reduce((s, v) => s + v, 0);
+    const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+    if (!sorted.length) {
+      pctDiv.innerHTML = '<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>';
+    } else {
+      // 圓餅圖 SVG
+      const size = 140, cx = 70, cy = 70, r = 58, inner = 32;
+      let startAngle = -Math.PI / 2;
+      let paths = '';
+      sorted.forEach(([cat, pts]) => {
+        const color = CAT_COLORS[cat] || '#9ca3af';
+        const angle = (pts / totalPos) * 2 * Math.PI;
+        const endAngle = startAngle + angle;
+        const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+        const x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
+        const xi1 = cx + inner * Math.cos(startAngle), yi1 = cy + inner * Math.sin(startAngle);
+        const xi2 = cx + inner * Math.cos(endAngle),   yi2 = cy + inner * Math.sin(endAngle);
+        const large = angle > Math.PI ? 1 : 0;
+        paths += '<path d="M' + xi1 + ',' + yi1 + ' L' + x1 + ',' + y1 +
+          ' A' + r + ',' + r + ' 0 ' + large + ',1 ' + x2 + ',' + y2 +
+          ' L' + xi2 + ',' + yi2 + ' A' + inner + ',' + inner + ' 0 ' + large + ',0 ' + xi1 + ',' + yi1 + ' Z"' +
+          ' fill="' + color + '" opacity="0.9" stroke="#fff" stroke-width="1.5"/>';
+        startAngle = endAngle;
+      });
+      const svgPie = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' + paths + '</svg>';
+      const legend = sorted.map(([cat, pts]) => {
+        const pct   = Math.round(pts / totalPos * 100);
+        const color = CAT_COLORS[cat] || '#9ca3af';
+        const emoji = LOVE_EMOJIS[cat] || '📝';
+        return '<div class="pie-legend-row">' +
+          '<div class="pie-legend-dot" style="background:' + color + '"></div>' +
+          '<span class="pie-legend-name">' + emoji + ' ' + cat + '</span>' +
+          '<span class="pie-legend-pct" style="color:' + color + '">' + pct + '%</span></div>';
+      }).join('');
+      pctDiv.innerHTML = '<div class="pie-section"><div style="flex-shrink:0">' + svgPie + '</div><div class="pie-legend">' + legend + '</div></div>';
+    }
+  }
+
+  // ── 本月明細 ──
+  const hist = document.getElementById('love-score-history');
+  if (!hist) return;
+  if (!monthEvts.length) {
+    hist.innerHTML = '<div class="empty-state">本月還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>';
+    return;
+  }
+  hist.innerHTML = monthEvts.map(e => {
+    const cat   = evtCat(e);
+    const score = evtScore(e);
+    const emoji = LOVE_EMOJIS[cat] || '📝';
+    const color = CAT_COLORS[cat] || '#9ca3af';
+    const sc    = score > 0 ? 'pos' : score < 0 ? 'neg' : 'zero';
+    const stxt  = score > 0 ? '+' + score + ' 分' : score === 0 ? '±0 分' : score + ' 分';
+    const wc    = whoClass(e.who || '');
+    const whoName = (e.who || '').split(' ')[0];
+    return `<div class="score-hist-item">
+      <div class="score-hist-emoji">${emoji}</div>
+      <div class="score-hist-info">
+        <div class="score-hist-cat" style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0"></span>
+          ${cat}
+          ${whoName ? '<span class="who-badge ' + wc + '">' + whoName + '</span>' : ''}
+        </div>
+        <div class="score-hist-date">${e.date}</div>
+        ${e.note ? `<div class="score-hist-note">${e.note}</div>` : ''}
+      </div>
+      <div class="score-hist-pts ${sc}">${stxt}</div>
+    </div>`;
+  }).join('');
+}
+
+window.scorePrevMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()-1); renderLoveScore(); };
+window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()+1); renderLoveScore(); };
+
+</script>
+
+<!-- ═══ PAGE: 滿滿回憶 ═══ -->
+<div class="love-page" id="page-love-calendar">
+  <div class="love-page-header">
+    <h1>🗓️ 滿滿回憶</h1>
+    <p>記錄你們的每個珍貴時刻</p>
+  </div>
+
+  <!-- 月份導覽 -->
+  <div class="cal-nav">
+    <button class="cal-nav-btn" onclick="calPrevMonth()">◀</button>
+    <span class="cal-month-lbl" id="cal-month-lbl"></span>
+    <button class="cal-nav-btn" onclick="calNextMonth()">▶</button>
+  </div>
+
+  <!-- 月曆 -->
+  <div class="cal-wrap">
+    <div class="cal-weekdays">
+      <div class="cal-wd">一</div>
+      <div class="cal-wd">二</div>
+      <div class="cal-wd">三</div>
+      <div class="cal-wd">四</div>
+      <div class="cal-wd">五</div>
+      <div class="cal-wd">六</div>
+      <div class="cal-wd">日</div>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <!-- 當天事件展開 -->
+  <div class="day-panel" id="day-panel">
+    <div class="day-panel-title" id="day-panel-title"></div>
+    <div class="day-panel-body"></div>
+  </div>
+
+  <!-- 顏色圖例 -->
+  <div class="cal-legend">
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#d4a017"></span>吃飯</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#3b82f6"></span>旅遊</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#ec4899"></span>愛愛</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#374151"></span>吵架</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#9ca3af"></span>其他</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#0d9488"></span>大運動</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#38bdf8"></span>小運動</span>
+    <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#78350f"></span>鬥嘴</span>
+  </div>
+</div>
+
+<!-- ═══ PAGE: 愛情分數 ═══ -->
+<div class="love-page" id="page-love-score">
+  <div class="love-page-header">
+    <h1>💯 愛情診斷</h1>
+    <p>查理 ❤️ 妮妮的愛情帳本</p>
+  </div>
+
+  <!-- 在一起幾個月幾天 -->
+  <div class="love-stats-card">
+    <div style="font-size:1.2rem;margin-bottom:10px">🌹 在一起的時光</div>
+    <div class="single-flip-card" id="love-days-number">
+      <span id="flip-months">…</span><span class="flip-text">個月又</span><span id="flip-days">…</span><span class="flip-text">天</span>
+    </div>
+  </div>
+
+  <!-- 月份切換 -->
+  <div class="score-month-nav">
+    <button onclick="scorePrevMonth()">◀</button>
+    <span class="score-month-lbl" id="score-month-lbl"></span>
+    <button onclick="scoreNextMonth()">▶</button>
+  </div>
+
+  <!-- 本月分數 -->
+  <div class="score-big-card">
+    <div class="score-lbl" id="love-score-lbl">本月累積愛情分數</div>
+    <div class="score-number" id="love-score-number">0</div>
+    <div class="score-unit">分</div>
+    <div class="score-hearts" id="love-score-hearts">💕</div>
+    <!-- 愛情指標 -->
+    <div class="love-index-wrap">
+      <div class="love-index-label">💘 愛情指標</div>
+      <div class="love-index-bar-track">
+        <div class="love-index-bar-fill" id="love-index-bar"></div>
+      </div>
+      <div class="love-index-pct" id="love-index-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- 戀愛百分比 -->
+  <div class="score-rules-card">
+    <h3>戀愛百分比</h3>
+    <div id="love-pct-list">
+      <div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>
+    </div>
+  </div>
+
+  <!-- 本月明細 -->
+  <div class="list-section">
+    <h2 style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">本月得分明細</h2>
+    <div class="score-hist-list" id="love-score-history">
+      <div class="empty-state">本月還沒有記錄<br>去「滿滿回憶」頁面新增吧 💕</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="love-fab" onclick="openAddEventModal()">＋</button>
+
+<!-- Add Event Modal -->
+<div class="modal-overlay" id="add-event-modal">
+  <div class="modal ae-modal">
+    <h3 id="ae-modal-title">✨ 新增回憶</h3>
+    <div class="ae-field">
+      <div class="ae-label">📆 日期</div>
+      <input type="date" id="ae-date" class="ae-input" />
+    </div>
+    <div class="ae-field">
+      <div class="ae-label">分類</div>
+      <div class="ae-cat-grid">
+        <button class="ae-cat-btn" data-cat="吃飯" onclick="selectAECat(this)">🍽️ 吃飯</button>
+        <button class="ae-cat-btn" data-cat="旅遊" onclick="selectAECat(this)">✈️ 旅遊</button>
+        <button class="ae-cat-btn" data-cat="愛愛" onclick="selectAECat(this)">💕 愛愛</button>
+        <button class="ae-cat-btn" data-cat="吵架" onclick="selectAECat(this)">💢 吵架</button>
+        <button class="ae-cat-btn" data-cat="其他" onclick="selectAECat(this)">📝 其他</button>
+        <button class="ae-cat-btn" data-cat="大運動" onclick="selectAECat(this)">🏋️ 大運動</button>
+        <button class="ae-cat-btn" data-cat="小運動" onclick="selectAECat(this)">🚶 小運動</button>
+        <button class="ae-cat-btn" data-cat="鬥嘴" onclick="selectAECat(this)">🗣️ 鬥嘴</button>
+      </div>
+    </div>
+    <div class="ae-field">
+      <div class="ae-label">分數</div>
+      <input type="number" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="numeric" />
+      <div class="ae-score-hint" id="ae-score-hint">選擇分類後自動填入預設分數</div>
+    </div>
+    <div class="ae-field">
+      <div class="ae-label">備註（選填）</div>
+      <input type="text" id="ae-note" class="ae-input" placeholder="例如：去了101吃牛排…" />
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeAddEventModal()">取消</button>
+      <button class="modal-confirm" onclick="confirmAddEvent()">確認新增</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="nav-item active" id="nav-cmfund" onclick="switchPage('cmfund')">
+    <span class="nav-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="6" width="20" height="14" rx="2"/>
+      <path d="M2 10h20"/>
+      <path d="M17 14h.01"/>
+      <path d="M6 6V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/>
+    </svg></span>
+  </button>
+  <button class="nav-item" id="nav-love-cal" onclick="switchPage('love-calendar')">
+    <span class="nav-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"/>
+      <line x1="3" y1="9" x2="21" y2="9"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <circle cx="8" cy="14" r=".8" fill="currentColor"/>
+      <circle cx="12" cy="14" r=".8" fill="currentColor"/>
+      <circle cx="16" cy="14" r=".8" fill="currentColor"/>
+      <circle cx="8" cy="18" r=".8" fill="currentColor"/>
+      <circle cx="12" cy="18" r=".8" fill="currentColor"/>
+    </svg></span>
+  </button>
+  <button class="nav-item" id="nav-love-score" onclick="switchPage('love-score')">
+    <span class="nav-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="10" width="5" height="11" rx="1"/>
+      <rect x="9.5" y="5" width="5" height="16" rx="1"/>
+      <rect x="17" y="13" width="5" height="8" rx="1"/>
+      <line x1="1" y1="22" x2="23" y2="22"/>
+      <line x1="10.5" y1="3" x2="13.5" y2="3"/>
+      <line x1="12" y1="3" x2="12" y2="5"/>
+    </svg></span>
+  </button>
+</nav>
+</body>
+</html>
