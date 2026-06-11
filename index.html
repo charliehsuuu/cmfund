@@ -277,6 +277,23 @@ body {
 .toast.error { border-color:#c06050; color:#803030; }
 .toast.warn { border-color:#d0a840; color:#705820; }
 
+
+/* Custom Keypad */
+.keypad-overlay { position:fixed; inset:0; background:rgba(160,100,70,.35); backdrop-filter:blur(4px); display:none; align-items:flex-end; justify-content:center; z-index:500; }
+.keypad-overlay.open { display:flex; }
+.keypad-sheet { background:#fffdf9; border:2px solid var(--border); border-radius:24px 24px 0 0; padding:16px; width:100%; max-width:420px; box-shadow:0 -4px 0 #c8b090, 0 -8px 24px var(--shadow); }
+.keypad-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding-bottom:10px; border-bottom:1.5px solid var(--border); }
+.keypad-display { font-family:'DM Mono',monospace; font-size:1.6rem; font-weight:700; color:var(--accent); letter-spacing:1px; }
+.keypad-label { font-size:.8rem; color:var(--muted); }
+.keypad-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.kp-btn { padding:16px 0; font-size:1.2rem; font-weight:700; border:2px solid var(--border); border-radius:14px; background:#fdf6ee; color:var(--text); cursor:pointer; transition:all .12s; box-shadow:0 3px 0 #c8b090; active:scale(.95); -webkit-tap-highlight-color:transparent; }
+.kp-btn:active { transform:translateY(2px); box-shadow:0 1px 0 #c8b090; }
+.kp-btn.wide { grid-column:span 2; }
+.kp-btn.accent { background:linear-gradient(135deg,#f08098,#d05878); border-color:#b04060; color:#fff; box-shadow:0 3px 0 #903050; }
+.kp-btn.accent:active { box-shadow:0 1px 0 #903050; }
+.kp-btn.warn { background:#fff8e8; color:#b06020; border-color:#d0a840; box-shadow:0 3px 0 #a08030; }
+.kp-btn.neg { background:#e8f4ff; color:#2060a0; border-color:#6090c0; box-shadow:0 3px 0 #4070a0; }
+
 /* Budget modal */
 .modal-overlay { position:fixed; inset:0; background:rgba(160,100,70,.2); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:400; padding:20px; }
 .modal-overlay.open { display:flex; }
@@ -767,7 +784,7 @@ body {
         <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
       </div>
       <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
-      <div class="input-row"><input type="number" id="amount-input" placeholder="金額 TWD" min="0" inputmode="decimal" /></div>
+      <div class="input-row"><input type="text" id="amount-input" placeholder="金額 TWD" inputmode="none" readonly onclick="openKeypad(this)" ontouchstart="event.preventDefault();openKeypad(this)" /></div>
       <div class="time-row">
         <label>⏰ 時間</label>
         <input type="time" id="time-input" />
@@ -849,7 +866,7 @@ body {
     </div>
     <div class="modal-field">
       <div class="modal-label">金額 TWD</div>
-      <input type="number" id="edit-amount" placeholder="金額" min="0" inputmode="decimal" />
+      <input type="text" id="edit-amount" placeholder="金額" inputmode="none" readonly onclick="openKeypad(this)" ontouchstart="event.preventDefault();openKeypad(this)" />
     </div>
     <div class="modal-field">
       <div class="modal-label">分類</div>
@@ -2100,6 +2117,54 @@ function renderLoveScore() {
 window.scorePrevMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()-1); renderLoveScore(); };
 window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()+1); renderLoveScore(); };
 
+// ── Custom Keypad ──
+let _kpTarget = null;
+let _kpVal = '';
+
+function openKeypad(el) {
+  _kpTarget = el;
+  _kpVal = el.value.replace(/[^0-9.\-]/g, '') || '';
+  document.getElementById('kp-display').textContent = _kpVal || '0';
+  const label = el.id === 'ae-score' ? '輸入分數' : '輸入金額';
+  document.getElementById('kp-label').textContent = label;
+  document.getElementById('keypad-overlay').classList.add('open');
+}
+function closeKeypad() {
+  document.getElementById('keypad-overlay').classList.remove('open');
+  _kpTarget = null;
+}
+function kpInput(ch) {
+  if (ch === '.' && _kpVal.includes('.')) return;
+  if (ch === '.' && _kpVal === '') _kpVal = '0';
+  if (_kpVal === '0' && ch !== '.') _kpVal = ch;
+  else _kpVal += ch;
+  document.getElementById('kp-display').textContent = _kpVal;
+}
+function kpToggleNeg() {
+  if (_kpVal.startsWith('-')) _kpVal = _kpVal.slice(1);
+  else if (_kpVal && _kpVal !== '0') _kpVal = '-' + _kpVal;
+  document.getElementById('kp-display').textContent = _kpVal || '0';
+}
+function kpDelete() {
+  _kpVal = _kpVal.slice(0, -1);
+  document.getElementById('kp-display').textContent = _kpVal || '0';
+}
+function kpConfirm() {
+  if (_kpTarget) {
+    _kpTarget.value = _kpVal || '0';
+    _kpTarget.dispatchEvent(new Event('input', { bubbles: true }));
+    _kpTarget.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  closeKeypad();
+}
+
+window.openKeypad   = openKeypad;
+window.closeKeypad  = closeKeypad;
+window.kpInput      = kpInput;
+window.kpToggleNeg  = kpToggleNeg;
+window.kpDelete     = kpDelete;
+window.kpConfirm    = kpConfirm;
+
 </script>
 
 <!-- ═══ PAGE: 滿滿回憶 ═══ -->
@@ -2230,7 +2295,7 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
     </div>
     <div class="ae-field">
       <div class="ae-label">分數</div>
-      <input type="number" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="numeric" />
+      <input type="text" id="ae-score" class="ae-input" placeholder="選分類後自動填入" inputmode="none" readonly onclick="openKeypad(this)" ontouchstart="event.preventDefault();openKeypad(this)" />
       <div class="ae-score-hint" id="ae-score-hint">選擇分類後自動填入預設分數</div>
     </div>
     <div class="ae-field">
@@ -2278,5 +2343,36 @@ window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getM
     </svg></span>
   </button>
 </nav>
+
+<!-- ═══ Custom Keypad Overlay ═══ -->
+<div class="keypad-overlay" id="keypad-overlay">
+  <div class="keypad-sheet">
+    <div class="keypad-header">
+      <span class="keypad-label" id="kp-label">輸入金額</span>
+      <span class="keypad-display" id="kp-display">0</span>
+    </div>
+    <div class="keypad-grid">
+      <button class="kp-btn" onclick="kpInput('7')">7</button>
+      <button class="kp-btn" onclick="kpInput('8')">8</button>
+      <button class="kp-btn" onclick="kpInput('9')">9</button>
+      <button class="kp-btn warn" onclick="kpDelete()">⌫</button>
+
+      <button class="kp-btn" onclick="kpInput('4')">4</button>
+      <button class="kp-btn" onclick="kpInput('5')">5</button>
+      <button class="kp-btn" onclick="kpInput('6')">6</button>
+      <button class="kp-btn neg" onclick="kpToggleNeg()">+/−</button>
+
+      <button class="kp-btn" onclick="kpInput('1')">1</button>
+      <button class="kp-btn" onclick="kpInput('2')">2</button>
+      <button class="kp-btn" onclick="kpInput('3')">3</button>
+      <button class="kp-btn warn" onclick="closeKeypad()">✕</button>
+
+      <button class="kp-btn wide" onclick="kpInput('0')">0</button>
+      <button class="kp-btn" onclick="kpInput('.')">.</button>
+      <button class="kp-btn accent" onclick="kpConfirm()">確定 ✓</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
