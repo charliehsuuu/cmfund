@@ -719,8 +719,8 @@ body {
             <stop offset="0%"   stop-color="#e86040"/>
             <stop offset="100%" stop-color="#b82818"/>
           </radialGradient>
-          <filter id="fAir" x="-70%" y="-70%" width="240%" height="240%">
-            <feGaussianBlur stdDeviation="11"/>
+          <filter id="fAir" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="16"/>
           </filter>
           <filter id="fPink" x="-60%" y="-60%" width="220%" height="220%">
             <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f472b6" flood-opacity="0.65"/>
@@ -733,18 +733,22 @@ body {
             <stop offset="100%" stop-color="#ffb0cc" stop-opacity="0"/>
           </radialGradient>
           <!-- Sky gradient -->
-          <linearGradient id="gSky" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#1e9bd4"/>
-            <stop offset="38%"  stop-color="#7dd3f8"/>
-            <stop offset="65%"  stop-color="#c8edf8"/>
-            <stop offset="85%"  stop-color="#f0f8ff"/>
-            <stop offset="100%" stop-color="#fdf0e8"/>
-          </linearGradient>
-          <!-- Bottom fade overlay gradient -->
-          <linearGradient id="gFade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <!-- Radial sky: bright centre, deeper edges -->
+          <radialGradient id="gSky" cx="50%" cy="30%" r="75%">
+            <stop offset="0%"   stop-color="#a8dff5"/>
+            <stop offset="35%"  stop-color="#5ec8ef"/>
+            <stop offset="70%"  stop-color="#1e9bd4"/>
+            <stop offset="100%" stop-color="#0e7ab0"/>
+          </radialGradient>
+          <!-- Vertical fade overlay: sky → app bg -->
+          <linearGradient id="gSkyFade" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%"   stop-color="#fdf0e8" stop-opacity="0"/>
+            <stop offset="40%"  stop-color="#fdf0e8" stop-opacity="0"/>
+            <stop offset="72%"  stop-color="#fdf0e8" stop-opacity="0.45"/>
+            <stop offset="88%"  stop-color="#fdf0e8" stop-opacity="0.82"/>
             <stop offset="100%" stop-color="#fdf0e8" stop-opacity="1"/>
           </linearGradient>
+
         </defs>
 
         <!-- Sky background -->
@@ -758,7 +762,7 @@ body {
 
         <!-- ══ MICKEY ══ -->
         <!-- Blue airbrush glow behind -->
-        <ellipse cx="80" cy="108" rx="50" ry="47" fill="#90b8e8" opacity="0.42" filter="url(#fAir)"/>
+        <ellipse cx="80" cy="108" rx="62" ry="56" fill="#90b8e8" opacity="0.38" filter="url(#fAir)"/>
 
         <!-- Left ear -->
         <circle cx="50" cy="72" r="23" fill="url(#gHead)"/>
@@ -837,7 +841,7 @@ body {
 
         <!-- ══ MINNIE ══ -->
         <!-- Pink airbrush glow behind -->
-        <ellipse cx="246" cy="97" rx="48" ry="45" fill="#f9a8d4" opacity="0.40" filter="url(#fAir)"/>
+        <ellipse cx="246" cy="97" rx="60" ry="54" fill="#f9a8d4" opacity="0.35" filter="url(#fAir)"/>
 
         <!-- Left ear -->
         <circle cx="217" cy="57" r="22" fill="url(#gHead)"/>
@@ -953,10 +957,8 @@ body {
         <circle cx="263" cy="152" r="2.8" fill="#1a1a1a" opacity="0.55"/>
         <circle cx="258.5" cy="160" r="2.2" fill="#1a1a1a" opacity="0.45"/>
         <!-- Bottom fade-out to blend with app background -->
-        <!-- Tall soft fade from y=70, fully covers bottom -->
-        <rect x="0" y="70"  width="320" height="110" fill="url(#gFade)" opacity="0.45"/>
-        <rect x="0" y="110" width="320" height="70"  fill="url(#gFade)" opacity="0.7"/>
-        <rect x="0" y="145" width="320" height="35"  fill="url(#gFade)" opacity="1"/>
+        <!-- Full-height seamless fade overlay -->
+        <rect x="0" y="0" width="320" height="180" fill="url(#gSkyFade)"/>
       </svg>
     </div>
     <div class="header-title-row">
