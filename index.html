@@ -78,7 +78,7 @@ body {
 
 /* Header */
 .header { text-align:center; margin-bottom:24px; }
-.header-deco { font-size:2rem; margin-bottom:4px; }
+.header-deco { font-size:2rem; margin-bottom:4px; margin-left:-16px; margin-right:-16px; margin-top:-20px; overflow:hidden; border-radius:0 0 0 0; }
 .header h1 { font-size:1.6rem; font-weight:700; color:var(--accent); }
 .header-title-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.5; margin-top:4px; }
 .header-subtitle-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:.9rem; color:#c084a0; font-weight:700; letter-spacing:.06em; }
@@ -685,7 +685,7 @@ body {
 <div id="app">
   <div class="header">
     <div class="header-deco">
-      <svg width="320" height="180" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+      <svg width="100%" height="auto" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="display:block">
         <defs>
           <radialGradient id="gHead" cx="33%" cy="26%" r="72%">
             <stop offset="0%"   stop-color="#545454"/>
@@ -728,7 +728,7 @@ body {
         </defs>
 
         <!-- Sky background -->
-        <rect x="0" y="0" width="320" height="180" fill="url(#gSky)" rx="0"/>
+        <rect x="0" y="0" width="320" height="180" fill="url(#gSky)"/>
         <!-- Soft clouds -->
         <ellipse cx="50"  cy="22" rx="28" ry="10" fill="white" opacity="0.28"/>
         <ellipse cx="72"  cy="18" rx="20" ry="8"  fill="white" opacity="0.22"/>
