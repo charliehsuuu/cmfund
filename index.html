@@ -82,6 +82,17 @@ body {
 .header h1 { font-size:1.6rem; font-weight:700; color:var(--accent); }
 .header-title-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.5; margin-top:4px; }
 .header-subtitle-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:.9rem; color:#c084a0; font-weight:700; letter-spacing:.06em; }
+.header-title-row {
+  display:flex; align-items:center; justify-content:center; gap:12px; margin-top:8px;
+}
+.avatar-logout-btn {
+  background:none; border:2px solid var(--border); border-radius:50%;
+  padding:0; cursor:pointer; flex-shrink:0;
+  box-shadow:0 2px 0 var(--border);
+  transition:transform .15s;
+}
+.avatar-logout-btn:active { transform:scale(.92); }
+.avatar-logout-btn .user-avatar { width:36px; height:36px; border-radius:50%; display:block; }
 .user-badge {
   display:inline-flex; align-items:center; gap:8px; margin-top:8px;
   background:#fffdf9; border:1.5px solid var(--border);
@@ -942,11 +953,14 @@ body {
         <rect x="0" y="120" width="320" height="60" fill="url(#gFade)" opacity="0.7"/>
       </svg>
     </div>
-    <h1 class="header-title-cute">查理與妮妮<br><span class="header-subtitle-cute">愛與冒險的故事</span></h1>
-    <div class="user-badge">
-      <img class="user-avatar" id="user-avatar" src="" alt="">
-      <span class="user-name" id="user-name"></span>
-      <button class="logout-btn" id="logout-btn">登出</button>
+    <div class="header-title-row">
+      <button class="avatar-logout-btn" id="logout-btn" title="登出">
+        <img class="user-avatar" id="user-avatar" src="" alt="帳號">
+      </button>
+      <div>
+        <h1 class="header-title-cute">查理與妮妮</h1>
+        <span class="header-subtitle-cute">愛與冒險的故事</span>
+      </div>
     </div>
 
   </div>
