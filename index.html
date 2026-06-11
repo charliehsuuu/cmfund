@@ -605,6 +605,38 @@ body {
 .who-badge.other   { background:#e8d0f0; color:#402860; border:1px solid #9870b8; }
 
 
+
+/* Love Pulse */
+.love-pulse-bar { background:linear-gradient(135deg,#fff0f5,#ffe4ec); border:1.5px solid #fecdd3; border-radius:20px; padding:12px 16px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.pulse-btn { flex:1; padding:10px 0; border:2px solid #fecdd3; border-radius:14px; background:#fff; font-size:1rem; cursor:pointer; transition:all .15s; box-shadow:0 3px 0 #f9a8d4; font-family:inherit; }
+.pulse-btn:active { transform:translateY(2px); box-shadow:0 1px 0 #f9a8d4; }
+.pulse-label { font-size:.65rem; color:#f43f5e; font-weight:700; text-align:center; margin-top:4px; display:block; }
+/* Floating emoji animation */
+@keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:1;} 100%{transform:translateY(-80vh) scale(1.4);opacity:0;} }
+.float-emoji { position:fixed; pointer-events:none; z-index:9999; font-size:2rem; animation:floatUp 2.5s ease-out forwards; }
+/* Whisper Notes */
+.whisper-section { background:linear-gradient(135deg,#fffbeb,#fef3c7); border:1.5px solid #fde68a; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
+.whisper-title { font-size:.8rem; font-weight:700; color:#92400e; margin-bottom:8px; display:flex; align-items:center; gap:5px; }
+.whisper-list { max-height:120px; overflow-y:auto; margin-bottom:8px; display:flex; flex-direction:column; gap:6px; }
+.whisper-item { background:#fff; border:1px solid #fde68a; border-radius:10px; padding:7px 10px; font-size:.78rem; color:#78350f; }
+.whisper-item .wh-who { font-weight:700; color:#b45309; }
+.whisper-item .wh-time { font-size:.68rem; color:#a16207; float:right; }
+.whisper-input-row { display:flex; gap:6px; }
+.whisper-input-row input { flex:1; border:1.5px solid #fde68a; border-radius:10px; padding:7px 10px; font-size:.8rem; background:#fffbeb; outline:none; font-family:inherit; }
+.whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:7px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; }
+/* Wish Pool */
+.wish-section { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #bbf7d0; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
+.wish-title { font-size:.8rem; font-weight:700; color:#14532d; margin-bottom:10px; display:flex; align-items:center; gap:5px; }
+.wish-list { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.wish-item { background:#fff; border:1.5px solid #bbf7d0; border-radius:12px; padding:8px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.wish-item.fulfilled { opacity:.55; background:#f0fdf4; }
+.wish-item-text { font-size:.82rem; color:#166534; flex:1; }
+.wish-item-who { font-size:.68rem; color:#22c55e; }
+.wish-fulfill-btn { background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; border:none; border-radius:8px; padding:5px 10px; font-size:.73rem; font-weight:700; cursor:pointer; white-space:nowrap; font-family:inherit; }
+.wish-fulfilled-badge { background:#dcfce7; color:#166534; border-radius:8px; padding:5px 10px; font-size:.73rem; font-weight:700; }
+.wish-input-row { display:flex; gap:6px; }
+.wish-input-row input { flex:1; border:1.5px solid #bbf7d0; border-radius:10px; padding:7px 10px; font-size:.8rem; background:#f0fdf4; outline:none; font-family:inherit; }
+.wish-input-row button { background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; border:none; border-radius:10px; padding:7px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; }
 </style>
 </head>
 <body>
@@ -731,6 +763,31 @@ body {
       <button class="logout-btn" id="logout-btn">登出</button>
     </div>
 
+  </div>
+
+  <!-- Love Pulse Bar -->
+  <div class="love-pulse-bar">
+    <button class="pulse-btn" onclick="sendPulse('kiss')">
+      💋<span class="pulse-label">親親</span>
+    </button>
+    <button class="pulse-btn" onclick="sendPulse('hug')">
+      🤗<span class="pulse-label">抱抱</span>
+    </button>
+    <button class="pulse-btn" onclick="sendPulse('massage')">
+      💆<span class="pulse-label">搥背</span>
+    </button>
+  </div>
+
+  <!-- Whisper Sticky Notes -->
+  <div class="whisper-section">
+    <div class="whisper-title">📌 悄悄話便籤</div>
+    <div class="whisper-list" id="whisper-list">
+      <div style="font-size:.78rem;color:#a16207;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>
+    </div>
+    <div class="whisper-input-row">
+      <input type="text" id="whisper-input" placeholder="寫下你的悄悄話…" maxlength="60">
+      <button onclick="sendWhisper()">傳送</button>
+    </div>
   </div>
 
   <!-- TABS -->
@@ -2117,6 +2174,125 @@ function renderLoveScore() {
 window.scorePrevMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()-1); renderLoveScore(); };
 window.scoreNextMonth = function() { scoreMonthDate.setMonth(scoreMonthDate.getMonth()+1); renderLoveScore(); };
 
+// ── Love Pulse ──
+const PULSE_EMOJI = { kiss:'💋', hug:'🤗', massage:'💆' };
+
+function sendPulse(type) {
+  if (!currentUser) return;
+  push(ref(db, 'love_pulse'), { type, who: currentWho(), ts: Date.now() });
+  spawnEmojis(PULSE_EMOJI[type], 12, true);
+}
+
+function spawnEmojis(emoji, count, isSelf) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'float-emoji';
+      el.textContent = emoji;
+      el.style.left = (10 + Math.random() * 80) + 'vw';
+      el.style.top = (50 + Math.random() * 30) + 'vh';
+      el.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+      el.style.animationDuration = (1.8 + Math.random() * 1.2) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }, i * 80);
+  }
+}
+
+// Listen for partner's pulse
+let _lastPulseTs = Date.now();
+onValue(ref(db, 'love_pulse'), snap => {
+  let latest = null;
+  snap.forEach(child => {
+    const v = child.val();
+    if (v.ts > _lastPulseTs && v.who !== currentWho()) latest = v;
+  });
+  if (latest) {
+    _lastPulseTs = latest.ts;
+    spawnEmojis(PULSE_EMOJI[latest.type] || '💕', 16, false);
+  }
+});
+
+window.sendPulse = sendPulse;
+
+// ── Whisper Notes ──
+function sendWhisper() {
+  const input = document.getElementById('whisper-input');
+  const text = input.value.trim();
+  if (!text) return;
+  push(ref(db, 'whispers'), { text, who: currentWho(), ts: Date.now() });
+  input.value = '';
+}
+
+onValue(ref(db, 'whispers'), snap => {
+  const items = [];
+  snap.forEach(child => items.push(child.val()));
+  items.sort((a,b) => b.ts - a.ts);
+  const list = document.getElementById('whisper-list');
+  if (!list) return;
+  if (!items.length) {
+    list.innerHTML = '<div style="font-size:.78rem;color:#a16207;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>';
+    return;
+  }
+  list.innerHTML = items.slice(0, 5).map(m => {
+    const d = new Date(m.ts);
+    const timeStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+    return `<div class="whisper-item"><span class="wh-who">${m.who}：</span>${m.text}<span class="wh-time">${timeStr}</span></div>`;
+  }).join('');
+});
+
+window.sendWhisper = sendWhisper;
+
+// ── Wish Pool ──
+function addWish() {
+  const input = document.getElementById('wish-input');
+  const text = input.value.trim();
+  if (!text) return;
+  push(ref(db, 'wishes'), { text, who: currentWho(), ts: Date.now(), fulfilled: false });
+  input.value = '';
+}
+
+async function fulfillWish(id, text, wisher) {
+  // Mark fulfilled
+  await update(ref(db, 'wishes/' + id), { fulfilled: true, fulfilledBy: currentWho(), fulfilledTs: Date.now() });
+  // Auto add +5 love event for the wisher
+  const today = new Date();
+  const dateKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+  await push(ref(db, 'love_events'), {
+    date: dateKey, category: '圓夢', score: 5,
+    note: currentWho() + ' 幫 ' + wisher + ' 實現了「' + text + '」💚',
+    timestamp: Date.now(), who: currentWho()
+  });
+}
+
+onValue(ref(db, 'wishes'), snap => {
+  const items = [];
+  snap.forEach(child => items.push({ id: child.key, ...child.val() }));
+  items.sort((a,b) => a.ts - b.ts);
+  const list = document.getElementById('wish-list');
+  if (!list) return;
+  if (!items.length) {
+    list.innerHTML = '<div style="font-size:.82rem;color:#166534;text-align:center;">還沒有願望，許下第一個心願吧 ✨</div>';
+    return;
+  }
+  list.innerHTML = items.map(w => {
+    const me = currentWho();
+    const canFulfill = !w.fulfilled && w.who !== me;
+    const badge = w.fulfilled
+      ? `<span class="wish-fulfilled-badge">✓ 已實現</span>`
+      : canFulfill
+        ? `<button class="wish-fulfill-btn" onclick="fulfillWish('${w.id}','${w.text.replace(/'/g,"\'")}','${w.who.replace(/'/g,"\'")}')">圓夢 ✨</button>`
+        : `<span style="font-size:.72rem;color:#86efac;">等待中…</span>`;
+    return `<div class="wish-item${w.fulfilled?' fulfilled':''}">
+      <div><div class="wish-item-text">${w.text}</div><div class="wish-item-who">${w.who} 的心願</div></div>
+      ${badge}
+    </div>`;
+  }).join('');
+});
+
+window.addWish = addWish;
+window.fulfillWish = fulfillWish;
+
 // ── Custom Keypad ──
 let _kpTarget = null;
 let _kpVal = '';
@@ -2261,6 +2437,19 @@ window.kpConfirm    = kpConfirm;
     <h3>戀愛百分比</h3>
     <div id="love-pct-list">
       <div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>
+    </div>
+  </div>
+
+
+  <!-- 甜蜜許願池 -->
+  <div class="wish-section">
+    <div class="wish-title">🎋 甜蜜許願池</div>
+    <div class="wish-list" id="wish-list">
+      <div style="font-size:.82rem;color:#166534;text-align:center;">還沒有願望，許下第一個心願吧 ✨</div>
+    </div>
+    <div class="wish-input-row">
+      <input type="text" id="wish-input" placeholder="我想要… 💚" maxlength="50">
+      <button onclick="addWish()">許願</button>
     </div>
   </div>
 
