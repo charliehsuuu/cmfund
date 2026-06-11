@@ -86,13 +86,15 @@ body {
   display:flex; align-items:center; justify-content:center; gap:12px; margin-top:8px;
 }
 .avatar-logout-btn {
-  background:none; border:2px solid var(--border); border-radius:50%;
-  padding:0; cursor:pointer; flex-shrink:0;
+  background:#f0e8dc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='14' r='7' fill='%23c8a888'/%3E%3Cellipse cx='18' cy='30' rx='12' ry='8' fill='%23c8a888'/%3E%3C/svg%3E") center/cover;
+  border:2px solid var(--border); border-radius:50%;
+  padding:0; cursor:pointer; flex-shrink:0; overflow:hidden;
+  width:36px; height:36px;
   box-shadow:0 2px 0 var(--border);
   transition:transform .15s;
 }
 .avatar-logout-btn:active { transform:scale(.92); }
-.avatar-logout-btn .user-avatar { width:36px; height:36px; border-radius:50%; display:block; }
+.avatar-logout-btn .user-avatar { width:36px; height:36px; border-radius:50%; display:block; object-fit:cover; }
 .user-badge {
   display:inline-flex; align-items:center; gap:8px; margin-top:8px;
   background:#fffdf9; border:1.5px solid var(--border);
@@ -733,8 +735,9 @@ body {
           <!-- Sky gradient -->
           <linearGradient id="gSky" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%"   stop-color="#1e9bd4"/>
-            <stop offset="42%"  stop-color="#7dd3f8"/>
-            <stop offset="75%"  stop-color="#ceeefa"/>
+            <stop offset="38%"  stop-color="#7dd3f8"/>
+            <stop offset="65%"  stop-color="#c8edf8"/>
+            <stop offset="85%"  stop-color="#f0f8ff"/>
             <stop offset="100%" stop-color="#fdf0e8"/>
           </linearGradient>
           <!-- Bottom fade overlay gradient -->
@@ -950,12 +953,15 @@ body {
         <circle cx="263" cy="152" r="2.8" fill="#1a1a1a" opacity="0.55"/>
         <circle cx="258.5" cy="160" r="2.2" fill="#1a1a1a" opacity="0.45"/>
         <!-- Bottom fade-out to blend with app background -->
-        <rect x="0" y="120" width="320" height="60" fill="url(#gFade)" opacity="0.7"/>
+        <!-- Tall soft fade from y=70, fully covers bottom -->
+        <rect x="0" y="70"  width="320" height="110" fill="url(#gFade)" opacity="0.45"/>
+        <rect x="0" y="110" width="320" height="70"  fill="url(#gFade)" opacity="0.7"/>
+        <rect x="0" y="145" width="320" height="35"  fill="url(#gFade)" opacity="1"/>
       </svg>
     </div>
     <div class="header-title-row">
       <button class="avatar-logout-btn" id="logout-btn" title="登出">
-        <img class="user-avatar" id="user-avatar" src="" alt="帳號">
+        <img class="user-avatar" id="user-avatar" src="" alt="" onerror="this.style.display='none'" onload="this.style.display='block'">
       </button>
       <div>
         <h1 class="header-title-cute">查理與妮妮</h1>
