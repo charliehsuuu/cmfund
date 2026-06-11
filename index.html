@@ -2154,8 +2154,12 @@ function kpConfirm() {
     _kpTarget.value = _kpVal || '0';
     _kpTarget.dispatchEvent(new Event('input', { bubbles: true }));
     _kpTarget.dispatchEvent(new Event('change', { bubbles: true }));
+    const id = _kpTarget.id;
+    closeKeypad();
+    if (id === 'amount-input') addTransaction();
+  } else {
+    closeKeypad();
   }
-  closeKeypad();
 }
 
 window.openKeypad   = openKeypad;
