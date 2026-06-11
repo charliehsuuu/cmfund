@@ -685,75 +685,253 @@ body {
 <div id="app">
   <div class="header">
     <div class="header-deco">
-      <svg width="320" height="155" viewBox="0 0 320 155" xmlns="http://www.w3.org/2000/svg">
-        <!-- ♪ 音符 -->
-        <text x="18" y="52" font-size="16" fill="#555" opacity="0.75">♪</text>
-        <text x="30" y="36" font-size="12" fill="#555" opacity="0.6">♫</text>
-        <!-- ★ 星星 (Mickey下方) -->
-        <polygon points="62,138 64.5,145 72,145 66,149 68,156 62,152 56,156 58,149 52,145 59.5,145" fill="#f0c040" opacity="0.9"/>
+      <svg width="320" height="180" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="gHead" cx="33%" cy="26%" r="72%">
+            <stop offset="0%"   stop-color="#545454"/>
+            <stop offset="32%"  stop-color="#202020"/>
+            <stop offset="100%" stop-color="#090909"/>
+          </radialGradient>
+          <radialGradient id="gSkin" cx="42%" cy="26%" r="68%">
+            <stop offset="0%"   stop-color="#fef2dc"/>
+            <stop offset="65%"  stop-color="#f5d4a8"/>
+            <stop offset="100%" stop-color="#e8bc84"/>
+          </radialGradient>
+          <radialGradient id="gBow" cx="34%" cy="24%" r="72%">
+            <stop offset="0%"   stop-color="#ffbcd8"/>
+            <stop offset="55%"  stop-color="#f06aab"/>
+            <stop offset="100%" stop-color="#cc4488"/>
+          </radialGradient>
+          <radialGradient id="gShorts" cx="35%" cy="28%" r="72%">
+            <stop offset="0%"   stop-color="#e86040"/>
+            <stop offset="100%" stop-color="#b82818"/>
+          </radialGradient>
+          <filter id="fAir" x="-70%" y="-70%" width="240%" height="240%">
+            <feGaussianBlur stdDeviation="11"/>
+          </filter>
+          <filter id="fPink" x="-60%" y="-60%" width="220%" height="220%">
+            <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f472b6" flood-opacity="0.65"/>
+          </filter>
+          <filter id="fGold" x="-60%" y="-60%" width="220%" height="220%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#fbbf24" flood-opacity="0.6"/>
+          </filter>
+          <radialGradient id="gBlush">
+            <stop offset="0%"   stop-color="#ffb0cc" stop-opacity="0.72"/>
+            <stop offset="100%" stop-color="#ffb0cc" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Sky gradient -->
+          <linearGradient id="gSky" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#1e9bd4"/>
+            <stop offset="45%"  stop-color="#7dd3f8"/>
+            <stop offset="100%" stop-color="#e8f8ff"/>
+          </linearGradient>
+        </defs>
 
-        <!-- Mickey head (左) -->
-        <circle cx="40" cy="44" r="22" fill="#1a1a1a"/>
-        <circle cx="84" cy="38" r="22" fill="#1a1a1a"/>
-        <circle cx="62" cy="88" r="38" fill="#1a1a1a"/>
-        <ellipse cx="62" cy="94" rx="26" ry="22" fill="#f5d5b0"/>
-        <ellipse cx="51" cy="80" rx="5.5" ry="6.5" fill="#1a1a1a"/>
-        <circle cx="53" cy="78" r="1.8" fill="white"/>
-        <ellipse cx="73" cy="80" rx="5.5" ry="6.5" fill="#1a1a1a"/>
-        <circle cx="75" cy="78" r="1.8" fill="white"/>
-        <ellipse cx="62" cy="92" rx="4.5" ry="3.5" fill="#1a1a1a"/>
-        <path d="M 50 101 Q 62 112 74 101" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <circle cx="46" cy="98" r="8" fill="#e8a0a0" opacity="0.48"/>
-        <circle cx="78" cy="98" r="8" fill="#e8a0a0" opacity="0.48"/>
+        <!-- Sky background -->
+        <rect x="0" y="0" width="320" height="180" fill="url(#gSky)" rx="0"/>
+        <!-- Soft clouds -->
+        <ellipse cx="50"  cy="22" rx="28" ry="10" fill="white" opacity="0.28"/>
+        <ellipse cx="72"  cy="18" rx="20" ry="8"  fill="white" opacity="0.22"/>
+        <ellipse cx="200" cy="15" rx="32" ry="11" fill="white" opacity="0.25"/>
+        <ellipse cx="225" cy="12" rx="22" ry="9"  fill="white" opacity="0.2"/>
+        <ellipse cx="260" cy="26" rx="18" ry="7"  fill="white" opacity="0.18"/>
 
-        <!-- 中間 love + 心 -->
-        <text x="160" y="38" font-family="Georgia,serif" font-size="18" fill="#ec4899" font-style="italic" text-anchor="middle" opacity="0.95">love</text>
-        <path d="M174,52 C174,48 169,44 164,44 C159,44 154,48 154,52 C154,58 164,66 164,66 C164,66 174,58 174,52Z" fill="#ec4899" opacity="0.9"/>
-        <!-- 小心 -->
-        <path d="M138,80 C138,77 134,74 131,74 C128,74 124,77 124,80 C124,84 131,89 131,89 C131,89 138,84 138,80Z" fill="#f9a8d4" opacity="0.85"/>
+        <!-- ══ MICKEY ══ -->
+        <!-- Blue airbrush glow behind -->
+        <ellipse cx="80" cy="108" rx="50" ry="47" fill="#90b8e8" opacity="0.42" filter="url(#fAir)"/>
 
-        <!-- Minnie head (右) -->
-        <!-- bow -->
-        <ellipse cx="222" cy="24" rx="16" ry="10" fill="#ec4899" transform="rotate(-25 222 24)"/>
-        <ellipse cx="248" cy="18" rx="16" ry="10" fill="#ec4899" transform="rotate(25 248 18)"/>
-        <circle cx="235" cy="21" r="7" fill="#f472b6"/>
-        <circle cx="226" cy="18" r="2.5" fill="white" opacity="0.55"/>
-        <!-- ears -->
-        <circle cx="214" cy="48" r="22" fill="#1a1a1a"/>
-        <circle cx="258" cy="40" r="22" fill="#1a1a1a"/>
-        <!-- head -->
-        <circle cx="236" cy="90" r="38" fill="#1a1a1a"/>
-        <ellipse cx="236" cy="96" rx="26" ry="22" fill="#f5d5b0"/>
-        <!-- eyes -->
-        <ellipse cx="225" cy="82" rx="5.5" ry="6.5" fill="#1a1a1a"/>
-        <circle cx="227" cy="80" r="1.8" fill="white"/>
-        <ellipse cx="247" cy="82" rx="5.5" ry="6.5" fill="#1a1a1a"/>
-        <circle cx="249" cy="80" r="1.8" fill="white"/>
-        <!-- lashes -->
-        <line x1="220" y1="76" x2="215" y2="70" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="225" y1="74" x2="224" y2="68" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="252" y1="76" x2="257" y2="70" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="247" y1="74" x2="248" y2="68" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
-        <!-- nose + smile -->
-        <ellipse cx="236" cy="94" rx="4.5" ry="3.5" fill="#1a1a1a"/>
-        <path d="M 224 103 Q 236 114 248 103" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <!-- cheeks -->
-        <circle cx="220" cy="100" r="8" fill="#e8a0a0" opacity="0.48"/>
-        <circle cx="252" cy="100" r="8" fill="#e8a0a0" opacity="0.48"/>
+        <!-- Left ear -->
+        <circle cx="50" cy="72" r="23" fill="url(#gHead)"/>
+        <ellipse cx="43" cy="63" rx="10" ry="7" fill="white" opacity="0.24" transform="rotate(-28 43 63)"/>
+        <!-- Right ear -->
+        <circle cx="94" cy="63" r="23" fill="url(#gHead)"/>
+        <ellipse cx="88" cy="56" rx="9" ry="6.5" fill="white" opacity="0.22" transform="rotate(-22 88 56)"/>
 
-        <!-- 花 (Minnie右下) -->
-        <circle cx="296" cy="118" r="4.5" fill="#fbbf24"/>
-        <circle cx="296" cy="107" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
-        <circle cx="296" cy="129" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
-        <circle cx="285" cy="118" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
-        <circle cx="307" cy="118" r="5.5" fill="white" stroke="#f0d8d8" stroke-width="1"/>
-        <!-- ✦ 閃光 -->
-        <path d="M278,98 L280,92 L282,98 L288,100 L282,102 L280,108 L278,102 L272,100Z" fill="#fbbf24" opacity="0.88"/>
-        <!-- 愛心 (Minnie右上) -->
-        <path d="M305,52 C305,48 300,44 296,44 C292,44 287,48 287,52 C287,57 296,63 296,63 C296,63 305,57 305,52Z" fill="#f9a8d4" opacity="0.9"/>
-        <!-- 小圓點 -->
-        <circle cx="280" cy="75" r="3" fill="#ec4899" opacity="0.5"/>
-        <circle cx="275" cy="85" r="2" fill="#ec4899" opacity="0.35"/>
+        <!-- Head -->
+        <circle cx="77" cy="108" r="39" fill="url(#gHead)"/>
+        <!-- Main specular highlight -->
+        <ellipse cx="59" cy="87" rx="20" ry="13" fill="white" opacity="0.18" transform="rotate(-26 59 87)"/>
+        <ellipse cx="53" cy="83" rx="10" ry="6" fill="white" opacity="0.22" transform="rotate(-26 53 83)"/>
+
+        <!-- Muzzle -->
+        <ellipse cx="77" cy="117" rx="27" ry="23" fill="url(#gSkin)"/>
+        <ellipse cx="70" cy="109" rx="11" ry="6.5" fill="white" opacity="0.28" transform="rotate(-18 70 109)"/>
+
+        <!-- Closed squinting eyes -->
+        <path d="M 61 100 Q 67 93 73 100" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 81 98  Q 87 91 93 98"  stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Tiny outer lash tips -->
+        <line x1="61"  y1="99.5" x2="58"  y2="95"  stroke="#1a1a1a" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="93"  y1="98"   x2="96"  y2="93.5" stroke="#1a1a1a" stroke-width="1.3" stroke-linecap="round"/>
+
+        <!-- Nose -->
+        <ellipse cx="77" cy="113" rx="6.5" ry="6" fill="#0e0e0e"/>
+        <ellipse cx="74.5" cy="110.8" rx="2.2" ry="1.5" fill="white" opacity="0.38"/>
+
+        <!-- Big open smile + teeth -->
+        <path d="M 60 125 Q 77 142 94 125" fill="#b05038"/>
+        <path d="M 60 125 Q 77 142 94 125" stroke="#903828" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M 64 125 Q 77 138 90 125 Z" fill="white"/>
+        <path d="M 64 125 Q 77 138 90 125 Z" fill="#f5d4a8" opacity="0.18"/>
+        <line x1="77" y1="125" x2="77" y2="137.5" stroke="#c07858" stroke-width="1.3" opacity="0.55"/>
+
+        <!-- Cheeks -->
+        <circle cx="53"  cy="121" r="15" fill="url(#gBlush)"/>
+        <circle cx="101" cy="121" r="15" fill="url(#gBlush)"/>
+
+        <!-- Red shorts -->
+        <path d="M 58 146 Q 61 163 68 165 L 77 162 L 86 165 Q 93 163 96 146 Q 87 152 77 152 Q 67 152 58 146Z" fill="url(#gShorts)"/>
+        <ellipse cx="70"  cy="157" rx="5.5" ry="4.5" fill="white" opacity="0.88"/>
+        <ellipse cx="84"  cy="157" rx="5.5" ry="4.5" fill="white" opacity="0.88"/>
+        <path d="M 58 146 Q 77 154 96 146" stroke="#901c08" stroke-width="1.5" fill="none"/>
+
+        <!-- Music notes + extra sparkles around Mickey -->
+        <text x="6"  y="62" font-size="20" fill="#1a1a1a" opacity="0.78" font-family="serif">♫</text>
+        <text x="22" y="42" font-size="15" fill="#1a1a1a" opacity="0.68" font-family="serif">♪</text>
+        <text x="8"  y="82" font-size="12" fill="#1a1a1a" opacity="0.55" font-family="serif">♩</text>
+        <!-- Firework burst upper-left of Mickey -->
+        <g opacity="0.72" filter="url(#fGold)">
+          <line x1="16" y1="92" x2="16" y2="83" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="92" x2="9"  y2="86" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="92" x2="23" y2="86" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="92" x2="10" y2="96" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="92" x2="22" y2="97" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="16" cy="92" r="2" fill="#facc15"/>
+        </g>
+        <!-- Scattered dots Mickey left -->
+        <circle cx="10"  cy="108" r="2"   fill="#f9a8d4" opacity="0.7"/>
+        <circle cx="18"  cy="116" r="1.5" fill="#fbbf24" opacity="0.65"/>
+        <circle cx="8"   cy="122" r="1.8" fill="#f9a8d4" opacity="0.6"/>
+        <circle cx="20"  cy="128" r="1.3" fill="#fbbf24" opacity="0.55"/>
+        <!-- Mickey bottom star -->
+        <path d="M50,170 L51.5,165.5 L53,170 L57.5,170 L54,172.5 L55.5,177 L51.5,174.5 L47.5,177 L49,172.5 L45.5,170Z" fill="#facc15" opacity="0.82" filter="url(#fGold)"/>
+        <!-- Small firework near bottom-left -->
+        <g opacity="0.65" filter="url(#fPink)">
+          <line x1="14" y1="150" x2="14" y2="142" stroke="#f9a8d4" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="14" y1="150" x2="7"  y2="145" stroke="#f9a8d4" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="14" y1="150" x2="21" y2="145" stroke="#f9a8d4" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="14" y1="150" x2="8"  y2="155" stroke="#f9a8d4" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="14" y1="150" x2="20" y2="155" stroke="#f9a8d4" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="14" cy="150" r="1.8" fill="#f9a8d4"/>
+        </g>
+
+        <!-- ══ MINNIE ══ -->
+        <!-- Pink airbrush glow behind -->
+        <ellipse cx="246" cy="97" rx="48" ry="45" fill="#f9a8d4" opacity="0.40" filter="url(#fAir)"/>
+
+        <!-- Left ear -->
+        <circle cx="217" cy="57" r="22" fill="url(#gHead)"/>
+        <ellipse cx="210" cy="50" rx="10" ry="7" fill="white" opacity="0.22" transform="rotate(-28 210 50)"/>
+        <!-- Right ear -->
+        <circle cx="262" cy="49" r="22" fill="url(#gHead)"/>
+        <ellipse cx="257" cy="42" rx="9" ry="6.5" fill="white" opacity="0.2" transform="rotate(-22 257 42)"/>
+
+        <!-- BOW — center (255,58), tilted right -->
+        <g transform="rotate(14 255 58)">
+          <!-- Left lobe -->
+          <ellipse cx="241" cy="58" rx="14" ry="8.5" fill="url(#gBow)"/>
+          <ellipse cx="238" cy="53" rx="6"  ry="3.8" fill="white" opacity="0.30"/>
+          <path d="M 236,64 Q 243,61 248,63" stroke="#b03878" stroke-width="1" fill="none" opacity="0.45"/>
+          <!-- Right lobe -->
+          <ellipse cx="269" cy="58" rx="14" ry="8.5" fill="url(#gBow)"/>
+          <ellipse cx="272" cy="53" rx="6"  ry="3.8" fill="white" opacity="0.28"/>
+          <path d="M 262,64 Q 268,61 275,64" stroke="#b03878" stroke-width="1" fill="none" opacity="0.45"/>
+          <!-- Knot -->
+          <circle cx="255" cy="58" r="7"   fill="url(#gBow)"/>
+          <circle cx="253" cy="55" r="2.8" fill="white" opacity="0.40"/>
+        </g>
+
+        <!-- Head -->
+        <circle cx="243" cy="98" r="38" fill="url(#gHead)"/>
+        <ellipse cx="227" cy="77" rx="20" ry="13" fill="white" opacity="0.18" transform="rotate(-26 227 77)"/>
+        <ellipse cx="221" cy="73" rx="10" ry="6"  fill="white" opacity="0.22" transform="rotate(-26 221 73)"/>
+
+        <!-- Muzzle -->
+        <ellipse cx="243" cy="107" rx="26" ry="22" fill="url(#gSkin)"/>
+        <ellipse cx="236" cy="99"  rx="10.5" ry="6.5" fill="white" opacity="0.28" transform="rotate(-18 236 99)"/>
+
+        <!-- Left eye — open with lashes -->
+        <ellipse cx="230" cy="88" rx="7"   ry="8"   fill="#1a1a1a"/>
+        <ellipse cx="230.5" cy="88.5" rx="5" ry="6"  fill="#3d1868"/>
+        <ellipse cx="231" cy="87.5" rx="3"  ry="3.5" fill="#6b38a0" opacity="0.75"/>
+        <circle  cx="233" cy="85.5" r="2.4" fill="white"/>
+        <circle  cx="234.5" cy="87" r="1"   fill="white" opacity="0.65"/>
+        <line x1="223"  y1="83.5" x2="216" y2="75.5" stroke="#1a1a1a" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="226.5" y1="81.5" x2="225" y2="74"  stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="230"  y1="80.5" x2="231" y2="73.5" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- Right eye — wink -->
+        <path d="M 252 87 Q 258 80 264 87" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <line x1="257" y1="81.5" x2="262" y2="75.5" stroke="#1a1a1a" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="254" y1="82.5" x2="255" y2="76"   stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- Nose -->
+        <ellipse cx="243" cy="103" rx="6.5" ry="6" fill="#0e0e0e"/>
+        <ellipse cx="240.5" cy="100.8" rx="2.2" ry="1.5" fill="white" opacity="0.38"/>
+
+        <!-- Smile + teeth -->
+        <path d="M 227 114 Q 243 131 259 114" fill="#b05038"/>
+        <path d="M 227 114 Q 243 131 259 114" stroke="#903828" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M 231 114 Q 243 127 255 114 Z" fill="white"/>
+        <path d="M 231 114 Q 243 127 255 114 Z" fill="#f5d4a8" opacity="0.18"/>
+        <line x1="243" y1="114" x2="243" y2="126.5" stroke="#c07858" stroke-width="1.3" opacity="0.55"/>
+
+        <!-- Cheeks -->
+        <circle cx="222" cy="111" r="15" fill="url(#gBlush)"/>
+        <circle cx="264" cy="111" r="15" fill="url(#gBlush)"/>
+
+        <!-- Firework burst left of Minnie -->
+        <g opacity="0.75" filter="url(#fPink)">
+          <line x1="200" y1="80" x2="200" y2="71" stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="200" y1="80" x2="193" y2="74" stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="200" y1="80" x2="207" y2="74" stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="200" y1="80" x2="194" y2="85" stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="200" y1="80" x2="206" y2="86" stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="200" cy="80" r="2" fill="#f472b6"/>
+        </g>
+        <!-- Gold firework upper-right of Minnie -->
+        <g opacity="0.7" filter="url(#fGold)">
+          <line x1="308" y1="88" x2="308" y2="80" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="308" y1="88" x2="301" y2="82" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="308" y1="88" x2="315" y2="82" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="308" y1="88" x2="302" y2="94" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="308" y1="88" x2="314" y2="94" stroke="#facc15" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="308" cy="88" r="2" fill="#facc15"/>
+        </g>
+        <!-- Scattered dots Minnie sides -->
+        <circle cx="196" cy="95"  r="2"   fill="#fbbf24" opacity="0.62"/>
+        <circle cx="192" cy="108" r="1.6" fill="#f9a8d4" opacity="0.58"/>
+        <circle cx="198" cy="118" r="1.8" fill="#f472b6" opacity="0.55"/>
+        <circle cx="312" cy="102" r="2"   fill="#f9a8d4" opacity="0.6"/>
+        <circle cx="314" cy="115" r="1.5" fill="#fbbf24" opacity="0.55"/>
+        <!-- Small 4-pt star upper left of Minnie -->
+        <path d="M196,62 L197.2,58.5 L198.4,62 L202,62 L199.2,64 L200.2,67.5 L197.2,65.5 L194.2,67.5 L195.2,64 L192.4,62Z" fill="#facc15" opacity="0.78" filter="url(#fGold)"/>
+        <!-- "love" cursive -->
+        <text x="283" y="17" font-family="Georgia,serif" font-size="19" fill="#1a1a1a" font-style="italic" text-anchor="middle" opacity="0.86">love</text>
+
+        <!-- Hearts -->
+        <!-- Larger heart beside "love" -->
+        <path d="M302,30 C302,24 295,19 291,19 C287,19 280,24 280,30 C280,38 291,48 291,48 C291,48 302,38 302,30Z" fill="#f9a8d4" filter="url(#fPink)" opacity="0.9"/>
+        <ellipse cx="286.5" cy="24.5" rx="5.5" ry="3.5" fill="white" opacity="0.32" transform="rotate(-30 286.5 24.5)"/>
+        <!-- Smaller heart lower left of Minnie -->
+        <path d="M218,132 C218,129 214,126 211.5,126 C209,126 205,129 205,132 C205,137 211.5,142.5 211.5,142.5 C211.5,142.5 218,137 218,132Z" fill="#ec4899" filter="url(#fPink)" opacity="0.88"/>
+
+        <!-- Daisy flower -->
+        <circle cx="297" cy="148" r="6" fill="#fbbf24" filter="url(#fGold)"/>
+        <circle cx="297" cy="133" r="7.5" fill="white" opacity="0.94"/>
+        <circle cx="297" cy="163" r="7.5" fill="white" opacity="0.94"/>
+        <circle cx="282" cy="148" r="7.5" fill="white" opacity="0.94"/>
+        <circle cx="312" cy="148" r="7.5" fill="white" opacity="0.94"/>
+        <circle cx="285.5" cy="136.5" r="7" fill="white" opacity="0.92"/>
+        <circle cx="308.5" cy="136.5" r="7" fill="white" opacity="0.92"/>
+        <circle cx="285.5" cy="159.5" r="7" fill="white" opacity="0.92"/>
+        <circle cx="308.5" cy="159.5" r="7" fill="white" opacity="0.92"/>
+
+        <!-- Gold 4-pointed sparkle star -->
+        <path d="M272,165 L274.8,157.5 L277.6,165 L285,165 L279,169.5 L281.2,177 L274.8,173 L268.4,177 L270.6,169.5 L264.6,165Z" fill="#facc15" opacity="0.92" filter="url(#fGold)"/>
+        <!-- Two dots near sparkle -->
+        <circle cx="263" cy="152" r="2.8" fill="#1a1a1a" opacity="0.55"/>
+        <circle cx="258.5" cy="160" r="2.2" fill="#1a1a1a" opacity="0.45"/>
       </svg>
     </div>
     <h1 class="header-title-cute">查理與妮妮<br><span class="header-subtitle-cute">愛與冒險的故事</span></h1>
