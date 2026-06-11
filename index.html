@@ -965,6 +965,7 @@ body {
       <button class="avatar-logout-btn" id="logout-btn" title="登出">
         <img class="user-avatar" id="user-avatar" src="" alt="" onerror="this.style.display='none'" onload="this.style.display='block'">
       </button>
+      <span id="user-name" style="display:none"></span>
       <div>
         <h1 class="header-title-cute">查理與妮妮</h1>
         <span class="header-subtitle-cute">愛與冒險的故事</span>
@@ -1293,7 +1294,7 @@ onAuthStateChanged(auth, user => {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     document.getElementById('bottom-nav').style.display = 'flex';
-    document.getElementById('user-name').textContent = user.displayName || user.email;
+    const unEl = document.getElementById('user-name'); if(unEl) unEl.textContent = user.displayName || user.email;
     document.getElementById('user-avatar').src = user.photoURL || '';
     init();
     initLoveEvents();
