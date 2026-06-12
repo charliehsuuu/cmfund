@@ -2,8 +2,10 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#1e9bd4">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="CMfund">
@@ -76,11 +78,11 @@ body {
 .google-btn img { width:22px; }
 
 /* ── MAIN APP ── */
-#app { display:none; padding:20px 16px 60px; max-width:540px; margin:0 auto; }
+#app { display:none; padding:max(env(safe-area-inset-top,0px),20px) 16px 60px; max-width:540px; margin:0 auto; }
 
 /* Header */
 .header { text-align:center; margin-bottom:24px; }
-.header-deco { font-size:2rem; margin-bottom:4px; margin-left:-16px; margin-right:-16px; margin-top:-20px; overflow:hidden; }
+.header-deco { font-size:2rem; margin-bottom:4px; margin-left:-16px; margin-right:-16px; margin-top:calc(-1 * max(env(safe-area-inset-top,0px),20px)); overflow:hidden; }
 .header h1 { font-size:1.6rem; font-weight:700; color:var(--accent); }
 .header-title-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.5; margin-top:4px; }
 .header-subtitle-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:.9rem; color:#c084a0; font-weight:700; letter-spacing:.06em; }
@@ -382,7 +384,7 @@ body {
 .nav-item:active .nav-icon { transform: scale(.9); }
 
 /* ── PAGES ── */
-.love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
+.love-page { display: none; padding: max(env(safe-area-inset-top,0px),20px) 16px 90px; max-width: 540px; margin: 0 auto; }
 .love-page.active { display: block; }
 /* 頁面轉場 */
 /* ── 頁面轉場：GPU compositor only ── */
