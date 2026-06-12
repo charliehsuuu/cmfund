@@ -1269,7 +1269,6 @@ let selectedCat = '';
 let currentDate = new Date();
 let currentMonthDate = new Date();
 let transactions = [];
-let allTxCache = {};
 let unsubscribe = null;
 let filterCat = 'all';
 let monthBudget = parseInt(localStorage.getItem('cmfund_budget') || '0');
@@ -1352,6 +1351,7 @@ onAuthStateChanged(auth, user => {
 });
 
 // ── Helpers ──
+function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 function formatDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function formatDateDisplay(d) {
   const w = ['日','一','二','三','四','五','六'];
@@ -1533,11 +1533,11 @@ function renderList() {
     const sign = t.type === 'income' ? '+' : '-';
     const wc = whoClass(t.who);
     const wl = (t.who && t.who !== '匿名') ? whoLabel(t.who) : '';
-    const whoSpan = wl ? `<span class="tx-who ${wc}">${wl}</span>` : '';
+    const whoSpan = wl ? `<span class="tx-who ${wc}">${esc(wl)}</span>` : '';
     return `<div class="tx-item">
       <div class="tx-dot ${cls}"></div>
       <div class="tx-info">
-        <div class="tx-desc">${t.desc || ''}</div>
+        <div class="tx-desc">${esc(t.desc)}</div>
         <div class="tx-meta">
           <span class="tx-tag">${t.cat || ''}</span>
           <span class="tx-time">${t.time || ''}</span>
@@ -1847,11 +1847,11 @@ async function renderMonthly() {
     return `<div class="tx-item">
       <div class="tx-dot ${cls}"></div>
       <div class="tx-info">
-        <div class="tx-desc">${t.desc}</div>
+        <div class="tx-desc">${esc(t.desc)}</div>
         <div class="tx-meta">
           <span class="tx-tag">${t.cat}</span>
           <span class="tx-time">${dateDisp} ${t.time}</span>
-          ${wl ? `<span class="tx-who ${wc}">${wl}</span>` : ''}
+          ${wl ? `<span class="tx-who ${wc}">${esc(wl)}</span>` : ''}
         </div>
       </div>
       <div class="tx-amount ${cls}">${sign}${fmt(t.amount)}</div>
@@ -2097,8 +2097,8 @@ window.switchPage = function(page, direction) {
 // LOVE EVENTS — Firebase 共享（兩人共用）
 // ══════════════════════════════════════════
 const LOVE_SCORES  = { '吃飯': 2, '旅遊': 5, '愛愛': 2, '吵架': -5, '其他': 0, '大運動': 3, '小運動': 1, '鬥嘴': -2 };
-const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝', '大運動': '🏋️', '小運動': '🚶', '鬥嘴': '🗣️' };
-const CAT_COLORS   = { '吃飯': '#d4a017', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#374151', '其他': '#9ca3af', '大運動': '#0d9488', '小運動': '#38bdf8', '鬥嘴': '#78350f' };
+const LOVE_EMOJIS  = { '吃飯': '🍽️', '旅遊': '✈️', '愛愛': '💕', '吵架': '💢', '其他': '📝', '大運動': '🏋️', '小運動': '🚶', '鬥嘴': '🗣️', '圓夢': '🌟' };
+const CAT_COLORS   = { '吃飯': '#d4a017', '旅遊': '#3b82f6', '愛愛': '#ec4899', '吵架': '#374151', '其他': '#9ca3af', '大運動': '#0d9488', '小運動': '#38bdf8', '鬥嘴': '#78350f', '圓夢': '#16a34a' };
 const LOVE_KEY     = 'cmfund_love_events'; // 舊 localStorage key（僅用於搬移）
 
 // Helpers
@@ -2253,7 +2253,7 @@ function renderDayPanel() {
         '<div class="day-ev-dot" style="background:' + color + '"></div>' +
         '<span style="font-size:1.1rem">' + emoji + '</span>' +
         '<span class="day-ev-cat">' + cat + '</span>' +
-        (e.note ? '<span class="day-ev-note">' + e.note + '</span>' : '<span class="day-ev-note"></span>') +
+        (e.note ? '<span class="day-ev-note">' + esc(e.note) + '</span>' : '<span class="day-ev-note"></span>') +
         '<span class="day-ev-score ' + sc + '">' + stxt + ' 分</span>' +
         (isOwn ? `<button class="day-ev-edit" onclick="editLoveEvent('${safeId}')">編輯</button>` : '') +
         (isOwn ? `<button class="day-ev-del" onclick="deleteLoveEvent('${safeId}')" title="刪除">🗑️</button>` : '') +
@@ -2381,8 +2381,6 @@ function getDaysTogether() {
 function renderLoveScore() {
   // ── 在一起天數 ──
   const dt = getDaysTogether();
-  const dEl = document.getElementById('love-days-number');
-  const dLb = document.getElementById('love-days-label');
   // 翻頁桌曆：直接填入數字
   const mEl = document.getElementById('flip-months');
   const dDEl = document.getElementById('flip-days');
@@ -2500,7 +2498,7 @@ function renderLoveScore() {
           ${whoName ? '<span class="who-badge ' + wc + '">' + whoName + '</span>' : ''}
         </div>
         <div class="score-hist-date">${e.date}</div>
-        ${e.note ? `<div class="score-hist-note">${e.note}</div>` : ''}
+        ${e.note ? `<div class="score-hist-note">${esc(e.note)}</div>` : ''}
       </div>
       <div class="score-hist-pts ${sc}">${stxt}</div>
     </div>`;
@@ -2571,11 +2569,13 @@ function editWhisper(id) {
   const el = document.getElementById('wn-' + id);
   if (!el) return;
   const textEl = el.querySelector('.wn-text');
+  // 將原始文字存在 dataset，避免 onclick 字串轉義問題
+  textEl.dataset.origText = textEl.textContent;
   const cur = textEl.textContent;
-  textEl.innerHTML = `<input class="wn-edit-input" id="wn-ei-${id}" value="${cur.replace(/"/g,'&quot;')}" maxlength="60">
+  textEl.innerHTML = `<input class="wn-edit-input" id="wn-ei-${id}" value="${esc(cur)}" maxlength="60">
     <div class="wn-actions">
       <button class="wn-btn wn-save-btn" onclick="saveWhisper('${id}')">儲存</button>
-      <button class="wn-btn wn-edit-btn" onclick="cancelWhisperEdit('${id}','${cur.replace(/'/g,"\'")}')">取消</button>
+      <button class="wn-btn wn-edit-btn" onclick="cancelWhisperEdit('${id}')">取消</button>
     </div>`;
   document.getElementById('wn-ei-' + id).focus();
 }
@@ -2588,10 +2588,12 @@ async function saveWhisper(id) {
   await update(ref(db, 'whispers/' + id), { text: newText, edited: true });
 }
 
-function cancelWhisperEdit(id, orig) {
+function cancelWhisperEdit(id) {
   const el = document.getElementById('wn-' + id);
   if (!el) return;
-  el.querySelector('.wn-text').textContent = orig;
+  const textEl = el.querySelector('.wn-text');
+  textEl.textContent = textEl.dataset.origText || '';
+  delete textEl.dataset.origText;
 }
 
 const NOTE_COLORS = ['wn-0','wn-1','wn-2','wn-3'];
@@ -2617,10 +2619,10 @@ onValue(ref(db, 'whispers'), snap => {
       : `<div class="wn-actions"><button class="wn-btn wn-tear-btn" onclick="deleteWhisper('${m.id}')">🗑 撕掉</button></div>`;
     return `<div class="whisper-note ${NOTE_COLORS[i % 4]}" id="wn-${m.id}">
       <div class="wn-header">
-        <span class="wn-who">${m.who}</span>
+        <span class="wn-who">${esc(m.who)}</span>
         <span class="wn-time">${timeStr}</span>
       </div>
-      <div class="wn-text">${m.text}${editedTag}</div>
+      <div class="wn-text">${esc(m.text)}${editedTag}</div>
       ${actions}
     </div>`;
   }).join('');
@@ -2673,7 +2675,7 @@ onValue(ref(db, 'wishes'), snap => {
         ? `<button class="wish-fulfill-btn" onclick="fulfillWish('${w.id}','${w.text.replace(/'/g,"\'")}','${w.who.replace(/'/g,"\'")}')">圓夢 ✨</button>`
         : `<span style="font-size:.72rem;color:#86efac;">等待中…</span>`;
     return `<div class="wish-item${w.fulfilled?' fulfilled':''}">
-      <div><div class="wish-item-text">${w.text}</div><div class="wish-item-who">${w.who} 的心願</div></div>
+      <div><div class="wish-item-text">${esc(w.text)}</div><div class="wish-item-who">${esc(w.who)} 的心願</div></div>
       ${badge}
     </div>`;
   }).join('');
