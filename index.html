@@ -383,12 +383,33 @@ body {
 .love-page { display: none; padding: 20px 16px 90px; max-width: 540px; margin: 0 auto; }
 .love-page.active { display: block; }
 /* 頁面轉場 */
-.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
-.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
-@keyframes slideInLeft  { from { opacity:0; transform:translateX(40px);  } to { opacity:1; transform:translateX(0); } }
-@keyframes slideInRight { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
-#app.page-slide-enter-left  { animation: slideInLeft  .28s cubic-bezier(.25,.46,.45,.94) both; }
-#app.page-slide-enter-right { animation: slideInRight .28s cubic-bezier(.25,.46,.45,.94) both; }
+/* ── 頁面平行橫移轉場 ── */
+/* 退場：滑出＋漸消 */
+@keyframes pageExitLeft {
+  0%   { opacity:1; transform:translateX(0); }
+  35%  { opacity:.65; transform:translateX(-18%); }
+  100% { opacity:0;  transform:translateX(-42%); }
+}
+@keyframes pageExitRight {
+  0%   { opacity:1; transform:translateX(0); }
+  35%  { opacity:.65; transform:translateX(18%); }
+  100% { opacity:0;  transform:translateX(42%); }
+}
+/* 進場：滑入＋漸現 */
+@keyframes pageEnterLeft {
+  0%   { opacity:0; transform:translateX(55%); }
+  45%  { opacity:.7; transform:translateX(12%); }
+  100% { opacity:1; transform:translateX(0); }
+}
+@keyframes pageEnterRight {
+  0%   { opacity:0; transform:translateX(-55%); }
+  45%  { opacity:.7; transform:translateX(-12%); }
+  100% { opacity:1; transform:translateX(0); }
+}
+.page-exit-left  { animation: pageExitLeft  .38s cubic-bezier(.4,0,.2,1) forwards; }
+.page-exit-right { animation: pageExitRight .38s cubic-bezier(.4,0,.2,1) forwards; }
+.page-enter-left  { animation: pageEnterLeft  .38s cubic-bezier(.4,0,.2,1) both; }
+.page-enter-right { animation: pageEnterRight .38s cubic-bezier(.4,0,.2,1) both; }
 
 /* ── LOVE CALENDAR PAGE ── */
 .love-page-header { text-align: center; margin-bottom: 20px; }
@@ -1948,40 +1969,95 @@ function prefillTimeInput() {
 const PAGE_ORDER_MAIN = ['cmfund', 'love-calendar', 'love-score'];
 let _currentPageKey = 'cmfund';
 
-window.switchPage = function(page, direction) {
-  const animClass = direction === 'left' ? 'page-slide-enter-left' : direction === 'right' ? 'page-slide-enter-right' : '';
+let _isTransitioning = false;
 
-  // Hide all
+function _getPageEl(key) {
+  return key === 'cmfund'
+    ? document.getElementById('app')
+    : document.getElementById('page-' + key);
+}
+
+function _showPage(key) {
   const appEl = document.getElementById('app');
-  appEl.style.display = 'none';
-  appEl.classList.remove('page-slide-enter-left','page-slide-enter-right');
-  document.querySelectorAll('.love-page').forEach(p => {
-    p.classList.remove('active','page-slide-enter-left','page-slide-enter-right');
-  });
+  const fab   = document.querySelector('.love-fab');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const fab = document.querySelector('.love-fab');
   if (fab) fab.classList.remove('show');
 
-  _currentPageKey = page;
-
-  if (page === 'cmfund') {
+  if (key === 'cmfund') {
     appEl.style.display = 'block';
-    if (animClass) { void appEl.offsetWidth; appEl.classList.add(animClass); }
     document.getElementById('nav-cmfund').classList.add('active');
-  } else if (page === 'love-calendar') {
+  } else if (key === 'love-calendar') {
     const pg = document.getElementById('page-love-calendar');
     pg.classList.add('active');
-    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
     document.getElementById('nav-love-cal').classList.add('active');
     if (fab) fab.classList.add('show');
     renderCalendar();
-  } else if (page === 'love-score') {
+  } else if (key === 'love-score') {
     const pg = document.getElementById('page-love-score');
     pg.classList.add('active');
-    if (animClass) { void pg.offsetWidth; pg.classList.add(animClass); }
     document.getElementById('nav-love-score').classList.add('active');
     renderLoveScore();
   }
+}
+
+function _hidePage(key) {
+  if (key === 'cmfund') {
+    document.getElementById('app').style.display = 'none';
+  } else {
+    const pg = document.getElementById('page-' + key);
+    if (pg) pg.classList.remove('active');
+  }
+}
+
+window.switchPage = function(page, direction) {
+  if (page === _currentPageKey || _isTransitioning) return;
+  _isTransitioning = true;
+
+  const prevKey = _currentPageKey;
+  const outEl   = _getPageEl(prevKey);
+  const exitCls  = direction === 'left'  ? 'page-exit-left'  : direction === 'right' ? 'page-exit-right'  : null;
+  const enterCls = direction === 'left'  ? 'page-enter-left' : direction === 'right' ? 'page-enter-right' : null;
+
+  // Fix outgoing page in place so it overlaps while animating
+  if (outEl && exitCls) {
+    outEl.style.position = 'fixed';
+    outEl.style.top      = '0';
+    outEl.style.left     = '0';
+    outEl.style.right    = '0';
+    outEl.style.zIndex   = '60';
+    outEl.style.overflowY = 'hidden';
+    void outEl.offsetWidth;
+    outEl.classList.add(exitCls);
+  }
+
+  // Show new page immediately (slides in behind the exiting one)
+  _currentPageKey = page;
+  _showPage(page);
+
+  const inEl = _getPageEl(page);
+  if (inEl && enterCls) {
+    void inEl.offsetWidth;
+    inEl.classList.add(enterCls);
+    inEl.addEventListener('animationend', () => {
+      inEl.classList.remove(enterCls);
+    }, { once: true });
+  }
+
+  // Clean up outgoing after animation
+  const DURATION = 400;
+  setTimeout(() => {
+    if (outEl && exitCls) {
+      outEl.classList.remove(exitCls);
+      outEl.style.position  = '';
+      outEl.style.top       = '';
+      outEl.style.left      = '';
+      outEl.style.right     = '';
+      outEl.style.zIndex    = '';
+      outEl.style.overflowY = '';
+      _hidePage(prevKey);
+    }
+    _isTransitioning = false;
+  }, DURATION);
 };
 
 // ── 左右滑動切換頁面（含轉場方向）──
