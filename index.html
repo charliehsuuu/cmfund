@@ -632,23 +632,26 @@ body {
 .float-emoji { position:fixed; pointer-events:none; z-index:9999; font-size:2rem; animation:floatUp 2.5s ease-out forwards; }
 /* Whisper Notes */
 /* ── 便條紙軟木板 ── */
-.whisper-section { background:linear-gradient(135deg,#c8a46a,#b8904a); border-radius:20px; padding:14px 14px 14px; margin-bottom:12px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.15); }
-.whisper-title { font-size:.82rem; font-weight:700; color:#fff; margin-bottom:10px; display:flex; align-items:center; gap:5px; text-shadow:0 1px 2px rgba(0,0,0,0.3); }
-.whisper-list { display:flex; flex-direction:column; gap:10px; margin-bottom:10px; }
+.whisper-section { background:linear-gradient(170deg,#ffffff 0%,#ececec 100%); border:2.5px solid #c0c0c0; border-bottom:3px solid #aaaaaa; border-radius:18px 18px 14px 14px; padding:10px 26px 14px 12px; margin-bottom:12px; box-shadow:inset 1px 2px 5px rgba(255,255,255,0.95),inset -1px -1px 3px rgba(0,0,0,0.06),5px 10px 22px rgba(0,0,0,0.22); position:relative; }
+/* 冰箱把手 */
+.whisper-section::after { content:''; position:absolute; right:6px; top:38%; transform:translateY(-50%); width:9px; height:52px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:5px; box-shadow:1px 1px 4px rgba(0,0,0,0.22); }
+.whisper-title { font-size:1rem; font-weight:900; color:#cc0000; letter-spacing:3px; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-family:Arial,sans-serif; text-shadow:none; }
+.whisper-list { display:flex; flex-direction:row; gap:7px; margin-bottom:12px; align-items:flex-start; }
 /* 便條紙本體 */
 .whisper-note {
+  flex:1; min-width:0;
   position:relative; border-radius:3px 3px 4px 4px;
-  padding:28px 10px 10px;
-  font-size:.8rem; color:#3a2a10; line-height:1.5;
-  box-shadow:3px 4px 10px rgba(0,0,0,0.25), 0 1px 3px rgba(0,0,0,0.15);
+  padding:22px 7px 8px;
+  font-size:.72rem; color:#3a2a10; line-height:1.4;
+  box-shadow:2px 3px 8px rgba(0,0,0,0.22), 0 1px 2px rgba(0,0,0,0.1);
   transform-origin: top center;
   transition: transform .15s;
   overflow:hidden;
 }
 /* 膠帶條 */
 .whisper-note::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:22px;
-  background:rgba(255,255,255,0.38);
+  content:''; position:absolute; top:0; left:0; right:0; height:18px;
+  background:rgba(255,255,255,0.4);
   border-bottom:1px solid rgba(0,0,0,0.08);
 }
 /* 撕掉動畫 */
@@ -660,12 +663,12 @@ body {
 }
 .whisper-note.tearing { animation: tearOff .55s ease-in forwards; pointer-events:none; }
 /* 便條紙顏色組 */
-.wn-0 { background:#fef9c3; --wn-rot:rotate(-1.8deg); transform:rotate(-1.8deg); }
-.wn-1 { background:#fce7f3; --wn-rot:rotate(1.4deg);  transform:rotate(1.4deg); }
-.wn-2 { background:#dbeafe; --wn-rot:rotate(-1.1deg); transform:rotate(-1.1deg); }
-.wn-3 { background:#dcfce7; --wn-rot:rotate(2deg);    transform:rotate(2deg); }
+.wn-0 { background:#fef9c3; --wn-rot:rotate(-5deg) translateY(5px); transform:rotate(-5deg) translateY(5px); }
+.wn-1 { background:#fce7f3; --wn-rot:rotate(3.5deg) translateY(-4px); transform:rotate(3.5deg) translateY(-4px); }
+.wn-2 { background:#dbeafe; --wn-rot:rotate(-4deg) translateY(7px); transform:rotate(-4deg) translateY(7px); }
+.wn-3 { background:#dcfce7; --wn-rot:rotate(2.5deg) translateY(-2px); transform:rotate(2.5deg) translateY(-2px); }
 /* 便條紙內容 */
-.wn-header { position:absolute; top:4px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; }
+.wn-header { position:absolute; top:3px; left:7px; right:7px; display:flex; justify-content:space-between; align-items:center; }
 .wn-who { font-size:.68rem; font-weight:700; color:#5a3a10; }
 .wn-time { font-size:.62rem; color:#8a6030; }
 .wn-text { word-break:break-all; }
@@ -678,7 +681,7 @@ body {
 .wn-save-btn { background:rgba(40,150,80,0.15); color:#1a6030; }
 /* 輸入區 */
 .whisper-input-row { display:flex; gap:6px; }
-.whisper-input-row input { flex:1; border:none; border-radius:10px; padding:8px 12px; font-size:.8rem; background:rgba(255,255,255,0.75); outline:none; font-family:inherit; box-shadow:inset 0 1px 4px rgba(0,0,0,0.1); }
+.whisper-input-row input { flex:1; border:1.5px solid #d0d0d0; border-radius:10px; padding:8px 12px; font-size:.8rem; background:#f5f5f5; outline:none; font-family:inherit; box-shadow:inset 0 1px 3px rgba(0,0,0,0.08); }
 .whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:8px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 2px 0 #a05800; }
 /* Wish Pool */
 .wish-section { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #bbf7d0; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
@@ -1032,9 +1035,9 @@ body {
 
   <!-- Whisper Sticky Notes -->
   <div class="whisper-section">
-    <div class="whisper-title">📌 悄悄話便籤</div>
+    <div class="whisper-title">🧊 HITACHI</div>
     <div class="whisper-list" id="whisper-list">
-      <div style="font-size:.78rem;color:#a16207;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>
+      <div style="font-size:.78rem;color:#999;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>
     </div>
     <div class="whisper-input-row">
       <input type="text" id="whisper-input" placeholder="寫下你的悄悄話…" maxlength="60">
@@ -2600,11 +2603,11 @@ onValue(ref(db, 'whispers'), snap => {
   const list = document.getElementById('whisper-list');
   if (!list) return;
   if (!items.length) {
-    list.innerHTML = '<div style="font-size:.75rem;color:rgba(255,255,255,.75);text-align:center;padding:8px 0;">還沒有便籤，留下第一句話吧 💛</div>';
+    list.innerHTML = '<div style="font-size:.75rem;color:#999;text-align:center;padding:8px 0;">還沒有便籤，留下第一句話吧 💛</div>';
     return;
   }
   const me = currentWho();
-  list.innerHTML = items.slice(0, 6).map((m, i) => {
+  list.innerHTML = items.slice(0, 3).map((m, i) => {
     const d = new Date(m.ts);
     const timeStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' +
       d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
