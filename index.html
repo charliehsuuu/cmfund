@@ -628,15 +628,55 @@ body {
 @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:1;} 100%{transform:translateY(-80vh) scale(1.4);opacity:0;} }
 .float-emoji { position:fixed; pointer-events:none; z-index:9999; font-size:2rem; animation:floatUp 2.5s ease-out forwards; }
 /* Whisper Notes */
-.whisper-section { background:linear-gradient(135deg,#fffbeb,#fef3c7); border:1.5px solid #fde68a; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
-.whisper-title { font-size:.8rem; font-weight:700; color:#92400e; margin-bottom:8px; display:flex; align-items:center; gap:5px; }
-.whisper-list { max-height:120px; overflow-y:auto; margin-bottom:8px; display:flex; flex-direction:column; gap:6px; }
-.whisper-item { background:#fff; border:1px solid #fde68a; border-radius:10px; padding:7px 10px; font-size:.78rem; color:#78350f; }
-.whisper-item .wh-who { font-weight:700; color:#b45309; }
-.whisper-item .wh-time { font-size:.68rem; color:#a16207; float:right; }
+/* ── 便條紙軟木板 ── */
+.whisper-section { background:linear-gradient(135deg,#c8a46a,#b8904a); border-radius:20px; padding:14px 14px 14px; margin-bottom:12px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.15); }
+.whisper-title { font-size:.82rem; font-weight:700; color:#fff; margin-bottom:10px; display:flex; align-items:center; gap:5px; text-shadow:0 1px 2px rgba(0,0,0,0.3); }
+.whisper-list { display:flex; flex-direction:column; gap:10px; margin-bottom:10px; }
+/* 便條紙本體 */
+.whisper-note {
+  position:relative; border-radius:3px 3px 4px 4px;
+  padding:28px 10px 10px;
+  font-size:.8rem; color:#3a2a10; line-height:1.5;
+  box-shadow:3px 4px 10px rgba(0,0,0,0.25), 0 1px 3px rgba(0,0,0,0.15);
+  transform-origin: top center;
+  transition: transform .15s;
+  overflow:hidden;
+}
+/* 膠帶條 */
+.whisper-note::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:22px;
+  background:rgba(255,255,255,0.38);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+}
+/* 撕掉動畫 */
+@keyframes tearOff {
+  0%   { opacity:1; transform:var(--wn-rot) translateX(0) translateY(0) scaleY(1); }
+  25%  { opacity:.85; transform:var(--wn-rot) rotate(6deg) translateX(18px) translateY(-4px) scaleY(1); }
+  65%  { opacity:.4; transform:var(--wn-rot) rotate(20deg) translateX(80px) translateY(8px) scaleY(.7); }
+  100% { opacity:0; transform:var(--wn-rot) rotate(38deg) translateX(200px) translateY(20px) scaleY(.2); }
+}
+.whisper-note.tearing { animation: tearOff .55s ease-in forwards; pointer-events:none; }
+/* 便條紙顏色組 */
+.wn-0 { background:#fef9c3; --wn-rot:rotate(-1.8deg); transform:rotate(-1.8deg); }
+.wn-1 { background:#fce7f3; --wn-rot:rotate(1.4deg);  transform:rotate(1.4deg); }
+.wn-2 { background:#dbeafe; --wn-rot:rotate(-1.1deg); transform:rotate(-1.1deg); }
+.wn-3 { background:#dcfce7; --wn-rot:rotate(2deg);    transform:rotate(2deg); }
+/* 便條紙內容 */
+.wn-header { position:absolute; top:4px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; }
+.wn-who { font-size:.68rem; font-weight:700; color:#5a3a10; }
+.wn-time { font-size:.62rem; color:#8a6030; }
+.wn-text { word-break:break-all; }
+.wn-actions { margin-top:6px; display:flex; gap:6px; justify-content:flex-end; }
+.wn-btn { font-size:.68rem; border:none; border-radius:6px; padding:3px 8px; cursor:pointer; font-family:inherit; font-weight:700; }
+.wn-edit-btn { background:rgba(0,0,0,0.08); color:#5a3a10; }
+.wn-tear-btn { background:rgba(200,60,60,0.12); color:#c04040; }
+/* 編輯狀態 */
+.wn-edit-input { width:100%; border:1.5px solid rgba(0,0,0,0.15); border-radius:6px; padding:4px 6px; font-size:.8rem; background:rgba(255,255,255,0.6); font-family:inherit; outline:none; margin-top:2px; }
+.wn-save-btn { background:rgba(40,150,80,0.15); color:#1a6030; }
+/* 輸入區 */
 .whisper-input-row { display:flex; gap:6px; }
-.whisper-input-row input { flex:1; border:1.5px solid #fde68a; border-radius:10px; padding:7px 10px; font-size:.8rem; background:#fffbeb; outline:none; font-family:inherit; }
-.whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:7px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; }
+.whisper-input-row input { flex:1; border:none; border-radius:10px; padding:8px 12px; font-size:.8rem; background:rgba(255,255,255,0.75); outline:none; font-family:inherit; box-shadow:inset 0 1px 4px rgba(0,0,0,0.1); }
+.whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:8px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 2px 0 #a05800; }
 /* Wish Pool */
 .wish-section { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #bbf7d0; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
 .wish-title { font-size:.8rem; font-weight:700; color:#14532d; margin-bottom:10px; display:flex; align-items:center; gap:5px; }
@@ -2433,24 +2473,77 @@ function sendWhisper() {
   input.value = '';
 }
 
+function deleteWhisper(id) {
+  const el = document.getElementById('wn-' + id);
+  if (!el) return;
+  el.classList.add('tearing');
+  setTimeout(() => remove(ref(db, 'whispers/' + id)), 520);
+}
+
+function editWhisper(id) {
+  const el = document.getElementById('wn-' + id);
+  if (!el) return;
+  const textEl = el.querySelector('.wn-text');
+  const cur = textEl.textContent;
+  textEl.innerHTML = `<input class="wn-edit-input" id="wn-ei-${id}" value="${cur.replace(/"/g,'&quot;')}" maxlength="60">
+    <div class="wn-actions">
+      <button class="wn-btn wn-save-btn" onclick="saveWhisper('${id}')">儲存</button>
+      <button class="wn-btn wn-edit-btn" onclick="cancelWhisperEdit('${id}','${cur.replace(/'/g,"\'")}')">取消</button>
+    </div>`;
+  document.getElementById('wn-ei-' + id).focus();
+}
+
+async function saveWhisper(id) {
+  const input = document.getElementById('wn-ei-' + id);
+  if (!input) return;
+  const newText = input.value.trim();
+  if (!newText) return;
+  await update(ref(db, 'whispers/' + id), { text: newText, edited: true });
+}
+
+function cancelWhisperEdit(id, orig) {
+  const el = document.getElementById('wn-' + id);
+  if (!el) return;
+  el.querySelector('.wn-text').textContent = orig;
+}
+
+const NOTE_COLORS = ['wn-0','wn-1','wn-2','wn-3'];
 onValue(ref(db, 'whispers'), snap => {
   const items = [];
-  snap.forEach(child => items.push(child.val()));
+  snap.forEach(child => items.push({ id: child.key, ...child.val() }));
   items.sort((a,b) => b.ts - a.ts);
   const list = document.getElementById('whisper-list');
   if (!list) return;
   if (!items.length) {
-    list.innerHTML = '<div style="font-size:.78rem;color:#a16207;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>';
+    list.innerHTML = '<div style="font-size:.75rem;color:rgba(255,255,255,.75);text-align:center;padding:8px 0;">還沒有便籤，留下第一句話吧 💛</div>';
     return;
   }
-  list.innerHTML = items.slice(0, 5).map(m => {
+  const me = currentWho();
+  list.innerHTML = items.slice(0, 6).map((m, i) => {
     const d = new Date(m.ts);
-    const timeStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
-    return `<div class="whisper-item"><span class="wh-who">${m.who}：</span>${m.text}<span class="wh-time">${timeStr}</span></div>`;
+    const timeStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' +
+      d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+    const isMe = m.who === me;
+    const editedTag = m.edited ? ' <span style="font-size:.6rem;opacity:.6">(已編輯)</span>' : '';
+    const actions = isMe
+      ? `<div class="wn-actions"><button class="wn-btn wn-edit-btn" onclick="editWhisper('${m.id}')">✏️ 編輯</button></div>`
+      : `<div class="wn-actions"><button class="wn-btn wn-tear-btn" onclick="deleteWhisper('${m.id}')">🗑 撕掉</button></div>`;
+    return `<div class="whisper-note ${NOTE_COLORS[i % 4]}" id="wn-${m.id}">
+      <div class="wn-header">
+        <span class="wn-who">${m.who}</span>
+        <span class="wn-time">${timeStr}</span>
+      </div>
+      <div class="wn-text">${m.text}${editedTag}</div>
+      ${actions}
+    </div>`;
   }).join('');
 });
 
-window.sendWhisper = sendWhisper;
+window.sendWhisper      = sendWhisper;
+window.deleteWhisper    = deleteWhisper;
+window.editWhisper      = editWhisper;
+window.saveWhisper      = saveWhisper;
+window.cancelWhisperEdit = cancelWhisperEdit;
 
 // ── Wish Pool ──
 function addWish() {
