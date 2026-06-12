@@ -43,26 +43,18 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 
-/* Sky blue for status bar area — fixed strip behind iOS status bar */
+/* Status bar + body background */
 html { background: #1e9bd4; }
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: env(safe-area-inset-top, 44px);
-  background: radial-gradient(ellipse 200% 400% at 50% 200%, #a8dff5 0%, #5ec8ef 40%, #1e9bd4 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-/* Polka dot background */
 body {
   background-color: var(--bg);
   background-image:
+    linear-gradient(to bottom, #3ab8e8 0px, #6dd0f0 30px, transparent 70px),
     radial-gradient(circle, #d4a8b820 10px, transparent 10px),
     radial-gradient(circle, #a8c8a820 8px, transparent 8px),
     radial-gradient(circle, #c8b8e820 6px, transparent 6px);
-  background-size: 80px 80px, 60px 60px, 100px 100px;
-  background-position: 0 0, 30px 30px, 50px 10px;
+  background-size: 100% 100%, 80px 80px, 60px 60px, 100px 100px;
+  background-attachment: fixed, scroll, scroll, scroll;
+  background-position: 0 0, 0 0, 30px 30px, 50px 10px;
   color:var(--text); font-family:'Noto Sans TC','PingFang TC','Hiragino Sans GB','Microsoft JhengHei',sans-serif; min-height:100vh; font-size:18px;
 }
 
@@ -691,7 +683,7 @@ body {
 /* 輸入區 */
 .whisper-input-row { display:flex; gap:6px; }
 .whisper-input-row input { flex:1; border:1.5px solid #d0d0d0; border-radius:10px; padding:8px 12px; font-size:.8rem; background:#f5f5f5; outline:none; font-family:inherit; box-shadow:inset 0 1px 3px rgba(0,0,0,0.08); }
-.whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:8px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 2px 0 #a05800; }
+.whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:8px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 2px 0 #a05800; white-space:nowrap; }
 /* Wish Pool */
 .wish-section { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #bbf7d0; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
 .wish-title { font-size:.8rem; font-weight:700; color:#14532d; margin-bottom:10px; display:flex; align-items:center; gap:5px; }
