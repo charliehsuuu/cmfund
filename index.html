@@ -2011,44 +2011,50 @@ function _hidePage(key) {
   }
 }
 
+const PAGE_ORDER_FOR_DIR = ['cmfund', 'love-calendar', 'love-score'];
+
 window.switchPage = function(page, direction) {
   if (page === _currentPageKey || _isTransitioning) return;
   _isTransitioning = true;
 
-  const prevKey = _currentPageKey;
-  const outEl   = _getPageEl(prevKey);
-  const exitCls  = direction === 'left'  ? 'page-exit-left'  : direction === 'right' ? 'page-exit-right'  : null;
-  const enterCls = direction === 'left'  ? 'page-enter-left' : direction === 'right' ? 'page-enter-right' : null;
+  // 自動推算方向（nav 按鈕沒傳 direction 時）
+  if (!direction) {
+    const ci = PAGE_ORDER_FOR_DIR.indexOf(_currentPageKey);
+    const ni = PAGE_ORDER_FOR_DIR.indexOf(page);
+    if (ci >= 0 && ni >= 0) direction = ni > ci ? 'left' : 'right';
+  }
 
-  // Fix outgoing page in place so it overlaps while animating
-  if (outEl && exitCls) {
-    outEl.style.position = 'fixed';
-    outEl.style.top      = '0';
-    outEl.style.left     = '0';
-    outEl.style.right    = '0';
-    outEl.style.zIndex   = '60';
+  const prevKey  = _currentPageKey;
+  const outEl    = _getPageEl(prevKey);
+  const exitCls  = direction === 'left'  ? 'page-exit-left'  : 'page-exit-right';
+  const enterCls = direction === 'left'  ? 'page-enter-left' : 'page-enter-right';
+
+  // 舊頁面固定在畫面上動畫滑出
+  if (outEl) {
+    outEl.style.position  = 'fixed';
+    outEl.style.top       = '0';
+    outEl.style.left      = '0';
+    outEl.style.right     = '0';
+    outEl.style.zIndex    = '60';
     outEl.style.overflowY = 'hidden';
     void outEl.offsetWidth;
     outEl.classList.add(exitCls);
   }
 
-  // Show new page immediately (slides in behind the exiting one)
+  // 新頁面同時滑入
   _currentPageKey = page;
   _showPage(page);
 
   const inEl = _getPageEl(page);
-  if (inEl && enterCls) {
+  if (inEl) {
     void inEl.offsetWidth;
     inEl.classList.add(enterCls);
-    inEl.addEventListener('animationend', () => {
-      inEl.classList.remove(enterCls);
-    }, { once: true });
+    inEl.addEventListener('animationend', () => inEl.classList.remove(enterCls), { once: true });
   }
 
-  // Clean up outgoing after animation
-  const DURATION = 400;
+  // 動畫結束後清理舊頁面（一定執行，不論有無 direction）
   setTimeout(() => {
-    if (outEl && exitCls) {
+    if (outEl) {
       outEl.classList.remove(exitCls);
       outEl.style.position  = '';
       outEl.style.top       = '';
@@ -2056,10 +2062,10 @@ window.switchPage = function(page, direction) {
       outEl.style.right     = '';
       outEl.style.zIndex    = '';
       outEl.style.overflowY = '';
-      _hidePage(prevKey);
     }
+    _hidePage(prevKey);   // 一定要隱藏舊頁面
     _isTransitioning = false;
-  }, DURATION);
+  }, 420);
 };
 
 // ── 左右滑動切換頁面（含轉場方向）──
