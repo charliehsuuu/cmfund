@@ -633,14 +633,14 @@ body {
 .float-emoji { position:fixed; pointer-events:none; z-index:9999; font-size:2rem; animation:floatUp 2.5s ease-out forwards; }
 /* Whisper Notes */
 /* ── 便條紙軟木板 ── */
-.whisper-section { background:linear-gradient(170deg,#ffffff 0%,#ececec 100%); border:2.5px solid #c0c0c0; border-bottom:3px solid #aaaaaa; border-radius:18px 18px 14px 14px; padding:12px 26px 18px 12px; margin-bottom:12px; box-shadow:inset 1px 2px 5px rgba(255,255,255,0.95),inset -1px -1px 3px rgba(0,0,0,0.06),5px 10px 22px rgba(0,0,0,0.22); position:relative; }
+.whisper-section { background:linear-gradient(170deg,#ffffff 0%,#ececec 100%); border:2.5px solid #c0c0c0; border-bottom:3px solid #aaaaaa; border-radius:18px 18px 14px 14px; padding:14px 26px 20px 14px; margin-bottom:12px; box-shadow:inset 1px 2px 5px rgba(255,255,255,0.95),inset -1px -1px 3px rgba(0,0,0,0.06),5px 10px 22px rgba(0,0,0,0.22); position:relative; }
 /* 冰箱把手 */
-.whisper-section::after { content:''; position:absolute; right:6px; top:42%; transform:translateY(-50%); width:9px; height:65px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:5px; box-shadow:1px 1px 4px rgba(0,0,0,0.22); }
+.whisper-section::after { content:''; position:absolute; right:6px; top:45%; transform:translateY(-50%); width:9px; height:70px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:5px; box-shadow:1px 1px 4px rgba(0,0,0,0.22); }
 .whisper-title { font-size:1rem; font-weight:900; color:#cc0000; letter-spacing:3px; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-family:Arial,sans-serif; text-shadow:none; }
-.whisper-list { display:flex; flex-direction:row; gap:10px; margin-bottom:14px; align-items:stretch; }
+.whisper-list { display:flex; flex-direction:row; gap:14px; margin-bottom:14px; align-items:stretch; }
 /* 便條紙本體 */
 .whisper-note {
-  flex:1; min-width:0; min-height:130px;
+  flex:1; min-width:0; min-height:155px;
   position:relative; border-radius:3px 3px 4px 4px;
   padding:24px 9px 10px;
   font-size:.75rem; color:#3a2a10; line-height:1.5;
@@ -664,9 +664,9 @@ body {
 }
 .whisper-note.tearing { animation: tearOff .55s ease-in forwards; pointer-events:none; }
 /* 便條紙顏色組 */
-.wn-0 { background:#fef9c3; --wn-rot:rotate(-5deg) translateY(5px); transform:rotate(-5deg) translateY(5px); }
-.wn-1 { background:#fce7f3; --wn-rot:rotate(3.5deg) translateY(-4px); transform:rotate(3.5deg) translateY(-4px); }
-.wn-2 { background:#dbeafe; --wn-rot:rotate(-4deg) translateY(7px); transform:rotate(-4deg) translateY(7px); }
+.wn-0 { background:#fef9c3; --wn-rot:rotate(-1.5deg) translateY(3px); transform:rotate(-1.5deg) translateY(3px); }
+.wn-1 { background:#fce7f3; --wn-rot:rotate(1.8deg) translateY(-3px); transform:rotate(1.8deg) translateY(-3px); }
+.wn-2 { background:#dbeafe; --wn-rot:rotate(-1.2deg) translateY(5px); transform:rotate(-1.2deg) translateY(5px); }
 .wn-3 { background:#dcfce7; --wn-rot:rotate(2.5deg) translateY(-2px); transform:rotate(2.5deg) translateY(-2px); }
 /* 便條紙內容 */
 .wn-header { position:absolute; top:3px; left:7px; right:7px; display:flex; justify-content:space-between; align-items:center; }
