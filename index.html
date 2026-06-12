@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#1e9bd4">
+<meta name="theme-color" content="#7dd3fc">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -43,18 +43,16 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 
-/* Status bar + body background */
-html { background: #1e9bd4; }
+/* Body background */
+html { background: #7dd3fc; }
 body {
   background-color: var(--bg);
   background-image:
-    linear-gradient(to bottom, #3ab8e8 0px, #6dd0f0 30px, transparent 70px),
     radial-gradient(circle, #d4a8b820 10px, transparent 10px),
     radial-gradient(circle, #a8c8a820 8px, transparent 8px),
     radial-gradient(circle, #c8b8e820 6px, transparent 6px);
-  background-size: 100% 100%, 80px 80px, 60px 60px, 100px 100px;
-  background-attachment: fixed, scroll, scroll, scroll;
-  background-position: 0 0, 0 0, 30px 30px, 50px 10px;
+  background-size: 80px 80px, 60px 60px, 100px 100px;
+  background-position: 0 0, 30px 30px, 50px 10px;
   color:var(--text); font-family:'Noto Sans TC','PingFang TC','Hiragino Sans GB','Microsoft JhengHei',sans-serif; min-height:100vh; font-size:18px;
 }
 
@@ -78,11 +76,11 @@ body {
 .google-btn img { width:22px; }
 
 /* ── MAIN APP ── */
-#app { display:none; padding:max(env(safe-area-inset-top,0px),20px) 16px 60px; max-width:540px; margin:0 auto; }
+#app { display:none; padding:0 16px 60px; max-width:540px; margin:0 auto; }
 
 /* Header */
 .header { text-align:center; margin-bottom:24px; }
-.header-deco { font-size:0; line-height:0; margin-bottom:4px; margin-left:-16px; margin-right:-16px; margin-top:calc(-1 * max(env(safe-area-inset-top,0px),20px)); overflow:hidden; }
+.header-deco { font-size:0; line-height:0; margin-bottom:4px; margin-left:-16px; margin-right:-16px; margin-top:0; padding-top:env(safe-area-inset-top,0px); background:linear-gradient(to bottom,#7dd3fc 0%,#a8dff5 100%); overflow:hidden; }
 .header h1 { font-size:1.6rem; font-weight:700; color:var(--accent); }
 .header-title-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.5; margin-top:4px; }
 .header-subtitle-cute { font-family:'Zen Maru Gothic','Noto Sans TC','PingFang TC','Hiragino Sans GB',sans-serif; font-size:.9rem; color:#c084a0; font-weight:700; letter-spacing:.06em; }
