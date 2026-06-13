@@ -632,8 +632,7 @@ body {
 /* Whisper Notes */
 /* ── 雙人專屬便條紙 ── */
 .whisper-dual { display:flex; gap:10px; margin-bottom:12px; }
-.whisper-board { flex:1; min-width:0; border-radius:16px 16px 12px 12px; padding:12px 22px 14px 12px; position:relative; box-shadow:3px 8px 20px rgba(0,0,0,0.18); }
-.whisper-board::after { content:''; position:absolute; right:6px; top:45%; transform:translateY(-50%); width:7px; height:55px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:4px; box-shadow:1px 1px 3px rgba(0,0,0,0.2); }
+.whisper-board { flex:1; min-width:0; border-radius:16px 16px 12px 12px; padding:12px 12px 14px 12px; position:relative; box-shadow:3px 8px 20px rgba(0,0,0,0.18); overflow:hidden; }
 .whisper-board-charlie { background:linear-gradient(170deg,#e8f4fd 0%,#d0e8f8 100%); border:2px solid #6898c8; border-bottom:3px solid #4070a0; }
 .whisper-board-nini    { background:linear-gradient(170deg,#fff0f5 0%,#ffd6e0 100%); border:2px solid #e09090; border-bottom:3px solid #c06070; }
 .whisper-board-title { font-size:.82rem; font-weight:900; letter-spacing:1px; margin-bottom:8px; display:flex; align-items:center; gap:4px; }
@@ -687,7 +686,7 @@ body {
 .wn-save-btn { background:rgba(40,150,80,0.15); color:#1a6030; }
 /* 輸入區 */
 .whisper-input-row { display:flex; gap:6px; }
-.whisper-input-row input { flex:1; border:1.5px solid #d0d0d0; border-radius:10px; padding:8px 12px; font-size:.8rem; background:#f5f5f5; outline:none; font-family:inherit; box-shadow:inset 0 1px 3px rgba(0,0,0,0.08); }
+.whisper-input-row input { flex:1; min-width:0; border:1.5px solid #d0d0d0; border-radius:10px; padding:8px 10px; font-size:.8rem; background:#f5f5f5; outline:none; font-family:inherit; box-shadow:inset 0 1px 3px rgba(0,0,0,0.08); }
 .whisper-input-row button { background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; border:none; border-radius:10px; padding:8px 14px; font-size:.8rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 2px 0 #a05800; white-space:nowrap; }
 /* Wish Pool */
 .wish-section { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #bbf7d0; border-radius:20px; padding:14px 16px; margin-bottom:12px; }
@@ -1363,6 +1362,7 @@ onAuthStateChanged(auth, user => {
     document.getElementById('user-avatar').src = user.photoURL || '';
     init();
     initLoveEvents();
+    updateWhisperInputVisibility();
   } else {
     currentUser = null;
     document.getElementById('login-screen').style.display = 'flex';
@@ -2574,8 +2574,14 @@ window.sendPulse = sendPulse;
 const NOTE_COLORS = ['wn-0','wn-1','wn-2','wn-3'];
 
 function whisperOwnerKey(owner) {
-  // 判斷 owner ('charlie'|'nini') 是否是目前登入者
   return whoClass(currentWho()) === owner;
+}
+
+function updateWhisperInputVisibility() {
+  ['charlie', 'nini'].forEach(owner => {
+    const area = document.getElementById('whisper-input-area-' + owner);
+    if (area) area.style.display = whisperOwnerKey(owner) ? 'flex' : 'none';
+  });
 }
 
 function sendWhisper(owner) {
@@ -2671,11 +2677,12 @@ onValue(ref(db, 'whispers_nini'), snap => {
   renderWhisperBoard('nini', items);
 });
 
-window.sendWhisper      = sendWhisper;
-window.deleteWhisper    = deleteWhisper;
-window.editWhisper      = editWhisper;
-window.saveWhisper      = saveWhisper;
-window.cancelWhisperEdit = cancelWhisperEdit;
+window.sendWhisper               = sendWhisper;
+window.deleteWhisper             = deleteWhisper;
+window.editWhisper               = editWhisper;
+window.saveWhisper               = saveWhisper;
+window.cancelWhisperEdit         = cancelWhisperEdit;
+window.updateWhisperInputVisibility = updateWhisperInputVisibility;
 
 // ── Wish Pool ──
 function addWish() {
