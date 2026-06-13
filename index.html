@@ -630,12 +630,19 @@ body {
 @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:1;} 100%{transform:translateY(-80vh) scale(1.4);opacity:0;} }
 .float-emoji { position:fixed; pointer-events:none; z-index:9999; font-size:2rem; animation:floatUp 2.5s ease-out forwards; }
 /* Whisper Notes */
-/* ── 便條紙軟木板 ── */
-.whisper-section { background:linear-gradient(170deg,#ffffff 0%,#ececec 100%); border:2.5px solid #c0c0c0; border-bottom:3px solid #aaaaaa; border-radius:18px 18px 14px 14px; padding:14px 26px 20px 14px; margin-bottom:12px; box-shadow:inset 1px 2px 5px rgba(255,255,255,0.95),inset -1px -1px 3px rgba(0,0,0,0.06),5px 10px 22px rgba(0,0,0,0.22); position:relative; }
-/* 冰箱把手 */
-.whisper-section::after { content:''; position:absolute; right:6px; top:45%; transform:translateY(-50%); width:9px; height:70px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:5px; box-shadow:1px 1px 4px rgba(0,0,0,0.22); }
-.whisper-title { font-size:1rem; font-weight:900; color:#cc0000; letter-spacing:3px; margin-bottom:10px; display:flex; align-items:center; gap:6px; font-family:Arial,sans-serif; text-shadow:none; }
-.whisper-list { display:flex; flex-direction:row; gap:14px; margin-bottom:14px; align-items:stretch; }
+/* ── 雙人專屬便條紙 ── */
+.whisper-dual { display:flex; gap:10px; margin-bottom:12px; }
+.whisper-board { flex:1; min-width:0; border-radius:16px 16px 12px 12px; padding:12px 22px 14px 12px; position:relative; box-shadow:3px 8px 20px rgba(0,0,0,0.18); }
+.whisper-board::after { content:''; position:absolute; right:6px; top:45%; transform:translateY(-50%); width:7px; height:55px; background:linear-gradient(90deg,#a0a0a0,#e0e0e0,#a0a0a0); border-radius:4px; box-shadow:1px 1px 3px rgba(0,0,0,0.2); }
+.whisper-board-charlie { background:linear-gradient(170deg,#e8f4fd 0%,#d0e8f8 100%); border:2px solid #6898c8; border-bottom:3px solid #4070a0; }
+.whisper-board-nini    { background:linear-gradient(170deg,#fff0f5 0%,#ffd6e0 100%); border:2px solid #e09090; border-bottom:3px solid #c06070; }
+.whisper-board-title { font-size:.82rem; font-weight:900; letter-spacing:1px; margin-bottom:8px; display:flex; align-items:center; gap:4px; }
+.whisper-board-charlie .whisper-board-title { color:#204870; }
+.whisper-board-nini    .whisper-board-title { color:#903040; }
+.whisper-board-charlie .whisper-input-row button { background:linear-gradient(135deg,#5b8dd9,#3a6ab0); box-shadow:0 2px 0 #2050a0; }
+.whisper-board-nini    .whisper-input-row button { background:linear-gradient(135deg,#e07090,#c04060); box-shadow:0 2px 0 #a03050; }
+.whisper-list { display:flex; flex-direction:column; gap:10px; margin-bottom:10px; min-height:40px; }
+.wn-empty { font-size:.72rem; color:#999; text-align:center; padding:10px 0; }
 /* 便條紙本體 */
 .whisper-note {
   flex:1; min-width:0; min-height:155px;
@@ -1032,15 +1039,29 @@ body {
     </button>
   </div>
 
-  <!-- Whisper Sticky Notes -->
-  <div class="whisper-section">
-    <div class="whisper-title">🧊 HITACHI</div>
-    <div class="whisper-list" id="whisper-list">
-      <div style="font-size:.78rem;color:#999;text-align:center;">還沒有便籤，留下第一句話吧 💛</div>
+  <!-- Whisper Sticky Notes (雙人專屬) -->
+  <div class="whisper-dual">
+    <!-- 查理的便條紙 -->
+    <div class="whisper-board whisper-board-charlie">
+      <div class="whisper-board-title">💙 查理的便條</div>
+      <div class="whisper-list" id="whisper-list-charlie">
+        <div class="wn-empty">還沒留言 💙</div>
+      </div>
+      <div class="whisper-input-row" id="whisper-input-area-charlie" style="display:none">
+        <input type="text" id="whisper-input-charlie" placeholder="寫給妮妮…" maxlength="60">
+        <button onclick="sendWhisper('charlie')">傳送</button>
+      </div>
     </div>
-    <div class="whisper-input-row">
-      <input type="text" id="whisper-input" placeholder="寫下你的悄悄話…" maxlength="60">
-      <button onclick="sendWhisper()">傳送</button>
+    <!-- 妮妮的便條紙 -->
+    <div class="whisper-board whisper-board-nini">
+      <div class="whisper-board-title">🩷 妮妮的便條</div>
+      <div class="whisper-list" id="whisper-list-nini">
+        <div class="wn-empty">還沒留言 🩷</div>
+      </div>
+      <div class="whisper-input-row" id="whisper-input-area-nini" style="display:none">
+        <input type="text" id="whisper-input-nini" placeholder="寫給查理…" maxlength="60">
+        <button onclick="sendWhisper('nini')">傳送</button>
+      </div>
     </div>
   </div>
 
@@ -2549,43 +2570,49 @@ onValue(ref(db, 'love_pulse'), snap => {
 
 window.sendPulse = sendPulse;
 
-// ── Whisper Notes ──
-function sendWhisper() {
-  const input = document.getElementById('whisper-input');
+// ── Whisper Notes (雙人專屬) ──
+const NOTE_COLORS = ['wn-0','wn-1','wn-2','wn-3'];
+
+function whisperOwnerKey(owner) {
+  // 判斷 owner ('charlie'|'nini') 是否是目前登入者
+  return whoClass(currentWho()) === owner;
+}
+
+function sendWhisper(owner) {
+  const input = document.getElementById('whisper-input-' + owner);
   const text = input.value.trim();
   if (!text) return;
-  push(ref(db, 'whispers'), { text, who: currentWho(), ts: Date.now() });
+  push(ref(db, 'whispers_' + owner), { text, who: currentWho(), ts: Date.now() });
   input.value = '';
 }
 
-function deleteWhisper(id) {
+function deleteWhisper(owner, id) {
   const el = document.getElementById('wn-' + id);
   if (!el) return;
   el.classList.add('tearing');
-  setTimeout(() => remove(ref(db, 'whispers/' + id)), 520);
+  setTimeout(() => remove(ref(db, 'whispers_' + owner + '/' + id)), 520);
 }
 
-function editWhisper(id) {
+function editWhisper(owner, id) {
   const el = document.getElementById('wn-' + id);
   if (!el) return;
   const textEl = el.querySelector('.wn-text');
-  // 將原始文字存在 dataset，避免 onclick 字串轉義問題
   textEl.dataset.origText = textEl.textContent;
   const cur = textEl.textContent;
   textEl.innerHTML = `<input class="wn-edit-input" id="wn-ei-${id}" value="${esc(cur)}" maxlength="60">
     <div class="wn-actions">
-      <button class="wn-btn wn-save-btn" onclick="saveWhisper('${id}')">儲存</button>
+      <button class="wn-btn wn-save-btn" onclick="saveWhisper('${owner}','${id}')">儲存</button>
       <button class="wn-btn wn-edit-btn" onclick="cancelWhisperEdit('${id}')">取消</button>
     </div>`;
   document.getElementById('wn-ei-' + id).focus();
 }
 
-async function saveWhisper(id) {
+async function saveWhisper(owner, id) {
   const input = document.getElementById('wn-ei-' + id);
   if (!input) return;
   const newText = input.value.trim();
   if (!newText) return;
-  await update(ref(db, 'whispers/' + id), { text: newText, edited: true });
+  await update(ref(db, 'whispers_' + owner + '/' + id), { text: newText, edited: true });
 }
 
 function cancelWhisperEdit(id) {
@@ -2596,36 +2623,52 @@ function cancelWhisperEdit(id) {
   delete textEl.dataset.origText;
 }
 
-const NOTE_COLORS = ['wn-0','wn-1','wn-2','wn-3'];
-onValue(ref(db, 'whispers'), snap => {
-  const items = [];
-  snap.forEach(child => items.push({ id: child.key, ...child.val() }));
-  items.sort((a,b) => b.ts - a.ts);
-  const list = document.getElementById('whisper-list');
+function renderWhisperBoard(owner, items) {
+  const list = document.getElementById('whisper-list-' + owner);
+  const inputArea = document.getElementById('whisper-input-area-' + owner);
   if (!list) return;
+  // 顯示/隱藏輸入框（只有本人看到）
+  if (inputArea) inputArea.style.display = whisperOwnerKey(owner) ? 'flex' : 'none';
   if (!items.length) {
-    list.innerHTML = '<div style="font-size:.75rem;color:#999;text-align:center;padding:8px 0;">還沒有便籤，留下第一句話吧 💛</div>';
+    const emoji = owner === 'charlie' ? '💙' : '🩷';
+    list.innerHTML = `<div class="wn-empty">還沒留言 ${emoji}</div>`;
     return;
   }
-  const me = currentWho();
-  list.innerHTML = items.slice(0, 2).map((m, i) => {
+  const isOwner = whisperOwnerKey(owner);
+  list.innerHTML = items.slice(0, 3).map((m, i) => {
     const d = new Date(m.ts);
     const timeStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' +
       d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
-    const isMe = m.who === me;
     const editedTag = m.edited ? ' <span style="font-size:.6rem;opacity:.6">(已編輯)</span>' : '';
-    const actions = isMe
-      ? `<div class="wn-actions"><button class="wn-btn wn-edit-btn" onclick="editWhisper('${m.id}')">✏️ 編輯</button></div>`
-      : `<div class="wn-actions"><button class="wn-btn wn-tear-btn" onclick="deleteWhisper('${m.id}')">🗑 撕掉</button></div>`;
+    // 只有本人（板主）可編輯／刪除
+    const actions = isOwner
+      ? `<div class="wn-actions">
+           <button class="wn-btn wn-edit-btn" onclick="editWhisper('${owner}','${m.id}')">✏️</button>
+           <button class="wn-btn wn-tear-btn" onclick="deleteWhisper('${owner}','${m.id}')">🗑</button>
+         </div>`
+      : '';
     return `<div class="whisper-note ${NOTE_COLORS[i % 4]}" id="wn-${m.id}">
       <div class="wn-header">
-        <span class="wn-who">${esc(m.who)}</span>
         <span class="wn-time">${timeStr}</span>
       </div>
       <div class="wn-text">${esc(m.text)}${editedTag}</div>
       ${actions}
     </div>`;
   }).join('');
+}
+
+onValue(ref(db, 'whispers_charlie'), snap => {
+  const items = [];
+  snap.forEach(child => items.push({ id: child.key, ...child.val() }));
+  items.sort((a,b) => b.ts - a.ts);
+  renderWhisperBoard('charlie', items);
+});
+
+onValue(ref(db, 'whispers_nini'), snap => {
+  const items = [];
+  snap.forEach(child => items.push({ id: child.key, ...child.val() }));
+  items.sort((a,b) => b.ts - a.ts);
+  renderWhisperBoard('nini', items);
 });
 
 window.sendWhisper      = sendWhisper;
