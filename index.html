@@ -2451,23 +2451,34 @@ function renderLoveScore() {
   // ── 戀愛百分比（本月正分分類佔比）──
   const pctDiv = document.getElementById('love-pct-list');
   if (pctDiv) {
-    const catMap = {};
+    // 正分分類
+    const posMap = {};
     monthEvts.filter(e => evtScore(e) > 0).forEach(e => {
       const cat = evtCat(e);
-      catMap[cat] = (catMap[cat] || 0) + evtScore(e);
+      posMap[cat] = (posMap[cat] || 0) + evtScore(e);
     });
-    const totalPos = Object.values(catMap).reduce((s, v) => s + v, 0);
-    const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
-    if (!sorted.length) {
+    // 負分分類（取絕對值計算佔比）
+    const negMap = {};
+    monthEvts.filter(e => evtScore(e) < 0).forEach(e => {
+      const cat = evtCat(e);
+      negMap[cat] = (negMap[cat] || 0) + Math.abs(evtScore(e));
+    });
+    const totalPos = Object.values(posMap).reduce((s, v) => s + v, 0);
+    const totalNeg = Object.values(negMap).reduce((s, v) => s + v, 0);
+    const totalAll = totalPos + totalNeg;
+    const sortedPos = Object.entries(posMap).sort((a, b) => b[1] - a[1]);
+    const sortedNeg = Object.entries(negMap).sort((a, b) => b[1] - a[1]);
+    if (!totalAll) {
       pctDiv.innerHTML = '<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:8px 0">本月尚無加分記錄</div>';
     } else {
-      // 圓餅圖 SVG
+      // 圓餅圖 SVG（正分 + 負分均以絕對值計算在全圓中的佔比）
       const size = 140, cx = 70, cy = 70, r = 58, inner = 32;
       let startAngle = -Math.PI / 2;
       let paths = '';
-      sorted.forEach(([cat, pts]) => {
+      // 正分區塊
+      sortedPos.forEach(([cat, pts]) => {
         const color = CAT_COLORS[cat] || '#9ca3af';
-        const angle = (pts / totalPos) * 2 * Math.PI;
+        const angle = (pts / totalAll) * 2 * Math.PI;
         const endAngle = startAngle + angle;
         const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
         const x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
@@ -2480,9 +2491,27 @@ function renderLoveScore() {
           ' fill="' + color + '" opacity="0.9" stroke="#fff" stroke-width="1.5"/>';
         startAngle = endAngle;
       });
+      // 負分區塊（用斜線 pattern 或半透明表示扣分）
+      sortedNeg.forEach(([cat, abspts]) => {
+        const color = CAT_COLORS[cat] || '#9ca3af';
+        const angle = (abspts / totalAll) * 2 * Math.PI;
+        const endAngle = startAngle + angle;
+        const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+        const x2 = cx + r * Math.cos(endAngle),   y2 = cy + r * Math.sin(endAngle);
+        const xi1 = cx + inner * Math.cos(startAngle), yi1 = cy + inner * Math.sin(startAngle);
+        const xi2 = cx + inner * Math.cos(endAngle),   yi2 = cy + inner * Math.sin(endAngle);
+        const large = angle > Math.PI ? 1 : 0;
+        // 負分用較深顏色 + 虛線邊框凸顯
+        paths += '<path d="M' + xi1 + ',' + yi1 + ' L' + x1 + ',' + y1 +
+          ' A' + r + ',' + r + ' 0 ' + large + ',1 ' + x2 + ',' + y2 +
+          ' L' + xi2 + ',' + yi2 + ' A' + inner + ',' + inner + ' 0 ' + large + ',0 ' + xi1 + ',' + yi1 + ' Z"' +
+          ' fill="' + color + '" opacity="0.45" stroke="#fff" stroke-width="1.5" stroke-dasharray="3,2"/>';
+        startAngle = endAngle;
+      });
       const svgPie = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' + paths + '</svg>';
-      const legend = sorted.map(([cat, pts]) => {
-        const pct   = Math.round(pts / totalPos * 100);
+      // Legend：正分在上，負分在下（含 - 標示）
+      const legendPos = sortedPos.map(([cat, pts]) => {
+        const pct   = Math.round(pts / totalAll * 100);
         const color = CAT_COLORS[cat] || '#9ca3af';
         const emoji = LOVE_EMOJIS[cat] || '📝';
         return '<div class="pie-legend-row">' +
@@ -2490,7 +2519,19 @@ function renderLoveScore() {
           '<span class="pie-legend-name">' + emoji + ' ' + cat + '</span>' +
           '<span class="pie-legend-pct" style="color:' + color + '">' + pct + '%</span></div>';
       }).join('');
-      pctDiv.innerHTML = '<div class="pie-section"><div style="flex-shrink:0">' + svgPie + '</div><div class="pie-legend">' + legend + '</div></div>';
+      const legendNeg = sortedNeg.map(([cat, abspts]) => {
+        const pct   = Math.round(abspts / totalAll * 100);
+        const color = CAT_COLORS[cat] || '#9ca3af';
+        const emoji = LOVE_EMOJIS[cat] || '📝';
+        return '<div class="pie-legend-row">' +
+          '<div class="pie-legend-dot" style="background:' + color + ';opacity:0.45;outline:1px dashed ' + color + '"></div>' +
+          '<span class="pie-legend-name" style="opacity:0.7">' + emoji + ' ' + cat + ' <span style=\'font-size:.7rem;color:#ef4444\'>扣分</span></span>' +
+          '<span class="pie-legend-pct" style="color:' + color + ';opacity:0.7">-' + pct + '%</span></div>';
+      }).join('');
+      const divider = (sortedPos.length && sortedNeg.length)
+        ? '<div style="border-top:1px dashed var(--border);margin:4px 0;opacity:0.5"></div>'
+        : '';
+      pctDiv.innerHTML = '<div class="pie-section"><div style="flex-shrink:0">' + svgPie + '</div><div class="pie-legend">' + legendPos + divider + legendNeg + '</div></div>';
     }
   }
 
