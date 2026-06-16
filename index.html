@@ -986,29 +986,31 @@ body {
         <button class="type-btn active-income" id="btn-income" onclick="setType('income')">💕 收入</button>
         <button class="type-btn" id="btn-expense" onclick="setType('expense')">🛍 支出</button>
       </div>
-      <div class="categories" id="cat-income">
-        <button class="cat-btn" onclick="selectCat(this)">💑 查理的愛</button>
-        <button class="cat-btn" onclick="selectCat(this)">👑 妮妮的愛</button>
-        <button class="cat-btn" onclick="selectCat(this)">🎁 其他收入</button>
+      <div id="entry-fields" style="display:none">
+        <div class="categories" id="cat-income">
+          <button class="cat-btn" onclick="selectCat(this)">💑 查理的愛</button>
+          <button class="cat-btn" onclick="selectCat(this)">👑 妮妮的愛</button>
+          <button class="cat-btn" onclick="selectCat(this)">🎁 其他收入</button>
+        </div>
+        <div class="categories" id="cat-expense" style="display:none">
+          <button class="cat-btn" onclick="selectCat(this)">🍜 餐飲</button>
+          <button class="cat-btn" onclick="selectCat(this)">🚇 交通</button>
+          <button class="cat-btn" onclick="selectCat(this)">🛒 購物</button>
+          <button class="cat-btn" onclick="selectCat(this)">🏠 住房</button>
+          <button class="cat-btn" onclick="selectCat(this)">🎮 娛樂</button>
+          <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
+        </div>
+        <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
+        <div class="input-row"><input type="text" id="amount-input" placeholder="金額 TWD" inputmode="none" onclick="openKeypad(this)" ontouchstart="event.preventDefault();openKeypad(this)" /></div>
+        <div class="time-row">
+          <label>⏰ 時間</label>
+          <input type="time" id="time-input" />
+        </div>
+        <button class="add-btn" id="add-btn" onclick="addTransaction()">
+          <span class="spinner" id="spinner"></span>
+          <span id="btn-text">💕 新增記錄</span>
+        </button>
       </div>
-      <div class="categories" id="cat-expense" style="display:none">
-        <button class="cat-btn" onclick="selectCat(this)">🍜 餐飲</button>
-        <button class="cat-btn" onclick="selectCat(this)">🚇 交通</button>
-        <button class="cat-btn" onclick="selectCat(this)">🛒 購物</button>
-        <button class="cat-btn" onclick="selectCat(this)">🏠 住房</button>
-        <button class="cat-btn" onclick="selectCat(this)">🎮 娛樂</button>
-        <button class="cat-btn" onclick="selectCat(this)">📦 其他支出</button>
-      </div>
-      <div class="input-row"><input type="text" id="desc-input" placeholder="說明（午餐、薪水…）" /></div>
-      <div class="input-row"><input type="text" id="amount-input" placeholder="金額 TWD" inputmode="none" onclick="openKeypad(this)" ontouchstart="event.preventDefault();openKeypad(this)" /></div>
-      <div class="time-row">
-        <label>⏰ 時間</label>
-        <input type="time" id="time-input" />
-      </div>
-      <button class="add-btn" id="add-btn" onclick="addTransaction()">
-        <span class="spinner" id="spinner"></span>
-        <span id="btn-text">💕 新增記錄</span>
-      </button>
     </div>
 
     <!-- Search & filter -->
@@ -1307,6 +1309,7 @@ window.setType = (t) => {
   document.getElementById('btn-expense').className = 'type-btn' + (t==='expense' ? ' active-expense' : '');
   document.getElementById('cat-income').style.display = t==='income' ? 'flex' : 'none';
   document.getElementById('cat-expense').style.display = t==='expense' ? 'flex' : 'none';
+  document.getElementById('entry-fields').style.display = 'block';
 };
 window.selectCat = (btn) => {
   btn.parentElement.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
@@ -2493,9 +2496,7 @@ function kpConfirm() {
     _kpTarget.value = _kpVal || '0';
     _kpTarget.dispatchEvent(new Event('input', { bubbles: true }));
     _kpTarget.dispatchEvent(new Event('change', { bubbles: true }));
-    const id = _kpTarget.id;
     closeKeypad();
-    if (id === 'amount-input') addTransaction();
   } else {
     closeKeypad();
   }
